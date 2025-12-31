@@ -10,10 +10,16 @@ function snippet(text: string, n = 260) {
   return t.length <= n ? t : t.slice(0, n) + "…";
 }
 
+const corsHeaders = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "GET,POST,OPTIONS",
+  "access-control-allow-headers": "authorization,content-type",
+};
+
 function json(data: any, status = 200) {
   return new Response(JSON.stringify(data, null, 2), {
     status,
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json", ...corsHeaders },
   });
 }
 
@@ -27,6 +33,10 @@ async function embedText(env: Env, text: string): Promise<number[]> {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
+
+    if (req.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: corsHeaders });
+    }
     
     if (req.method === "GET" && url.pathname === "/search") {
       const q = (url.searchParams.get("q") ?? "").trim();
@@ -126,6 +136,6 @@ export default {
       });
     }
 
-    return new Response("Not found", { status: 404 });
+    return new Response("Not found", { status: 404, headers: corsHeaders });
   },
 };

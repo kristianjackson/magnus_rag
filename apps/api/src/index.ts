@@ -5,6 +5,11 @@ export interface Env {
   ADMIN_TOKEN: string;
 }
 
+function snippet(text: string, n = 260) {
+  const t = (text ?? "").replace(/\s+/g, " ").trim();
+  return t.length <= n ? t : t.slice(0, n) + "…";
+}
+
 function json(data: any, status = 200) {
   return new Response(JSON.stringify(data, null, 2), {
     status,
@@ -22,6 +27,36 @@ async function embedText(env: Env, text: string): Promise<number[]> {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
+    
+    if (req.method === "GET" && url.pathname === "/search") {
+      const q = (url.searchParams.get("q") ?? "").trim();
+      if (!q) return json({ error: "Missing q" }, 400);
+      if (q.length > 500) return json({ error: "q too long" }, 400);
+
+      const topK = Math.min(Number(url.searchParams.get("topK") ?? "8"), 20);
+
+      const qVec = await embedText(env, q);
+      const res: any = await env.VECTORIZE_INDEX.query(qVec, { topK, returnMetadata: true });
+
+      const matches = res?.matches ?? [];
+      const out = [];
+
+      for (const m of matches) {
+        const obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
+        const chunk = obj ? await obj.json<any>() : null;
+
+        out.push({
+          id: m.id,
+          score: m.score,
+          source: chunk?.source ?? m.metadata?.source ?? null,
+          title: chunk?.title ?? m.metadata?.title ?? null,
+          snippet: snippet(chunk?.text ?? ""),
+          metadata: m.metadata ?? null,
+        });
+      }
+
+      return json({ query: q, matches: out });
+    }
 
     // ---------- Health ----------
     if (req.method === "GET" && url.pathname === "/health") {

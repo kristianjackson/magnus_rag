@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import "./App.css";
 
-const API_BASE = "https://magnus-api.kristian-jackson.workers.dev/search?q=";
+const API_BASE = "https://magnus-api.kristian-jackson.workers.dev";
 
 const extractItems = (data) => {
   if (!data) return [];
   if (Array.isArray(data)) return data;
+  if (Array.isArray(data.citations)) return data.citations;
   if (Array.isArray(data.results)) return data.results;
   if (Array.isArray(data.items)) return data.items;
   return [];
@@ -87,6 +88,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [topK, setTopK] = useState(8);
   const [data, setData] = useState(null);
+  const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -100,17 +102,19 @@ function App() {
     setLoading(true);
     setError("");
     setData(null);
+    setAnswer("");
 
     try {
       const resolvedTopK = Math.max(1, Number(topK) || 1);
       const response = await fetch(
-        `${API_BASE}${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
+        `${API_BASE}/answer?q=${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
       );
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`);
       }
       const json = await response.json();
       setData(json);
+      setAnswer(json.answer || "");
     } catch (fetchError) {
       setError(fetchError.message || "Something went wrong.");
     } finally {
@@ -162,6 +166,12 @@ function App() {
       <section className="results">
         {error ? <p className="status status--error">{error}</p> : null}
         {loading ? <p className="status">Searching the index...</p> : null}
+        {!loading && answer ? (
+          <div className="answer-card">
+            <h2>Answer</h2>
+            <p>{answer}</p>
+          </div>
+        ) : null}
         {!loading && data && items.length === 0 ? (
           <p className="status">No structured results found.</p>
         ) : null}

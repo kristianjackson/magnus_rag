@@ -23,11 +23,51 @@ function json(data: any, status = 200) {
   });
 }
 
+const EMBED_MODEL = "@cf/baai/bge-base-en-v1.5";
+const ANSWER_MODEL = "@cf/meta/llama-3-8b-instruct";
+
 async function embedText(env: Env, text: string): Promise<number[]> {
-  const res: any = await env.AI.run("@cf/baai/bge-base-en-v1.5", { text });
+  const res: any = await env.AI.run(EMBED_MODEL, { text });
   const vec = res?.data?.[0];
   if (!Array.isArray(vec)) throw new Error("Invalid embedding response");
   return vec;
+}
+
+async function generateAnswer(
+  env: Env,
+  query: string,
+  contexts: Array<{ source: string | null; title: string | null; text: string }>
+): Promise<string> {
+  const contextText = contexts
+    .map((chunk, index) => {
+      const headerParts = [
+        chunk.title ? `Title: ${chunk.title}` : null,
+        chunk.source ? `Source: ${chunk.source}` : null,
+      ].filter(Boolean);
+      const header = headerParts.length ? `${headerParts.join(" | ")}\n` : "";
+      return `Excerpt ${index + 1}:\n${header}${chunk.text}`;
+    })
+    .join("\n\n---\n\n");
+
+  const messages = [
+    {
+      role: "system",
+      content:
+        "You are a helpful assistant. Use the provided excerpts to answer the question. If the answer is not in the excerpts, say you do not know.",
+    },
+    {
+      role: "user",
+      content: `Question: ${query}\n\nExcerpts:\n${contextText}`,
+    },
+  ];
+
+  const result: any = await env.AI.run(ANSWER_MODEL, { messages });
+  return (
+    result?.response ||
+    result?.result ||
+    result?.choices?.[0]?.message?.content ||
+    ""
+  ).trim();
 }
 
 export default {
@@ -66,6 +106,48 @@ export default {
       }
 
       return json({ query: q, matches: out });
+    }
+
+    if (req.method === "GET" && url.pathname === "/answer") {
+      const q = (url.searchParams.get("q") ?? "").trim();
+      if (!q) return json({ error: "Missing q" }, 400);
+      if (q.length > 500) return json({ error: "q too long" }, 400);
+
+      const topK = Math.min(Number(url.searchParams.get("topK") ?? "5"), 12);
+
+      const qVec = await embedText(env, q);
+      const res: any = await env.VECTORIZE_INDEX.query(qVec, { topK, returnMetadata: true });
+
+      const matches = res?.matches ?? [];
+      const citations = [];
+      const contexts = [];
+
+      for (const m of matches) {
+        const obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
+        const chunk = obj ? await obj.json<any>() : null;
+        const text = chunk?.text ?? "";
+
+        contexts.push({
+          source: chunk?.source ?? m.metadata?.source ?? null,
+          title: chunk?.title ?? m.metadata?.title ?? null,
+          text,
+        });
+
+        citations.push({
+          id: m.id,
+          score: m.score,
+          source: chunk?.source ?? m.metadata?.source ?? null,
+          title: chunk?.title ?? m.metadata?.title ?? null,
+          snippet: snippet(text),
+          metadata: m.metadata ?? null,
+        });
+      }
+
+      const answer = contexts.length
+        ? await generateAnswer(env, q, contexts)
+        : "I do not know.";
+
+      return json({ query: q, answer, citations });
     }
 
     // ---------- Health ----------

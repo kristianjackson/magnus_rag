@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
 import "./App.css";
 
-const API_BASE = "https://magnus-api.kristian-jackson.workers.dev";
+const DEFAULT_API_BASE = "https://magnus-api.kristian-jackson.workers.dev";
+const API_BASE =
+  (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "") ||
+  DEFAULT_API_BASE;
 
 const extractItems = (data) => {
   if (!data) return [];
@@ -116,7 +119,11 @@ function App() {
       setData(json);
       setAnswer(json.answer || "");
     } catch (fetchError) {
-      setError(fetchError.message || "Something went wrong.");
+      const message =
+        fetchError instanceof TypeError
+          ? `Unable to reach the Magnus API at ${API_BASE}. Check VITE_API_BASE_URL or your network connection.`
+          : fetchError.message || "Something went wrong.";
+      setError(message);
     } finally {
       setLoading(false);
     }

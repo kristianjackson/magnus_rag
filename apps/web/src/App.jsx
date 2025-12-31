@@ -45,6 +45,13 @@ const ResultCard = ({ item, index }) => {
   const title = formatTitle(item, index);
   const snippet = formatSnippet(item);
   const link = formatLink(item);
+  const score = item?.score;
+  const source = item?.source;
+  const parsedScore = Number(score);
+  const formattedScore =
+    score !== undefined && Number.isFinite(parsedScore)
+      ? parsedScore.toFixed(4)
+      : score;
 
   return (
     <article className="result-card">
@@ -56,6 +63,14 @@ const ResultCard = ({ item, index }) => {
           </a>
         ) : null}
       </div>
+      {score !== undefined || source ? (
+        <div className="result-card__meta">
+          {score !== undefined ? (
+            <span>Score: {formattedScore}</span>
+          ) : null}
+          {source ? <span>Source: {source}</span> : null}
+        </div>
+      ) : null}
       {snippet ? <p>{snippet}</p> : null}
     </article>
   );
@@ -70,6 +85,7 @@ const RawResponse = ({ data }) => (
 
 function App() {
   const [query, setQuery] = useState("");
+  const [topK, setTopK] = useState(8);
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -86,7 +102,10 @@ function App() {
     setData(null);
 
     try {
-      const response = await fetch(`${API_BASE}${encodeURIComponent(trimmed)}`);
+      const resolvedTopK = Math.max(1, Number(topK) || 1);
+      const response = await fetch(
+        `${API_BASE}${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
+      );
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`);
       }
@@ -122,6 +141,18 @@ function App() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
+          <div className="search-form__control">
+            <label htmlFor="topK">Top K</label>
+            <input
+              id="topK"
+              name="topK"
+              type="number"
+              min={1}
+              max={50}
+              value={topK}
+              onChange={(event) => setTopK(Number(event.target.value) || 1)}
+            />
+          </div>
           <button type="submit" disabled={loading || !query.trim()}>
             {loading ? "Searching..." : "Search"}
           </button>

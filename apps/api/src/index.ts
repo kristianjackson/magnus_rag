@@ -2,13 +2,7 @@ export interface Env {
   R2_BUCKET: R2Bucket;
   VECTORIZE_INDEX: VectorizeIndex;
   AI: Fetcher;
-}
-
-function json(res: unknown, init: ResponseInit = {}) {
-  return new Response(JSON.stringify(res, null, 2), {
-    ...init,
-    headers: { "content-type": "application/json", ...(init.headers || {}) },
-  });
+  ADMIN_TOKEN: string;
 }
 
 async function readJsonFromR2(env: Env, key: string) {
@@ -20,13 +14,17 @@ async function readJsonFromR2(env: Env, key: string) {
 async function embedText(env: Env, text: string): Promise<number[]> {
   // Workers AI embeddings model (768 dims)
   const out: any = await env.AI.run("@cf/baai/bge-base-en-v1.5", { text });
-  // Docs show embeddings returned under data[0] for embeddings. :contentReference[oaicite:2]{index=2}
-  const vec = out?.data?.[0];
-  if (!Array.isArray(vec)) throw new Error("Unexpected embeddings response shape");
-  return vec;
+  const vec = out?.data?.[0]?.embedding ?? out?.data?.[0];
+  if (!Array.isArray(vec)) {
+    throw new Error("Unexpected embeddings response shape");
+  }
+  if (vec.length !== 768 || vec.some((value) => typeof value !== "number")) {
+    throw new Error("Embedding vector must be 768 floats");
+  }
+  return vec as number[];
 }
 
-const EMBEDDING_DIMENSIONS = 1536;
+const EMBEDDING_DIMENSIONS = 768;
 const MAX_QUERY_LENGTH = 500;
 const DEFAULT_TOP_K = 10;
 const LOCALHOST_ORIGIN = "http://localhost:5173";
@@ -86,136 +84,156 @@ export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
 
-<<<<<<< HEAD
-    // ---- Admin indexer ----
-    if (req.method === "POST" && url.pathname === "/admin/index") {
-      // basic safety: require a token so you don’t expose this publicly
-      const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
-      const expected = (env as any).ADMIN_TOKEN; // add as a secret later
-      if (!expected || token !== expected) {
-        return json({ error: "Unauthorized" }, { status: 401 });
+    try {
+      if (url.pathname === "/health") {
+        return jsonResponse({ ok: true }, { status: 200 }, req);
       }
 
-      const limit = Math.min(Number(url.searchParams.get("limit") ?? "25"), 50);
-      const cursor = url.searchParams.get("cursor") ?? undefined;
+      if (req.method === "OPTIONS") {
+        return new Response(null, {
+          status: 204,
+          headers: (() => {
+            const headers = new Headers();
+            applyCors(headers, req);
+            return headers;
+          })(),
+        });
+      }
 
-      // List objects in R2 under chunks/
-      // R2 list uses prefix + cursor pagination. :contentReference[oaicite:3]{index=3}
-      const listed = await env.R2_BUCKET.list({
-        prefix: "chunks/",
-        limit,
-        cursor,
-      });
+      if (req.method === "POST" && url.pathname === "/admin/index") {
+        const token = req.headers
+          .get("authorization")
+          ?.replace(/^Bearer\s+/i, "");
+        if (!env.ADMIN_TOKEN || token !== env.ADMIN_TOKEN) {
+          return jsonResponse({ error: "Unauthorized" }, { status: 401 }, req);
+        }
 
-      const objects = listed.objects ?? [];
-      const results: Array<{ id: string; ok: boolean; error?: string }> = [];
+        const limitRaw = Number(url.searchParams.get("limit") ?? "25");
+        const limit = Math.min(
+          Number.isFinite(limitRaw) ? limitRaw : 25,
+          50
+        );
+        const cursor = url.searchParams.get("cursor") ?? undefined;
 
-      // Process sequentially to keep CPU predictable; you can parallelize later.
-      for (const o of objects) {
-        try {
-          const key = o.key; // e.g. chunks/<id>.json
-          const chunk = await readJsonFromR2(env, key);
-          if (!chunk?.id || !chunk?.text) throw new Error("Bad chunk JSON");
+        const listed = await env.R2_BUCKET.list({
+          prefix: "chunks/",
+          limit,
+          cursor,
+        });
 
-          const values = await embedText(env, chunk.text);
+        let indexed = 0;
+        let failed = 0;
+        const sampleErrors: Array<{ key: string; error: string }> = [];
 
-          // Upsert into Vectorize (async mutation under the hood). :contentReference[oaicite:4]{index=4}
-          await env.VECTORIZE_INDEX.upsert([
-            {
-              id: chunk.id,
-              values,
-              metadata: {
-                source: chunk.source ?? null,
-                title: chunk.title ?? null,
-                chunk_index: chunk.metadata?.chunk_index ?? null,
-                chunk_count: chunk.metadata?.chunk_count ?? null,
+        for (const object of listed.objects ?? []) {
+          try {
+            const chunk = await readJsonFromR2(env, object.key);
+            if (
+              !chunk ||
+              typeof chunk.id !== "string" ||
+              typeof chunk.text !== "string" ||
+              typeof chunk.source !== "string" ||
+              typeof chunk.title !== "string" ||
+              !chunk.metadata ||
+              typeof chunk.metadata !== "object"
+            ) {
+              throw new Error("Chunk JSON missing required fields");
+            }
+
+            const values = await embedText(env, chunk.text);
+
+            await env.VECTORIZE_INDEX.upsert([
+              {
+                id: chunk.id,
+                values,
+                metadata: {
+                  source: chunk.source,
+                  title: chunk.title,
+                  chunk_index: chunk.metadata?.chunk_index ?? null,
+                  chunk_count: chunk.metadata?.chunk_count ?? null,
+                },
               },
-            },
-          ]);
+            ]);
 
-          results.push({ id: chunk.id, ok: true });
-        } catch (e: any) {
-          results.push({ id: String(o.key), ok: false, error: e?.message ?? String(e) });
+            indexed += 1;
+          } catch (error: any) {
+            failed += 1;
+            if (sampleErrors.length < 5) {
+              sampleErrors.push({
+                key: object.key,
+                error: error?.message ?? String(error),
+              });
+            }
+          }
+        }
+
+        return jsonResponse(
+          {
+            indexed,
+            failed,
+            nextCursor: listed.truncated ? listed.cursor : null,
+            sampleErrors,
+          },
+          { status: 200 },
+          req
+        );
+      }
+
+      if (url.pathname === "/search") {
+        if (req.method !== "GET") {
+          return jsonResponse(
+            { error: "Method not allowed" },
+            { status: 405 },
+            req
+          );
+        }
+
+        const query = url.searchParams.get("q");
+        if (!query || query.trim().length === 0) {
+          return jsonResponse(
+            { error: "Query parameter q is required" },
+            { status: 400 },
+            req
+          );
+        }
+
+        if (query.length > MAX_QUERY_LENGTH) {
+          return jsonResponse(
+            { error: "Query parameter q must be 500 characters or fewer" },
+            { status: 400 },
+            req
+          );
+        }
+
+        try {
+          const embedding = embeddingFromQuery(query);
+          const results = await env.VECTORIZE_INDEX.query(embedding, {
+            topK: DEFAULT_TOP_K,
+            returnMetadata: true,
+          });
+          const matches = results.matches.map((match) => ({
+            id: match.id,
+            score: match.score,
+            metadata: match.metadata ?? null,
+          }));
+
+          return jsonResponse({ query, matches }, { status: 200 }, req);
+        } catch (error) {
+          return jsonResponse(
+            { error: "Failed to query vector index" },
+            { status: 500 },
+            req
+          );
         }
       }
 
-      return json({
-        indexed: results.filter((r) => r.ok).length,
-        failed: results.filter((r) => !r.ok).length,
-        nextCursor: listed.truncated ? listed.cursor : null,
-        sample: results.slice(0, 5),
-      });
+      return jsonResponse({ error: "Not Found" }, { status: 404 }, req);
+    } catch (error: any) {
+      return jsonResponse(
+        { error: "Unhandled error", details: error?.message ?? String(error) },
+        { status: 500 },
+        req
+      );
     }
-
-    // ---- Health ----
-    if (req.method === "GET" && url.pathname === "/health") {
-      return json({ ok: true });
-    }
-
-    return new Response("Not Found", { status: 404 });
   },
-=======
-    if (url.pathname === "/health") {
-      return jsonResponse({ ok: true }, { status: 200 }, req);
-    }
-
-    if (req.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: (() => {
-        const headers = new Headers();
-        applyCors(headers, req);
-        return headers;
-      })() });
-    }
-
-    if (url.pathname === "/search") {
-      if (req.method !== "GET") {
-        return jsonResponse(
-          { error: "Method not allowed" },
-          { status: 405 },
-          req
-        );
-      }
-
-      const query = url.searchParams.get("q");
-      if (!query || query.trim().length === 0) {
-        return jsonResponse(
-          { error: "Query parameter q is required" },
-          { status: 400 },
-          req
-        );
-      }
-
-      if (query.length > MAX_QUERY_LENGTH) {
-        return jsonResponse(
-          { error: "Query parameter q must be 500 characters or fewer" },
-          { status: 400 },
-          req
-        );
-      }
-
-      try {
-        const embedding = embeddingFromQuery(query);
-        const results = await env.VECTORIZE_INDEX.query(embedding, {
-          topK: DEFAULT_TOP_K,
-          returnMetadata: true
-        });
-        const matches = results.matches.map((match) => ({
-          id: match.id,
-          score: match.score,
-          metadata: match.metadata ?? null
-        }));
-
-        return jsonResponse({ query, matches }, { status: 200 }, req);
-      } catch (error) {
-        return jsonResponse(
-          { error: "Failed to query vector index" },
-          { status: 500 },
-          req
-        );
-      }
-    }
-
-    return jsonResponse({ error: "Not Found" }, { status: 404 }, req);
-  }
->>>>>>> a9a1179db632d4b282ff1c3811fbc26ceb2d164a
 };

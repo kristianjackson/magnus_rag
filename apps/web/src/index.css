@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: #f8fafc;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+}

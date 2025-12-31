@@ -1,0 +1,2974 @@
+{
+  "pdf_dir": "C:\\Users\\kpjack\\Documents\\TMA",
+  "out_dir": "C:\\Users\\kpjack\\Documents\\projects\\magnus-rag\\data\\out",
+  "files": [
+    {
+      "pdf": "MAG 001 - Anglerfish - Transcript Re-formatted.pdf",
+      "title": "MAG 001 - Anglerfish - Transcript Re-formatted",
+      "num_chars": 14769,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "d5934b731309d2a3665d9e23",
+        "72d1d7dc96a6c2f7146b4467",
+        "dfbe3b7150e596b890a1e652",
+        "b66c55db5d57c5b9338f243f",
+        "85c44e6323d1ed3abc13d28c"
+      ]
+    },
+    {
+      "pdf": "MAG 002 - Do Not Open - Transcript Re-formatted.pdf",
+      "title": "MAG 002 - Do Not Open - Transcript Re-formatted",
+      "num_chars": 23248,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "426eee1b07cd0aefd5dbde62",
+        "70a051c0b3e519b76dc579d5",
+        "4e0b7c7867cc7de4e05d2184",
+        "62ed606d7f2814a50ee20682",
+        "7291d70f715d81073d233f5a",
+        "d7c75c8e8461ced5e8ecddd8",
+        "25598239bd93a5b5feb59fd2",
+        "acadefd08a97d0a21dc50d47",
+        "b5113cee6e34902eca33e580"
+      ]
+    },
+    {
+      "pdf": "MAG 003 - Across The Street - Transcript Re-formatted.pdf",
+      "title": "MAG 003 - Across The Street - Transcript Re-formatted",
+      "num_chars": 23947,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "46209557ffc3c3e6d114d28e",
+        "49e9b8de6e236821e8299cc0",
+        "4bd9e3735b3857c9fbc3ce4d",
+        "64703a23905a0a73357c4d9e",
+        "da407f80444eb4477e520e1c",
+        "87c21a2fa8d7f754613c3739",
+        "5b2e20b4aac9517c303c4e48",
+        "d0db05ddf2c2f6d451408014",
+        "b9c2d59f800c3a08fba34854"
+      ]
+    },
+    {
+      "pdf": "MAG 004 - Page Turner - Transcript Re-formatted.pdf",
+      "title": "MAG 004 - Page Turner - Transcript Re-formatted",
+      "num_chars": 28671,
+      "num_chunks": 10,
+      "chunk_ids": [
+        "2e0e6d00f5f082d679dea47b",
+        "aabdce7dfb0607de7a3a3a81",
+        "53b0686c69e81407b760cd74",
+        "ca5277c3213af9a8d2515387",
+        "7c72848b0c4929824e9e8442",
+        "3a1b5ae9bbcbbdf2f7496fd7",
+        "64bd61f4f002d2bdfed509e3",
+        "29ddf8045e54c48b7d79a4c6",
+        "164b9087e623d83890d70dd6",
+        "b04bcccebc0d530aa1cba5c3"
+      ]
+    },
+    {
+      "pdf": "MAG 005 - Thrown Away - Transcript Re-formatted.pdf",
+      "title": "MAG 005 - Thrown Away - Transcript Re-formatted",
+      "num_chars": 20944,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "4521d5e574cacaf674072686",
+        "b2ef75ccc966ebe39940cdf5",
+        "5c256f31f7db247a1d7d02d2",
+        "d9b989443ef0cdc07672a2c1",
+        "5ac382f541b0d457bf4931ee",
+        "f31c05941a3fb04446e8bb7b",
+        "df4fce8cb446fea5d0c5f7b3",
+        "5380bcae9054c084ef33e79b"
+      ]
+    },
+    {
+      "pdf": "MAG 006 - Squirm - Transcript Re-formatted .pdf",
+      "title": "MAG 006 - Squirm - Transcript Re-formatted ",
+      "num_chars": 15733,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "3137b6be877383d132ab0e25",
+        "9cc0275027d38e427887a140",
+        "947c29189fb26db64f685097",
+        "153d48122488006ee0122b08",
+        "16ba8b1fe39757c6159390ea",
+        "b7108d4fc72800dd34710da7"
+      ]
+    },
+    {
+      "pdf": "MAG 007 - The Piper - Transcript Re-formatted.pdf",
+      "title": "MAG 007 - The Piper - Transcript Re-formatted",
+      "num_chars": 21630,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "3a7fde52bd84605556afac0e",
+        "54033e9cad0285dd4a8dd11d",
+        "ddfce58977319861c006862f",
+        "cd3ad50d20a646971bedb242",
+        "192543175e924c643758b22a",
+        "ac078988ce83e6ef1ecd1ab2",
+        "1ee5ce89b2cf714c5ccdb936",
+        "0d8aaa0e617886e036ddaa67"
+      ]
+    },
+    {
+      "pdf": "MAG 008 - Burned Out - Transcript Re-formatted.pdf",
+      "title": "MAG 008 - Burned Out - Transcript Re-formatted",
+      "num_chars": 24681,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "0b1f8d75874fd27d6b0e588a",
+        "ed6da2d15036894e9f333cec",
+        "96fd21f95ca36da1e3991d94",
+        "58a098156ae502c11eca73f6",
+        "7edc0d5bffe418668b5d6b44",
+        "d70072350912c6ce44bd196b",
+        "3c61357855fd9661c4d9d4dd",
+        "d2bdb334506e7027a5dd299f",
+        "5e0279d296919e70f00ac2e1"
+      ]
+    },
+    {
+      "pdf": "MAG 009 - A Father's Love - Transcript Re-formatted.pdf",
+      "title": "MAG 009 - A Father's Love - Transcript Re-formatted",
+      "num_chars": 26714,
+      "num_chunks": 10,
+      "chunk_ids": [
+        "0fb2b5a8dca79513a24bf697",
+        "884f956e3f670d917938886f",
+        "8e945fdd3c263a00de922a3c",
+        "57f9ae49ccca7d646785b9c4",
+        "83934c12dca086e763b8741e",
+        "07fc28a983fca95dd8858d68",
+        "1131e7219726f31595226d10",
+        "1e13b7aadb78678a522b7d0f",
+        "144ab54b23d5bd4fb9363ae4",
+        "fe9ba5ca32571950653e9259"
+      ]
+    },
+    {
+      "pdf": "MAG 010 - Vampire Killer - Transcript Re-formatted.pdf",
+      "title": "MAG 010 - Vampire Killer - Transcript Re-formatted",
+      "num_chars": 26175,
+      "num_chunks": 10,
+      "chunk_ids": [
+        "b384a8ef42940a062ae5067e",
+        "e85ac50ad76359e0022844ab",
+        "12657653224141882b8493ac",
+        "ab35c0e3c5a747fa19583d1f",
+        "6162485eea5ed3fd82f56fc2",
+        "30a90a65a8d4dab9aa1e941b",
+        "57214c1c53902515886e12f9",
+        "e0f909a1318ed3fceb24e878",
+        "91c8e33ae1e1d4f93b70f701",
+        "6d9c06d1f341ccab44aa77a7"
+      ]
+    },
+    {
+      "pdf": "MAG 011 - Dreamer - Transcript Re-formatted Template -converted.pdf",
+      "title": "MAG 011 - Dreamer - Transcript Re-formatted Template -converted",
+      "num_chars": 19202,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "fd3791b7a78f9f9a3b46ca55",
+        "7db06b5f34f1fe1544add16b",
+        "f1cd502c1babac6bc18d1275",
+        "bc677998449cb15aecf01210",
+        "14bd6b7117b001ffd42907a5",
+        "633068183499fa0f15cf8995"
+      ]
+    },
+    {
+      "pdf": "MAG 012 - First Aid - Transcript Re-formatted Template-converted.pdf",
+      "title": "MAG 012 - First Aid - Transcript Re-formatted Template-converted",
+      "num_chars": 22772,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "da7d88172ef4b15374b1b43c",
+        "13ea7032819ff494e80192bb",
+        "b69425c05cda36a5de9b4833",
+        "312b0ededb5600907e5551a9",
+        "bc4a716a5683ce59a410a9df",
+        "c81d6ea2ff47725915baf778",
+        "e8de0428add61d3e0ccca4b5",
+        "073eb82358d9d7f4c176fa13"
+      ]
+    },
+    {
+      "pdf": "MAG 013 - Alone - Transcript Re-formatted Template-converted.pdf",
+      "title": "MAG 013 - Alone - Transcript Re-formatted Template-converted",
+      "num_chars": 24888,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "50528e8de31b13893a086f66",
+        "9a40455760e6f8bba032b35f",
+        "360eaa72b7a555e409f6a9fd",
+        "d91cf253e18f7f3b10bf3ef0",
+        "3e93c3e14cdf3199bc831da9",
+        "6047956ef12d147ce3255234",
+        "d5d5760a4f4e2e8d536e20f2",
+        "23b019b956a6e79f60d5627e",
+        "e6d5bb00e4882337ee64e2d5"
+      ]
+    },
+    {
+      "pdf": "MAG 014 - Piecemeal - Transcript Re-formatted Template-converted.pdf",
+      "title": "MAG 014 - Piecemeal - Transcript Re-formatted Template-converted",
+      "num_chars": 21513,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "5d0c730c32ea6418f348c0e3",
+        "79bae50c6984cb63f2521042",
+        "95f911300bc8fdf869af15d2",
+        "851a58dd32d3ddab67435bf1",
+        "5ab8b20825c53429077f7d13",
+        "4cb847b174e390d1a8331e73",
+        "b31a9936d4344c4237a8725a",
+        "7fc668bdc5636d3f9488aedc"
+      ]
+    },
+    {
+      "pdf": "MAG 015 - Lost John's Cave - Transcript Re-formatted Template-converted.pdf",
+      "title": "MAG 015 - Lost John's Cave - Transcript Re-formatted Template-converted",
+      "num_chars": 22417,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "3c245239c677c81c2b0da6c4",
+        "b7f06fa0cc713f0ae82e7c8b",
+        "b07ab6d6d5c980158a68b7ac",
+        "d073cda2b7673e73f6336103",
+        "8e43e272360538c660d0bf9f",
+        "661c488871b74cc1236abf94",
+        "1574b9290de0f09c9482c083",
+        "9a962bb504a8f1648e512f30"
+      ]
+    },
+    {
+      "pdf": "MAG 016 - Arachnophobia - Transcript Re-formatted Template-converted.pdf",
+      "title": "MAG 016 - Arachnophobia - Transcript Re-formatted Template-converted",
+      "num_chars": 19124,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "4ecc0206871f2a840ee4d040",
+        "7d65871625c9db06136b55b8",
+        "361e9b7e647ff7f68b7e5180",
+        "1181c2938ef5af0b2370841e",
+        "75a051daa074d06debd7dc12",
+        "c31f2bfbc32bbc479cca8a1c",
+        "222e2b235115347bf5179335"
+      ]
+    },
+    {
+      "pdf": "MAG 017 - The Bone Turner's Tale - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 017 - The Bone Turner's Tale - Transcript Re-formatted-converted",
+      "num_chars": 24861,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "698ab49b3a9d3e7de8bd30cd",
+        "e2e942159f144aafe1965356",
+        "262764e187116d6a7b45e929",
+        "88d7e773d6008c37b9cbfa91",
+        "2ceb0641cb6410ce238ded8d",
+        "49ffd500c0a7a7f97d7f8853",
+        "2f98cf551b6ecc8be903f5ed",
+        "1c3296c8cbe3d8854d2ac025",
+        "5f710fb5e86ba762fe2f89b9"
+      ]
+    },
+    {
+      "pdf": "MAG 018 - The Man Upstairs - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 018 - The Man Upstairs - Transcript Re-formatted-converted",
+      "num_chars": 19608,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "7c031b116ff0f04d3e5c7d1d",
+        "9fdcbccc93707b7eb83f9696",
+        "3ea29a67d7948aa1d2e6f53b",
+        "899388e7705fa576a9469da3",
+        "4630a4ff2704a190c9e75d27",
+        "092c54f27c89585e7a1352e8",
+        "a9e52818b93a2c471be5daef"
+      ]
+    },
+    {
+      "pdf": "MAG 019 - Confession - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 019 - Confession - Transcript Re-formatted-converted",
+      "num_chars": 19090,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "c58dff985774450d87c2eaa5",
+        "70c50a928c461227b5da9cc1",
+        "cf85797fe063f24b57100f02",
+        "e38dab1aa671cdf77c6f1d15",
+        "25ea705c020e4cc4fdd4fa64",
+        "cd89f7aed15bded173a2542d"
+      ]
+    },
+    {
+      "pdf": "MAG 020 - Desecrated Host - Transcript Re-formatted.pdf",
+      "title": "MAG 020 - Desecrated Host - Transcript Re-formatted",
+      "num_chars": 18513,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "3b08f610975c7731527409be",
+        "676593ca4afc76c752351ddb",
+        "292e830144148c5e9b1bb872",
+        "35d2ce04285afa9e8eee9045",
+        "8dc266da7a1a5c076dc89f51",
+        "cbff3074b1db904db4eaad3e"
+      ]
+    },
+    {
+      "pdf": "MAG 021 - Freefall - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 021 - Freefall - Transcript Re-formatted-converted",
+      "num_chars": 15678,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "bbf50f2b8b760cd422d6e58c",
+        "8e967cba1d0f3db9e731134a",
+        "459c40cf3262050927b9ebcd",
+        "e923d5551c8b5591d90ece71",
+        "c514b5338e2f289b39fe9667"
+      ]
+    },
+    {
+      "pdf": "MAG 022 - Colony - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 022 - Colony - Transcript Re-formatted-converted",
+      "num_chars": 19327,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "da74b3f5f1625809eb303ac4",
+        "daf8f38a8967bc8c91c1b2f3",
+        "bc7c9f707281f851a6235210",
+        "9a83a281ed90a08e57f803fa",
+        "d05319e29abaa4294fee2c62",
+        "e964e45c87f1ab12f09d9544",
+        "9e8eb805be48bf563c458c28"
+      ]
+    },
+    {
+      "pdf": "MAG 023 - Schwartzwald - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 023 - Schwartzwald - Transcript Re-formatted-converted",
+      "num_chars": 27406,
+      "num_chunks": 10,
+      "chunk_ids": [
+        "9e6b4255c4a7fd1707f29ac1",
+        "a93f8a2602e245b19bc9f7a1",
+        "72a46653661a8c5d48662271",
+        "171a71624e0f1ef636c287f2",
+        "2d0c72c3308c3c5f48f92b43",
+        "e3b2de6684d1e5838c8f0d26",
+        "35aafe5a61b65d93160474ab",
+        "4cae5c846fa5b507006368a7",
+        "acc6e2a4f16dab02da2d9fdc",
+        "e0f44e954bab25460a69df0e"
+      ]
+    },
+    {
+      "pdf": "MAG 024 - Strange Music - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 024 - Strange Music - Transcript Re-formatted-converted",
+      "num_chars": 18499,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "700b742e821aee07c2f8d3a0",
+        "09fedd032b2f112011830fe4",
+        "286a01c2df2bab2ade7f88ed",
+        "a2539e9186b8952c42f7021f",
+        "b6160aa6b1a586c0c2772206",
+        "cd6659c5ea97dc2dede97505"
+      ]
+    },
+    {
+      "pdf": "MAG 025 - Growing Dark - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 025 - Growing Dark - Transcript Re-formatted-converted",
+      "num_chars": 22219,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "14f6bb99fe431a62edd407b3",
+        "3365103f908e70c2e5b7c0af",
+        "00ff909a791e57d854de2ae6",
+        "fde60e6a937c34c7724b74b0",
+        "d718df9e96314476515f5032",
+        "30729948e2690f7899ac2201",
+        "485feafa76a5c8bcfcd81b8d"
+      ]
+    },
+    {
+      "pdf": "MAG 026 - A Distortion - Transcript Re-formatted.pdf",
+      "title": "MAG 026 - A Distortion - Transcript Re-formatted",
+      "num_chars": 20375,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "e96ce599d9a5e5c82aa4766e",
+        "1ece04e8f9a8041810758f07",
+        "662657fe37d5420a007ebdbf",
+        "1ea5000ebbcb0b651a5770a0",
+        "82cb0905af88d623c2e46b0c",
+        "bc9088dca8110a2e6c0c1dd9",
+        "d4673bb754049a37194aaf34",
+        "3f791c6fca572227b8b0b6dc"
+      ]
+    },
+    {
+      "pdf": "MAG 027 - A Sturdy Lock - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 027 - A Sturdy Lock - Transcript Re-formatted-converted",
+      "num_chars": 13926,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "ec34da30b69ffd6b76fdcc90",
+        "fae276e73dc9a5353c92d7de",
+        "529358b5a19fa811f89bb5f1",
+        "b97de4bbfbd08d90eb0ff288",
+        "c9af77ffc758e633f04b294d"
+      ]
+    },
+    {
+      "pdf": "MAG 028 - Skintight - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 028 - Skintight - Transcript Re-formatted-converted",
+      "num_chars": 21276,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "890620909823c8552f7b3dad",
+        "09d72afc3870ff8c45758726",
+        "1aff54a8384e9221a3002050",
+        "fc0ac82c442c82fe987c6e52",
+        "5f4d96ce155b86f85e6cc7db",
+        "5ea142aae8726d573db5c62c",
+        "d12a5d04ef758d9980071a24",
+        "cf43f1722c459a466542b0a9"
+      ]
+    },
+    {
+      "pdf": "MAG 029 - Cheating Death - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 029 - Cheating Death - Transcript Re-formatted-converted",
+      "num_chars": 19937,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "e505c4d70f8bb17a0ce201db",
+        "b837eef87fda06734f3cb88f",
+        "af72b9f5205f31d4f38f41b0",
+        "c4f9a83ab211aa5a8ec5b32c",
+        "7212fe130ad66ecc56fdff33",
+        "25e9139a8619e3283264de1d"
+      ]
+    },
+    {
+      "pdf": "MAG 030 - Killing Floor - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 030 - Killing Floor - Transcript Re-formatted-converted",
+      "num_chars": 19673,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "ffeb1ea53a7e642f51e50c1e",
+        "df874e53c68682e7acecc551",
+        "9ec2276a89e3e7517d2906aa",
+        "b832c65a094c17b78a73dd80",
+        "901001708682e6560cc682c2",
+        "dcf76ab9487637b102909dd0",
+        "d2a8e98f381ce62f2ef11089"
+      ]
+    },
+    {
+      "pdf": "MAG 031 - First Hunt - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 031 - First Hunt - Transcript Re-formatted-converted",
+      "num_chars": 17915,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "59bc51545537bf2c59fb4853",
+        "34853764ea907f0d2b93f792",
+        "b5f119c0587c0e835d9463df",
+        "a7b589988f2456326f4269b4",
+        "6de9c47d4222ffbfc51568c9",
+        "b3fb536c12c5a518948a2244"
+      ]
+    },
+    {
+      "pdf": "MAG 032 - Hive - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 032 - Hive - Transcript Re-formatted-converted",
+      "num_chars": 13835,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "b42df4c1f300eed7098ac66b",
+        "718218a08929298c40684b00",
+        "fe9f3a48b8bdb1aaafeff4eb",
+        "ef14ec5bc2d30e5f9c642b0c",
+        "2d32000bdee93daa6114202c"
+      ]
+    },
+    {
+      "pdf": "MAG 033 - Boatswain's Call - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 033 - Boatswain's Call - Transcript Re-formatted-converted",
+      "num_chars": 21524,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "cd171995ce0ac99efea52ce3",
+        "06d3e1655f1cb79998981d11",
+        "6fac3206bfef73b2a1213b79",
+        "c64b772b11b67065b626b40e",
+        "ac432fc817e5d899e10f0b19",
+        "093ce12344f407c14081aaf7",
+        "f4ec0c4c0db073531518d2a2"
+      ]
+    },
+    {
+      "pdf": "MAG 034 - Anatomy Class - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 034 - Anatomy Class - Transcript Re-formatted-converted",
+      "num_chars": 22443,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "c91b0ebd55ccea5f759ea9f0",
+        "9697cb474b828ddee03f3f68",
+        "657d0e6367cca0fb3b18168c",
+        "285660ea51c07aa2ead44b93",
+        "7f3ca68f75f07e8db06f56ac",
+        "d54e28eea4161abf7e76be51",
+        "7d09596dba83c4e5d70b347a",
+        "56e8e2c707a902b09f8784fb"
+      ]
+    },
+    {
+      "pdf": "MAG 035 - Old Passages - Transcript Re-formatted Template-converted.pdf",
+      "title": "MAG 035 - Old Passages - Transcript Re-formatted Template-converted",
+      "num_chars": 22395,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "73b1cadabcfa325d362bb509",
+        "fa596c6c3ba3b15d806d4bdf",
+        "44a597a57a6b5555c7263a9a",
+        "936c8ad21b3d3c59cea22019",
+        "1d78d3a17e94ac8667b4c7e7",
+        "062105139d3e3fae2c13696a",
+        "720d242ec5068c66c42a9f57",
+        "93f6b5f385210e8ae28bc92d"
+      ]
+    },
+    {
+      "pdf": "MAG 036 - Taken Ill - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 036 - Taken Ill - Transcript Re-formatted-converted",
+      "num_chars": 25451,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "ba4b2bc0c959e0bb0d174e30",
+        "5984700842ee398649e90d99",
+        "28dd4b785b14b3636b00c5f3",
+        "a55d6f9285dc38202b28650d",
+        "f193f4c0c3781e5a38daac04",
+        "46711cccf8c118c9af7f68a2",
+        "e7c68c2499d4d25e26edec42",
+        "e6fad8eee825d6448655f5a0"
+      ]
+    },
+    {
+      "pdf": "MAG 037 - Burnt Offering - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 037 - Burnt Offering - Transcript Re-formatted-converted",
+      "num_chars": 14655,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "def7c804a84a42fe5d9a10de",
+        "2bfd53c5d899b7106e976a08",
+        "5063114fed5e2332dcae95a2",
+        "2aa47be9b5e99abc1bb376f5",
+        "f6c475305321de9177f88fcd"
+      ]
+    },
+    {
+      "pdf": "MAG 038 - Lost and Found - Transcript Re-formatted-converted.pdf",
+      "title": "MAG 038 - Lost and Found - Transcript Re-formatted-converted",
+      "num_chars": 17073,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "ef88720164216b30beac07a5",
+        "ba7c6367de855848069e9787",
+        "93cbbcea9a2b0d46e0a83e12",
+        "d976e3b14078887206f3cc9f",
+        "bbf58936a60aec1e5ce0f340",
+        "8c9b93e1b15d756499d6b977"
+      ]
+    },
+    {
+      "pdf": "MAG 039 - Infestation - Transcript Re-formatted.pdf",
+      "title": "MAG 039 - Infestation - Transcript Re-formatted",
+      "num_chars": 20230,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "dbbf4ef2c711d43dea0dde48",
+        "12df7a0c1c42a04590b5388f",
+        "4b63a4cb7dc280eb108dfd6d",
+        "0dbf5892ee3bb903e876915d",
+        "f7074dfc0fea7bcf8d0e7c7e",
+        "e4cc4a846c4a53db512cb190",
+        "c62ecaf43d2d6e06c7837e19"
+      ]
+    },
+    {
+      "pdf": "MAG 040 - Human Remains - Transcript Re-Formatted v2.pdf",
+      "title": "MAG 040 - Human Remains - Transcript Re-Formatted v2",
+      "num_chars": 22577,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "835c75afe77c5d15ce2aa1f0",
+        "cf3c9942b65b99bdf0dda115",
+        "b45e62bbf4f492cf6a16b3f4",
+        "2f5fb8727df2b287a26c4fbf",
+        "4a8804d7d0a796b03bc6d7d6",
+        "0fa527093b62c7206673208a",
+        "290991c3801384263debaf33",
+        "bbb37c8ba754fe2ff615d79b"
+      ]
+    },
+    {
+      "pdf": "MAG 041 - Too Deep - Transcript Re-formatted.pdf",
+      "title": "MAG 041 - Too Deep - Transcript Re-formatted",
+      "num_chars": 21640,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "b7fc1d3070db1246ceac6490",
+        "27eb6df531763c9c6d129c06",
+        "b4fce9067e6eac66584d04b4",
+        "50f700b9c99e99059f80359b",
+        "3b578ca02d8690d14836980f",
+        "a5a5122a50702e72b39490ef",
+        "e87a56ef9a6a2efe76143388",
+        "b4415c38575115120b55cbea"
+      ]
+    },
+    {
+      "pdf": "MAG 042 - Grifter's Bone - Transcript Re-formatted.pdf",
+      "title": "MAG 042 - Grifter's Bone - Transcript Re-formatted",
+      "num_chars": 20089,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "de86704b7dda22c7b9fea966",
+        "d42e8e5420f1b6cbc032ab23",
+        "c79ad88f9ace3fb25142b49f",
+        "8ca942946ac62c3411c41058",
+        "28e925c9e6c83ab4cdabd79b",
+        "ba9818b266f2c0f441011840",
+        "aa81d830f511ecbf1c3c1d1b"
+      ]
+    },
+    {
+      "pdf": "MAG 043 - Section 31 - Transcript Re-formatted.pdf",
+      "title": "MAG 043 - Section 31 - Transcript Re-formatted",
+      "num_chars": 18000,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "2537527657a6e6ddcf1213d6",
+        "9e60d1c8543b0890da1b5cc2",
+        "56510abaa4cf1724febafa05",
+        "c922a281af5969434a789e93",
+        "6fbf3afc142327a53a227612",
+        "d56d120c558daf2cbca78ad9"
+      ]
+    },
+    {
+      "pdf": "MAG 044 - Tightrope - Transcript.pdf",
+      "title": "MAG 044 - Tightrope - Transcript",
+      "num_chars": 18297,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "9f007659b176adfb8cba13ac",
+        "533a9117309f7e7c5c2a890a",
+        "0811c58f38502da9df0bbd39",
+        "d21037d1e564c0f166dc8dad",
+        "1ec31278e6b0ad44615dc051",
+        "2316c297f89bb7cbf23bcd72"
+      ]
+    },
+    {
+      "pdf": "MAG 045 - Blood Bag - Transcript.pdf",
+      "title": "MAG 045 - Blood Bag - Transcript",
+      "num_chars": 19373,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "d1db8f8fdc6de74ba95e39dc",
+        "10c0dee92316f65a09e87b20",
+        "f9d566f56ff594ec0ccb3815",
+        "824e532eea99709f7da6da7c",
+        "8f6fb44fb02e4b20218f9018",
+        "820a99ef435eef8c29b7622b",
+        "4f4984510d388fbe892df4b4",
+        "141975c642ca226e7d7bd15f"
+      ]
+    },
+    {
+      "pdf": "MAG 046 - Literary Heights - Transcript Re-formatted.pdf",
+      "title": "MAG 046 - Literary Heights - Transcript Re-formatted",
+      "num_chars": 21199,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "99b7996cf6d24ab465e5a69b",
+        "246c2809705e776b5ed2c2c2",
+        "7c3c31d10bba43c21563374a",
+        "060474b5274e6ad34c211607",
+        "bb428104dee6769c90a3a350",
+        "1c139cc0078522e88d0252e1",
+        "6f4e151300b2d71e055bb586",
+        "af0fb7d46efcfa01d9770a02"
+      ]
+    },
+    {
+      "pdf": "MAG 047 - The New Door - Transcript Re-formatted.pdf",
+      "title": "MAG 047 - The New Door - Transcript Re-formatted",
+      "num_chars": 17736,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "eed62924c8b23b744a6b421e",
+        "c32015ef027f7af606665c88",
+        "7da2e43b304653e8c247fc09",
+        "419e4eb2ffb208ad1fadd382",
+        "b77f4016e1337327ff7a974c",
+        "550572d9c5ac5dc4673c12b7"
+      ]
+    },
+    {
+      "pdf": "MAG 048 - Lost In The Crowd - Transcript Re-formatted.pdf",
+      "title": "MAG 048 - Lost In The Crowd - Transcript Re-formatted",
+      "num_chars": 20362,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "dffdf90a9d186501f87dbf39",
+        "1ab9bf30d48a335f107eb336",
+        "0c9171b6836bde547ec846a9",
+        "0c323203e34c053947e19978",
+        "84f408cbc43b97f6a156c756",
+        "4c1a1b56f2c740db2c363623",
+        "beff3b059b3c6ad9346a368d"
+      ]
+    },
+    {
+      "pdf": "MAG 049 - The Butcher's Window - Transcript Re-formatted.pdf",
+      "title": "MAG 049 - The Butcher's Window - Transcript Re-formatted",
+      "num_chars": 25154,
+      "num_chunks": 10,
+      "chunk_ids": [
+        "88c04407fa1e1879a5c1f4ea",
+        "55e133831e142f1086f0f2f0",
+        "a70d44f682d670e6ea10d945",
+        "1fa66aa3ad1220eecf0d2825",
+        "c1dacc8c058d111f349543b0",
+        "eb949c3c403120ce82e14f3b",
+        "1109a76a4d5f3ed78b7a5f4c",
+        "e731c3174eeba5da3b3e1f8f",
+        "b088dbc641bf1286f0100991",
+        "a69b703a0a8a229bfa3e8c51"
+      ]
+    },
+    {
+      "pdf": "MAG 050 - Foundations - Transcript Re-formatted.pdf",
+      "title": "MAG 050 - Foundations - Transcript Re-formatted",
+      "num_chars": 18914,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "b705b5a8102fe1b7dec369dc",
+        "cb8625443a9d3d3755af809c",
+        "7edb7bd11deb2c409a550b80",
+        "cd45dd6d8d092a989aaddb25",
+        "efe71565c2cd29deade9063c",
+        "36073423892e7db55e8c6d3e"
+      ]
+    },
+    {
+      "pdf": "MAG 051 - High Pressure - Transcript Re-formatted.pdf",
+      "title": "MAG 051 - High Pressure - Transcript Re-formatted",
+      "num_chars": 19462,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "2679e7edbb3771cdfa82aa55",
+        "dbd9fad33513f6989920ef48",
+        "348f8feb67cc9c5825950bb8",
+        "97ce242c881538ab06a830b4",
+        "b6c39fb78e768c815f5336e4",
+        "3dd64f1bf18851c3d1142dc8"
+      ]
+    },
+    {
+      "pdf": "MAG 052 - Exceptional Risk - Transcript Re-formatted.pdf",
+      "title": "MAG 052 - Exceptional Risk - Transcript Re-formatted",
+      "num_chars": 22831,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "ac7a091d773ed432dfc66038",
+        "cbd63b1eae15b93cbd82eb33",
+        "09eb0c2fa33afc5bf86a713e",
+        "5c3ee7976b87df3afb841e84",
+        "e64bf83fe5d565df3758031d",
+        "21444b6dd40c2d9174130fd9",
+        "70aedb76ebf62b32ea51852f",
+        "623db469af9ff6fb7e5847a2"
+      ]
+    },
+    {
+      "pdf": "MAG 053 - Crusader Transcript.pdf",
+      "title": "MAG 053 - Crusader Transcript",
+      "num_chars": 22269,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "9d6af1dd49cb57b46e1cb883",
+        "fb9b8e59125c47602c37a57d",
+        "d99170094166ebe1ce073129",
+        "58830263cd01829c84bd645f",
+        "2d914bc61e0670db23da10b3",
+        "62f05865b4cf4588b2351c1c",
+        "aedc7c40f38ad37eb7e9f91e",
+        "fb4fb2e170ca60f2fffe0c52"
+      ]
+    },
+    {
+      "pdf": "MAG 054 - Still Life Transcript.pdf",
+      "title": "MAG 054 - Still Life Transcript",
+      "num_chars": 19028,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "5eb8f559eb674eadfc2f4999",
+        "41a4ea6288e6189cf4c69e71",
+        "e794a8f614150a6b0c312e0c",
+        "836454111d1e30e9c2bbcc56",
+        "45cbb51f89288ea8c2a00dec",
+        "da7cac52de66a318c6a811f1",
+        "018e2cdf062bf2c33f247268"
+      ]
+    },
+    {
+      "pdf": "MAG 055 - Pest Control Transcript.pdf",
+      "title": "MAG 055 - Pest Control Transcript",
+      "num_chars": 21127,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "84a2d31b7f80d806441430ac",
+        "5f2502e4e9c3541e78eed1be",
+        "c76dc0078701095f949a17c7",
+        "5cec2bff3fef1d046d92f361",
+        "22e369d14924a49e7c7b6a6f",
+        "c037ab28710e62a325808b8f",
+        "0a080b440a95ce0e14afb6f1"
+      ]
+    },
+    {
+      "pdf": "MAG 056 - Children of the Night Transcript.pdf",
+      "title": "MAG 056 - Children of the Night Transcript",
+      "num_chars": 22521,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "580bfc458b56e4aafbe09a20",
+        "d61a78ff40d50d016bea08d9",
+        "503ac7cacb9da315db66219d",
+        "eff9e1d0c97efdba26d97e23",
+        "ee2590e744abe037f2d25539",
+        "a5a76b42cb5026b412659502",
+        "d4278a81397a87a3d68ff93d",
+        "07f3976e70e0210d6462aa77"
+      ]
+    },
+    {
+      "pdf": "MAG 057 - Personal Space Transcript.pdf",
+      "title": "MAG 057 - Personal Space Transcript",
+      "num_chars": 19689,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "f0bbaa6f14213ce86e1504b3",
+        "264ac42035debf55fe6dff6b",
+        "454c501d9f7605bd7c38e2c1",
+        "085d02984c64c04936278a08",
+        "a0e00046e177320c4598f28a",
+        "e3c59438671bb991e1b2f780",
+        "cbe530262cd338f709d91d6d"
+      ]
+    },
+    {
+      "pdf": "MAG 058 - Trail Rations Transcripts.pdf",
+      "title": "MAG 058 - Trail Rations Transcripts",
+      "num_chars": 19706,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "6dc3bc1783e858014e218817",
+        "744f700fc3d1aa951fd922f7",
+        "caa4f1b61395bb5341388ba8",
+        "3c50035734e10008b373d517",
+        "f25da4245b2ce63e9b60eb69",
+        "f3e703e862e575255c47c599",
+        "76f976bfb33291d57ebf4894"
+      ]
+    },
+    {
+      "pdf": "MAG 059 - Recluse Transcript.pdf",
+      "title": "MAG 059 - Recluse Transcript",
+      "num_chars": 20291,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "d5fddc4adf202870ba1c9dfe",
+        "013000ee9c87874fbd67edaa",
+        "9e4456a1d400d3640d5e8193",
+        "1c49d8bf0d6b159d83f44efa",
+        "64b4945d431877d1a7ca89fc",
+        "fc1d8267ba65442303615f21",
+        "822cdd9a9a737fe4812f9f14"
+      ]
+    },
+    {
+      "pdf": "MAG 060 - Observer Effect Transcript.pdf",
+      "title": "MAG 060 - Observer Effect Transcript",
+      "num_chars": 19055,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "74c53446af8999335c5cc0a6",
+        "742d9fcea3aa9e41325a4a3a",
+        "ff0605f94e0ac9cf5caab096",
+        "23df6cfdd9a8fa223d58f15f",
+        "c9e419ed8fc7be20d7ab7fb6",
+        "6dedd8f4f3ef4b078c16979a"
+      ]
+    },
+    {
+      "pdf": "MAG 061 - Hard Shoulder transcript.pdf",
+      "title": "MAG 061 - Hard Shoulder transcript",
+      "num_chars": 18077,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "3c8c03efc68cb8490581373c",
+        "c759fcddd0a9d52b0177395c",
+        "50d056499b6bcc341d76e68b",
+        "f7db372e3586a1ff586f3554",
+        "9e78bd3d6ad435ffc20770d7",
+        "3e07b81b574c00f144bd19b6"
+      ]
+    },
+    {
+      "pdf": "MAG 062 - First Edition Transcript.pdf",
+      "title": "MAG 062 - First Edition Transcript",
+      "num_chars": 19424,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "7655be0f0de4ae25bffda62a",
+        "7a9a96ce1f83f0370c766f15",
+        "2f297c45b93b751e43a78fb2",
+        "60f874f267a5395b77c84133",
+        "e6cd8af72006427361676ff2",
+        "7e5e414d767f97548c5aea13",
+        "b9b2e262b9e97f932381a0e5"
+      ]
+    },
+    {
+      "pdf": "MAG 063 - The End of the Tunnel Transcript.pdf",
+      "title": "MAG 063 - The End of the Tunnel Transcript",
+      "num_chars": 20679,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "0b8ca57b0e8df6b1821800e4",
+        "fdfbe51af037873d74ab5f17",
+        "9c8d0b2b38ecd20157b9cb63",
+        "4f4f686c26279f18e8908021",
+        "1ce9fc1a9b108c30e9b686d4",
+        "ec4b703801a9a7e35a40b88d",
+        "5e344c202636c748c0437d1d"
+      ]
+    },
+    {
+      "pdf": "MAG 064 - Burial Rites Transcript.pdf",
+      "title": "MAG 064 - Burial Rites Transcript",
+      "num_chars": 20299,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "cbc59f338082016792ca3e3a",
+        "8e009aa6213ec51f0cc165a8",
+        "0f1e46acb3c6b728bcc50328",
+        "c58c1c3ca07a248662a0f069",
+        "71f0a4df9ae74012804cf224",
+        "e73de933602a58c2c2790ea8",
+        "e2cbfa34166f37053f93a75d"
+      ]
+    },
+    {
+      "pdf": "MAG 065 - Binary Transcript.pdf",
+      "title": "MAG 065 - Binary Transcript",
+      "num_chars": 25408,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "604a4a49a7e9c56aa281a444",
+        "57ce8a285095aa9319f0ae56",
+        "20a99825095f7f67690567fd",
+        "8d3ee1fce74115c9f8847f49",
+        "a358824478f234728407be49",
+        "7a4d8a6be032af42e7d23680",
+        "b20af204f8bdcfbf8d01f50c",
+        "79283ccca1d146d4ba32940c",
+        "b5898660dc13dc5fc4e7f5c0"
+      ]
+    },
+    {
+      "pdf": "MAG 066 - Held in Customs Transcript.pdf",
+      "title": "MAG 066 - Held in Customs Transcript",
+      "num_chars": 19560,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "73e0c2462163556300fa23ff",
+        "cdacdd11dfbbc9c1398b6f90",
+        "58b2d60fba79dbb3bd732c08",
+        "6e30f3c32309f9275e26efc1",
+        "330463a0c4fc1c1719829120",
+        "ecaa4c0ecdba6aa6c6323d72",
+        "337044230b81204ed25dac8a"
+      ]
+    },
+    {
+      "pdf": "MAG 067 - Burning Desire.pdf",
+      "title": "MAG 067 - Burning Desire",
+      "num_chars": 19830,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "89006ad0b79921c16240ff7a",
+        "95351f9404ccb5c0ce5ad828",
+        "4fa8fdab2a1aaaa69443a1d9",
+        "c3d5a5428b35e475b023bd46",
+        "c2ffd3ec0ab919407c00ed12",
+        "d49e66fa5df2c5345728a27e",
+        "d907904d4033715da9112f4a"
+      ]
+    },
+    {
+      "pdf": "MAG 068 - The Tale of a Field Hospital Transcript.pdf",
+      "title": "MAG 068 - The Tale of a Field Hospital Transcript",
+      "num_chars": 17251,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "57d05e038a631585079525d0",
+        "9675dfec84b56f9e386cd958",
+        "21bf0695bc460462d29eb1d4",
+        "f9c56da46a6686afc3aabb13",
+        "6c677cd63b20215c92458eaa",
+        "6fc09e660f944ebbb322d165"
+      ]
+    },
+    {
+      "pdf": "MAG 069  - Thought for the Day Transcript.pdf",
+      "title": "MAG 069  - Thought for the Day Transcript",
+      "num_chars": 20692,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "9f796452503a9570f6cb8b47",
+        "5f50680bdde48770ca482e7d",
+        "aad6a02d2d7f9550239ab4aa",
+        "da5a9ef7bc4080f3cbbb1b89",
+        "d202f8c363127497911e8b9a",
+        "b8565a425edfc3c686c2f332"
+      ]
+    },
+    {
+      "pdf": "MAG 070 - The Book of the Dead Transcript.pdf",
+      "title": "MAG 070 - The Book of the Dead Transcript",
+      "num_chars": 19273,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "71565fcbbcb9ae73126e9335",
+        "5d2c65a434b51721033aedcc",
+        "4ba859b6877827f0391441c4",
+        "37af60fcb5c9f6abeb7e8cbd",
+        "102e0d1395b2ee62651cb6a9",
+        "e033f26d98d87ceb7fe240e3"
+      ]
+    },
+    {
+      "pdf": "MAG 071 - Underground transcript.pdf",
+      "title": "MAG 071 - Underground transcript",
+      "num_chars": 17333,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "c5023385b9bf79303e38480b",
+        "3df7baa73c76f17bd4d18ffa",
+        "580f8778816602e555982168",
+        "0b9a48cbb8a63c525b277571",
+        "fff6b649fc715b4aa33d6e97"
+      ]
+    },
+    {
+      "pdf": "MAG 072 - Takeaway Transcript.pdf",
+      "title": "MAG 072 - Takeaway Transcript",
+      "num_chars": 21631,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "da2ed53d48fad879efbaffa4",
+        "1147c8a29394d8c5aeb4c754",
+        "bb39cef962d2a8f4f1b06cc9",
+        "3921fe2be176c9670bb204d1",
+        "a85c32b7a6a4bd5c5caa53ca",
+        "95a8ad92acf85beb0c2d5fcb",
+        "040cddd0a06c5fce5f7991cb"
+      ]
+    },
+    {
+      "pdf": "MAG 073 - Police Lights Transcript.pdf",
+      "title": "MAG 073 - Police Lights Transcript",
+      "num_chars": 18683,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "c25ede82101dad02a779f745",
+        "20257ed6f61ce1288bb36be8",
+        "611097ccbaeafde8999a3c6b",
+        "cd8f6a50d44fe727da566e96",
+        "a18430a541e5852ef6920663",
+        "f048c24b44bd262b77050072"
+      ]
+    },
+    {
+      "pdf": "MAG 074 - Fatigue Transcript.pdf",
+      "title": "MAG 074 - Fatigue Transcript",
+      "num_chars": 16009,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "3a06bb4209299128901b506b",
+        "2c98a1b4f068c4d5f38e4e8e",
+        "c578ae843efc19bb7f8c6c0f",
+        "f43ea64a98af9c03ea0d1565",
+        "3b3d61de5c48a8bffc8dd8c3"
+      ]
+    },
+    {
+      "pdf": "MAG 075 - A Long Way Down Transcript.pdf",
+      "title": "MAG 075 - A Long Way Down Transcript",
+      "num_chars": 20073,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "fd75451662cf5ff0d0362474",
+        "500acafecacdf62b75822482",
+        "cbf6920c625a7857a77ca65c",
+        "a56a5c38b86c2adf36370eb6",
+        "86b2f7bbed01857189b53192",
+        "47d9fc2d453fe2029ec1a00a"
+      ]
+    },
+    {
+      "pdf": "MAG 076 - The Smell of Blood Transcript.pdf",
+      "title": "MAG 076 - The Smell of Blood Transcript",
+      "num_chars": 18354,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "884af6907aa6df5bb9f4e259",
+        "dffcda47ab27b6c24e8787fd",
+        "6398bcc028c01431b4dc2174",
+        "c81aee38c3747f96e4588680",
+        "86b32693f35fa683ce967b00",
+        "b19d5578f8a4af043a722307"
+      ]
+    },
+    {
+      "pdf": "MAG 077 - The Kind Mother Transcipt.pdf",
+      "title": "MAG 077 - The Kind Mother Transcipt",
+      "num_chars": 15570,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "493c96f439b21f2d5d98fcc7",
+        "d6621939550430bd3fb20e4f",
+        "9b40407a890addd964d08034",
+        "fc4e5e967a418ecd3f456792",
+        "02f7686437c756214084dcc3"
+      ]
+    },
+    {
+      "pdf": "MAG 078 - Distant Cousin Transcript.pdf",
+      "title": "MAG 078 - Distant Cousin Transcript",
+      "num_chars": 20356,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "24a55435b4e524e069a9887d",
+        "66ad923c54701db46e760e14",
+        "c02d338351475072a63318a2",
+        "50eebbd0ae8142b5363647e6",
+        "6947e566da6528d94a2d24fc",
+        "7a6c588ad446c0b92698200f",
+        "fea57203bd7ab07e596f3e99"
+      ]
+    },
+    {
+      "pdf": "MAG 079 - Hide and Seek Transcript.pdf",
+      "title": "MAG 079 - Hide and Seek Transcript",
+      "num_chars": 13138,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "5e927bc51130ae1f465ad6df",
+        "0e80aefbe17d19c55f3f3ccc",
+        "274eb69729640602fad4a24c",
+        "902b9718ea6c95a921567a4d",
+        "9142a107ad248f3e4fed9251"
+      ]
+    },
+    {
+      "pdf": "MAG 080 - The Librarian Transcript.pdf",
+      "title": "MAG 080 - The Librarian Transcript",
+      "num_chars": 26569,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "da286b27037f189a64e1a050",
+        "7041f72a20a7b2c954dd83d8",
+        "0ac759352171910e1fad500d",
+        "88a0db0e73060b977b10f0ce",
+        "f90620e8be31beccaab63d32",
+        "ba0b0bf7e6f475d239334914",
+        "35e9ac640f0087a6bb032946",
+        "3ed46b256ffd4fa7d0229837",
+        "9b0c151aee15d1289dca409f"
+      ]
+    },
+    {
+      "pdf": "MAG 081 - A Guest for Mr Spider Transcript.pdf",
+      "title": "MAG 081 - A Guest for Mr Spider Transcript",
+      "num_chars": 21271,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "c268e9575120a9ba40215e95",
+        "7522d5a402cd3cd6c5e4f1f2",
+        "eec65f45d77dd90fc85b5a99",
+        "33bd7879ee2557aec1a7a820",
+        "7039611ae71859c33c11824c",
+        "e0f2b62c44698d07c44f7f7a"
+      ]
+    },
+    {
+      "pdf": "MAG 082 - The Eyewitnesses Transcript.pdf",
+      "title": "MAG 082 - The Eyewitnesses Transcript",
+      "num_chars": 18318,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "72e91eb87f8af406792c2814",
+        "d6ddc7b6fe800b7223314ca1",
+        "3038caeb0ab7871e9faff0f3",
+        "1f205667ecc5fb247e8a5b42",
+        "3c2652579ad4ddee9ef2a691",
+        "27926da2149f8b4e8d1e7def"
+      ]
+    },
+    {
+      "pdf": "MAG 083 - Drawing a Blank - Transcript.pdf",
+      "title": "MAG 083 - Drawing a Blank - Transcript",
+      "num_chars": 20536,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "07717f750b2bdd7a42ca0267",
+        "9275d1e8f08faab37f90a40b",
+        "81257a15c03ea2d31c058722",
+        "9f5a8d951403455d9633fae0",
+        "c344f5bd4b1c083ea732e38c",
+        "c8d702555e86ba718c8f8696"
+      ]
+    },
+    {
+      "pdf": "MAG 084 - Possessive - Transcript.pdf",
+      "title": "MAG 084 - Possessive - Transcript",
+      "num_chars": 20584,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "7d0fd7296a013670bfb5617e",
+        "82216199442d4c378e4bfca6",
+        "0ac1bc67db73b6d00520fad3",
+        "fe645955acc72f469ccb753f",
+        "a1ce67655ab5e77297432985",
+        "be36b7761505ab5f0e92e598"
+      ]
+    },
+    {
+      "pdf": "MAG 085 - Upon the Stair - Transcript.pdf",
+      "title": "MAG 085 - Upon the Stair - Transcript",
+      "num_chars": 16344,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "c8eab2fbbd1358ed58df453b",
+        "d6998c6227864bdecd1ea309",
+        "f355840e33c56f6ac84afd45",
+        "253085ea820ef6b97ad37f30",
+        "f1e3b09fabc9dcaced5f0da3"
+      ]
+    },
+    {
+      "pdf": "MAG 086 - Tucked In Transcript.pdf",
+      "title": "MAG 086 - Tucked In Transcript",
+      "num_chars": 21540,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "b06e854f1fc74b0d86365c30",
+        "e1d2fbc2c7d578441d3a23f3",
+        "f0badd096aaf006af7071df6",
+        "b8661d52ad63ff1d3adc5c80",
+        "fc71b025aa29f707b8451847",
+        "e21e515af73d9be7dbadb2f4",
+        "9a2f528037cfa8a2a855fad1"
+      ]
+    },
+    {
+      "pdf": "MAG 087 - Uncanny Valley - Transcript.pdf",
+      "title": "MAG 087 - Uncanny Valley - Transcript",
+      "num_chars": 20063,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "49f8c9a2b839d97ee9b57801",
+        "9b51205611d6e66bad675dcc",
+        "120fed0994e0b0d3ae674f9e",
+        "e42cca37cc0770f37d8d984b",
+        "89661320b40c0c70c92a0c28",
+        "a5cfdefe980a97dfd1bce524"
+      ]
+    },
+    {
+      "pdf": "MAG 088 - Dig Transcript.pdf",
+      "title": "MAG 088 - Dig Transcript",
+      "num_chars": 15951,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "01b90081d5db241f9c47e1fa",
+        "bb039255703faec67f30eb72",
+        "514e189b5a254b1020893dc5",
+        "b1730dc9922e64c414e51208",
+        "44e961b012322027a767c161"
+      ]
+    },
+    {
+      "pdf": "MAG 089 - Twice as Bright Transcript.pdf",
+      "title": "MAG 089 - Twice as Bright Transcript",
+      "num_chars": 18888,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "39aea07f192a8442992ae492",
+        "f7b828197b5c448bbf113c38",
+        "80420a4bc1761c33219ac8a2",
+        "373368315fffce1612feb26c",
+        "14689e1de1ed934b793c0ba8",
+        "77a1177e030410d80746a3a2"
+      ]
+    },
+    {
+      "pdf": "MAG 090 - Body Builder Transcript.pdf",
+      "title": "MAG 090 - Body Builder Transcript",
+      "num_chars": 19217,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "54ff14ae6fbfd6c058b71bd7",
+        "38deb2f28ebd0fbe9cdff246",
+        "6fa303cae82193cbd6210e8d",
+        "000a2d5bed01798af6aa7d55",
+        "5e9984aad306cdebdbff2bff",
+        "9983a01276337b70622d834e"
+      ]
+    },
+    {
+      "pdf": "MAG 091 - The Coming Storm Transcript.pdf",
+      "title": "MAG 091 - The Coming Storm Transcript",
+      "num_chars": 16190,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "268acee1f13835460e3ecb7e",
+        "fb244da32e232db0867ab12d",
+        "57b8fd7999fbf3f3cd3e79ed",
+        "f9da200711d152e6adb21cbc",
+        "242592ba8c38d2887ac4292e"
+      ]
+    },
+    {
+      "pdf": "MAG 092 - Nothing Beside Remains Transcript.pdf",
+      "title": "MAG 092 - Nothing Beside Remains Transcript",
+      "num_chars": 18629,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "540f1da4723416c75e7e14ba",
+        "4396acd5dfcad5b83faa7e2f",
+        "184077ae7cba258fe1b8bf84",
+        "9d0707f38bd93ceb9f7933f5",
+        "084331c0c052509dc63983f7",
+        "924c029e733f919df43810eb"
+      ]
+    },
+    {
+      "pdf": "MAG 093 - Contaminant Transcript.pdf",
+      "title": "MAG 093 - Contaminant Transcript",
+      "num_chars": 22312,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "68470eba2f8440ae8df4452f",
+        "20df4290743ef41f9f4e5222",
+        "9169db3b56e953efe8e947cd",
+        "b9e630822fcd8c891180f8e8",
+        "65fa951313235ea4243c5461",
+        "c803c283190a29e8c310e362",
+        "eb56761d92e6b015e53a995e"
+      ]
+    },
+    {
+      "pdf": "MAG 094 - Dead Woman Walking Transcript.pdf",
+      "title": "MAG 094 - Dead Woman Walking Transcript",
+      "num_chars": 16805,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "877105f305cda52f350815e6",
+        "5abc36f7a257dc7485b11dd0",
+        "d322bd3cf366ad5593d7cf6b",
+        "c274274abb131accf6a6bb82",
+        "658e58f4675505070db97c97",
+        "7e8fd09cef3199dea2b1a9a5"
+      ]
+    },
+    {
+      "pdf": "MAG 095 - Absent Without Leave Transcript.pdf",
+      "title": "MAG 095 - Absent Without Leave Transcript",
+      "num_chars": 18724,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "00f0a4b9ac6d5558f2c7899b",
+        "8423719291501e703339d547",
+        "45cdd9f6d50da6463cbddea4",
+        "6e1eb2541e0d354ecb980643",
+        "8b0c5a5b9103b9cba22bda8f",
+        "534eeba0ef64c6fbd2688d94"
+      ]
+    },
+    {
+      "pdf": "MAG 096 - Return to Sender Transcript.pdf",
+      "title": "MAG 096 - Return to Sender Transcript",
+      "num_chars": 16023,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "d77c2f9654bdffc81ee8f945",
+        "cc76f725a8f81b88b0a0c224",
+        "7546ada74a97a06f99cf4cc8",
+        "a1e9ff5f6265b033b3b244d3",
+        "78c5bcce190403dc92792d0f"
+      ]
+    },
+    {
+      "pdf": "MAG 097 - We All Ignore The Pit Transcript.pdf",
+      "title": "MAG 097 - We All Ignore The Pit Transcript",
+      "num_chars": 21083,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "8d9e975a2ce19d2648cdceb8",
+        "0399e09ae26e76026fd904c5",
+        "71b081a07cee01f9c8f872d7",
+        "608f768434d5778a935e18e5",
+        "d200d2e5b74dde7bf1b3b7d3",
+        "b879be36fb0911d6f71686f7",
+        "16f0630c45d77689438c8c6f",
+        "ee8d26fd57c908203b6a08a1"
+      ]
+    },
+    {
+      "pdf": "MAG 098 - Lights Out Transcript.pdf",
+      "title": "MAG 098 - Lights Out Transcript",
+      "num_chars": 18926,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "48952da554e8be527747243f",
+        "a55b4ff2f524ab13d46668af",
+        "601c5819bcac4890febab4b7",
+        "082553d927434c5d9d3399e5",
+        "8ad097e9c9df054b197d864c",
+        "2e127ba5cd02eae4ea07c920",
+        "451e763f60653716414fa067"
+      ]
+    },
+    {
+      "pdf": "MAG 099 - Dust to Dust Transcript.pdf",
+      "title": "MAG 099 - Dust to Dust Transcript",
+      "num_chars": 19492,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "6b3f88485235109c8ff6d4ca",
+        "7a1c3253da51ee2676924b2a",
+        "497be47761ff5a5a88cf09c8",
+        "33c8a1d004b5aebc6b9ef5d9",
+        "110fbdf4a0392af4836288d9",
+        "cf01be550f386e653a7b565b"
+      ]
+    },
+    {
+      "pdf": "MAG 100 - I Guess You Had to be There Transcript.pdf",
+      "title": "MAG 100 - I Guess You Had to be There Transcript",
+      "num_chars": 23835,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "8bb1d179628901647bdad13b",
+        "70ae7c403b0b76b1db64b9fb",
+        "45dbe1b8e958dd5277c82efa",
+        "d7f326e777b023f014d28008",
+        "c0ea337a19556885b763f314",
+        "9c384cd513b8be77ee1d371f",
+        "fd13fd7ea53178e523971d5b"
+      ]
+    },
+    {
+      "pdf": "MAG 101 - Another Twist Transcript.pdf",
+      "title": "MAG 101 - Another Twist Transcript",
+      "num_chars": 15699,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "1c2d3cbefda5323b7403f52c",
+        "ab124d45cfcca2329a12c7e3",
+        "2b6d43fd7d2961306a0f4764",
+        "a5430241013815e3ad4c2c2a",
+        "b0054e8a6e2de40ad0bdba3b"
+      ]
+    },
+    {
+      "pdf": "MAG 102 - Nesting Instinct Transcript.pdf",
+      "title": "MAG 102 - Nesting Instinct Transcript",
+      "num_chars": 25112,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "44bf7118d477e45b0d9da355",
+        "59777fac3fe25fcacbca0ead",
+        "400291aee4d79da4bf89695b",
+        "490c5c86ca3152ae77de92cc",
+        "28aa7df588d451ca6c77443e",
+        "9c4f5ece6be6b177a3ecca90",
+        "d1bb90bc384d9bfcc622715e",
+        "fcd8e1c56b882b4845d5a4bc"
+      ]
+    },
+    {
+      "pdf": "MAG 103 - Cruelty Free Transcript.pdf",
+      "title": "MAG 103 - Cruelty Free Transcript",
+      "num_chars": 20016,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "10a76ead98a0b42560313d88",
+        "42ff133946fabae014b45a21",
+        "5d2ba513f5197f3d44fecdd1",
+        "ed529f9fb991eda8e477be56",
+        "c9a559a8d198c2ee0785a38f",
+        "cb28415a831c7fd17cd6da61"
+      ]
+    },
+    {
+      "pdf": "MAG 104 - Sneak Preview Transcript.pdf",
+      "title": "MAG 104 - Sneak Preview Transcript",
+      "num_chars": 20440,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "a65c11b8e279ceb6a3c7c308",
+        "c52d8f35ac01f8c422dcca0b",
+        "2e23f3920045af19a4224899",
+        "9f270d3b8245eaacd312f1d5",
+        "694065eb4e05341042062e41",
+        "09192bbd2b981b42c4df05ef"
+      ]
+    },
+    {
+      "pdf": "MAG 105 - Total War Transcript.pdf",
+      "title": "MAG 105 - Total War Transcript",
+      "num_chars": 14608,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "e7cb79a461fbb9df4cfa412f",
+        "92f0819ffe43face623569ba",
+        "1a56bd88199a95f0faddc793",
+        "6cc05a657adfdc91ef1dc4b9",
+        "ab4ca6960da06be6916c4282"
+      ]
+    },
+    {
+      "pdf": "MAG 106 - A Matter of Perspective-converted.pdf",
+      "title": "MAG 106 - A Matter of Perspective-converted",
+      "num_chars": 24295,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "3702490ace27796aae0d5121",
+        "2b1cdc89443743653c9dde8e",
+        "0eef5d9d6f78be59452b8af9",
+        "e35b80cf1344bef270be57d5",
+        "5d6057200041ea0086728d9d",
+        "3542d562f2884165ed7d8a17",
+        "56dcda56737ca15b05176549",
+        "9ea722daecb0566674d0ba3f"
+      ]
+    },
+    {
+      "pdf": "MAG 107 - Third Degree-converted.pdf",
+      "title": "MAG 107 - Third Degree-converted",
+      "num_chars": 20415,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "333a7387e05e50037ee38231",
+        "055f256c4bf02a6167e4b9a3",
+        "f353e658e244c73aec4ce98c",
+        "d8d3b046b3eb2647ec8c03fc",
+        "accb0bf64f7816bf55c571e7",
+        "c32d7a58a6efd0a1c619b11c",
+        "86c81d1d07866fbdc93d4958"
+      ]
+    },
+    {
+      "pdf": "MAG 108 - Monologue-converted.pdf",
+      "title": "MAG 108 - Monologue-converted",
+      "num_chars": 18662,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "20d183f50479ec4c78c9dee2",
+        "cd0f5f905f6e92a18219a246",
+        "2cfd093e7436f77a131d6431",
+        "be9c89f57d0a5ae3628efa6b",
+        "9fb7b35fb5f89cf939713366",
+        "a51fbdd4b5bad59758067599"
+      ]
+    },
+    {
+      "pdf": "MAG 109 - Nightfall-converted.pdf",
+      "title": "MAG 109 - Nightfall-converted",
+      "num_chars": 26071,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "ef029f76ff750dab893c9d52",
+        "42bc1d23d30060060a397562",
+        "35828f03c1f4728698d69fa1",
+        "4d524cfb924cb752d48b49ed",
+        "34e6ff42272252fb195e17e1",
+        "e509582856c0288ab0fdb06c",
+        "3de4de4681bec670868afe34",
+        "1dea114c050b65bf90cd0cdd"
+      ]
+    },
+    {
+      "pdf": "MAG 110 - Creature Feature-converted.pdf",
+      "title": "MAG 110 - Creature Feature-converted",
+      "num_chars": 24584,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "6d647f838ac9305853208101",
+        "e1b0e85ecbd76b2d8758860c",
+        "54cd4416a6c50a3d5596c997",
+        "05d0d06382817f2b58ef33e9",
+        "919cc17d88e670157f6fcc92",
+        "d6e6a677cd3ecf89a7ba0bb7",
+        "47e85cc49efa5ca78b8130b3",
+        "2c4efaab8a7a7634e2b70e94"
+      ]
+    },
+    {
+      "pdf": "MAG 111 - Family Business Transcript.pdf",
+      "title": "MAG 111 - Family Business Transcript",
+      "num_chars": 30562,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "e9a05ae9e47c31d9bd8eae6a",
+        "b7e3cedd139a356581b1dc33",
+        "2f870777f8deb7760aab124a",
+        "0c64f2385e1030d29efea6fa",
+        "03b6b145a57887a535063945",
+        "15ebc420b8fab3adf61f95ad",
+        "23ed749c3ab57ee10408f37a",
+        "1473c905534ba8cdc5ddbd93",
+        "e079ca82d916d0c025f66bdb"
+      ]
+    },
+    {
+      "pdf": "MAG 112 - The Thrill of the Chase Transcript.pdf",
+      "title": "MAG 112 - The Thrill of the Chase Transcript",
+      "num_chars": 18227,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "394ea684eb6edeacc9acd71d",
+        "f3b97b22401ac46fb9afadb3",
+        "29c3422d1ffa06c127134269",
+        "ba719a812160808a917780f6",
+        "a32a19006cf0cfc99c64ce2b",
+        "f1e0a0455376c345af9e3c9e"
+      ]
+    },
+    {
+      "pdf": "MAG 113 - Breathing Room Transcript.pdf",
+      "title": "MAG 113 - Breathing Room Transcript",
+      "num_chars": 19232,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "f6c04d3f5f33b5e72934ad90",
+        "ce1cf798188403a74ff69547",
+        "d5bbc02b00c77fdf41ce3edf",
+        "088f015cefc18ad701b5b3a8",
+        "005c9676b023ca41cda48636",
+        "09e87c14a8139b1472cb9056"
+      ]
+    },
+    {
+      "pdf": "MAG 114 - Cracked Foundation Transcript.pdf",
+      "title": "MAG 114 - Cracked Foundation Transcript",
+      "num_chars": 18419,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "3c3812d2f5f0670ed9e35d46",
+        "39665f75fdb29c6ea96e3630",
+        "adeed96d452a356767039b3d",
+        "9fece18d4cea99bf650d6f60",
+        "58da741330bf3665f306a0a4",
+        "3808d41a466824e659dd6c72"
+      ]
+    },
+    {
+      "pdf": "MAG 115 - Taking Stock Transcript.pdf",
+      "title": "MAG 115 - Taking Stock Transcript",
+      "num_chars": 16397,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "afc79175686d025ba0126ad1",
+        "665ab6041ac0d4fc7d2f6e73",
+        "cf9a4df03565c8e166e7dc50",
+        "9b5a05b680485209951dabae",
+        "e7c8c4e6d7316785eb0dbf46"
+      ]
+    },
+    {
+      "pdf": "MAG 116 - The Show Must Go On-converted.pdf",
+      "title": "MAG 116 - The Show Must Go On-converted",
+      "num_chars": 23513,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "990358c3cf34c1007612a85c",
+        "126a21b596afb0809f784a78",
+        "d1cd45aea19bf073ee1eb643",
+        "aa85d125954291730371732f",
+        "aa5521130f46d4cc263bbff3",
+        "7b28ded2a8813c028bf97874",
+        "b8cc31658498bcffde3b246d",
+        "f731753c30c00a570b8bb217"
+      ]
+    },
+    {
+      "pdf": "MAG 117 - Testament-converted.pdf",
+      "title": "MAG 117 - Testament-converted",
+      "num_chars": 15528,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "92af1b39cc133f1bd347e989",
+        "7bfb8d25cddef0df3913ef2e",
+        "7ef48f769a11e7acdf9ecaa4",
+        "9e4061046d9ede0d76e453ed",
+        "4c8fff009dd16feb4da507ae",
+        "a43b589ec5487ee265f867cd"
+      ]
+    },
+    {
+      "pdf": "MAG 118 - The Masquerade-converted.pdf",
+      "title": "MAG 118 - The Masquerade-converted",
+      "num_chars": 16366,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "7e236d1fc5f34eab8f14211e",
+        "c29c517e6a95c4bdb8cc7df0",
+        "85b15ee7cca1b870de9c4969",
+        "2a2d31e06b56ad6c86f97e27",
+        "4096f9ef4902a8ca3669bf4a"
+      ]
+    },
+    {
+      "pdf": "MAG 119 - Stranger and Stranger-converted.pdf",
+      "title": "MAG 119 - Stranger and Stranger-converted",
+      "num_chars": 15089,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "fd3707d03ab75c3a0241bbf5",
+        "6a9cbcbf707701a70ec05fe0",
+        "aed53529b3d78069ee74411f",
+        "b2b0e6d980882efd9c7b9160",
+        "3b725607c9fbe6b6049eebe2"
+      ]
+    },
+    {
+      "pdf": "MAG 120 - Eye Contact-converted.pdf",
+      "title": "MAG 120 - Eye Contact-converted",
+      "num_chars": 17592,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "5ec0390ae4e8a4b3adda61dd",
+        "70d0b2ac80964742d6cc1500",
+        "b7a078be500fe0682b9239b5",
+        "c6f4d4a03130a0931c77402d",
+        "542ac74b62649f67f2505822",
+        "ae61b23199464f661a42febf"
+      ]
+    },
+    {
+      "pdf": "MAG 121 - Far Awary Transcript.pdf",
+      "title": "MAG 121 - Far Awary Transcript",
+      "num_chars": 20433,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "cfe5a537d2836bdbfd9a871a",
+        "213cd3c5963f53b30a032144",
+        "c4a49c155f6e2c9a47e6c275",
+        "c9a388ea746943140a108fb6",
+        "fea5c09e0ac53c77df7f4b02",
+        "0492abcdce599013d206c8fe",
+        "8c54ee48c975e0babd5a70cc"
+      ]
+    },
+    {
+      "pdf": "MAG 122 - Zombie Transcript.pdf",
+      "title": "MAG 122 - Zombie Transcript",
+      "num_chars": 18751,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "96bd96522177e3eb7c63e6bc",
+        "e002a650504ae50af65b5f9a",
+        "d04810624f41b39a875f9830",
+        "feed2062a3b5a405985fcf9d",
+        "7a5b25b8143083e97df963b2",
+        "b888c8c206c2d2e5dc192710"
+      ]
+    },
+    {
+      "pdf": "MAG 123 - Web Development Transcript.pdf",
+      "title": "MAG 123 - Web Development Transcript",
+      "num_chars": 20757,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "da1858d22dac05b601ef883a",
+        "85cd2d5e161dd69c5245ca51",
+        "a0da3b5fe52617f09dc419ee",
+        "79550c528f284288d3b18bb8",
+        "8dbf4d30e861db5b7d272230",
+        "783c8c1ed220df36447f4f4e"
+      ]
+    },
+    {
+      "pdf": "MAG 124 - Left Hanging Transcript.pdf",
+      "title": "MAG 124 - Left Hanging Transcript",
+      "num_chars": 18845,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "8a8ed441ed060dfc5bf111a0",
+        "df114acd0cc94db36a18b950",
+        "bc6558466e160984bfd64972",
+        "a15ae5afbc32188f69b196ae",
+        "68c7a3d269807ece4f97e5de",
+        "b66290f5ca1840eef3ce4892"
+      ]
+    },
+    {
+      "pdf": "MAG 125 - Civilian Casualties Transcript.pdf",
+      "title": "MAG 125 - Civilian Casualties Transcript",
+      "num_chars": 20772,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "ad6f08e17803dd702ea664d3",
+        "d9920999b8e1a98cc1b3a5bb",
+        "28f64b48560ee7cc613fd747",
+        "70cab7ea20488e74b845edc4",
+        "8e5ae46496c4ffd85505925b",
+        "ee7f0f831214f76c8f7c76ad",
+        "770da95b40f4d04c844ea673"
+      ]
+    },
+    {
+      "pdf": "MAG 126 - Sculptor's Tool Transcript.pdf",
+      "title": "MAG 126 - Sculptor's Tool Transcript",
+      "num_chars": 20401,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "ac2c6aa3eac37dc861c6f4c8",
+        "bbe7748f598ae835dc3d696e",
+        "89d78c44e481a3417eef095b",
+        "6dc51466994124ca2f11d85a",
+        "1f1591da36b7297137287dd8",
+        "d77ad37c67f582853417de1f",
+        "67a8b2f1f300eb15ee423862"
+      ]
+    },
+    {
+      "pdf": "MAG 127 - Remains to be Seen Transcript.pdf",
+      "title": "MAG 127 - Remains to be Seen Transcript",
+      "num_chars": 21076,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "71a897499f07f257fbf448ab",
+        "23a15fed1d11d1ee872f5184",
+        "0bea4b29632be836a531a473",
+        "bff2bf2a1cf80a3e0265be2b",
+        "2aeb98778c0f733ee204a71e",
+        "dcc7df8ea520c776196f155c",
+        "46789a5f3b18024d816ef0e6"
+      ]
+    },
+    {
+      "pdf": "MAG 128 - Heavy Goods Transcript.pdf",
+      "title": "MAG 128 - Heavy Goods Transcript",
+      "num_chars": 16710,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "84907e3a99865ee014f1fadb",
+        "6ee9105adb805af7ba82d6dd",
+        "f37474fa333f8a886d859a22",
+        "7e39181edfd624fe3d656547",
+        "4d3211f674bee11925a1ab5b"
+      ]
+    },
+    {
+      "pdf": "MAG 129 - Submerged Transcript.pdf",
+      "title": "MAG 129 - Submerged Transcript",
+      "num_chars": 21885,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "4ea7e8d0beaf1511812985cd",
+        "31e5745b2bfbbd24ae9d9f0c",
+        "c538554723cd1506ebb1b553",
+        "e85f1ad45de3cc3cabf9925a",
+        "c4abcec65483b8f6c69afc60",
+        "fa6b8d47cfb1840f37a92fc2",
+        "d45a83abb702ba75e75a05df"
+      ]
+    },
+    {
+      "pdf": "MAG 130 - Meat Transcript.pdf",
+      "title": "MAG 130 - Meat Transcript",
+      "num_chars": 19033,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "be1ea74019de1adf58f68f0d",
+        "d0484c2deb3b99f17fc9522d",
+        "98c17e11f5f0549b335aa172",
+        "6009fd3e67b0f42b01dcca7a",
+        "3ce29b064579196706481885",
+        "0f4ee6928d32b6302bbbe782"
+      ]
+    },
+    {
+      "pdf": "MAG 131 - Flesh Transcript.pdf",
+      "title": "MAG 131 - Flesh Transcript",
+      "num_chars": 16678,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "48946c11d21bd04dff9dbf64",
+        "980aa05a84472627de1b6cef",
+        "60c530604416955382b828df",
+        "7716b30e510836736fc1f383",
+        "10a15413e06a780aa7250160"
+      ]
+    },
+    {
+      "pdf": "MAG 132 - Entombed Transcript.pdf",
+      "title": "MAG 132 - Entombed Transcript",
+      "num_chars": 12008,
+      "num_chunks": 4,
+      "chunk_ids": [
+        "c9a959d994c1abf5359c132e",
+        "0d69be377c716b6f769941c9",
+        "49b56733e9f553e44a846879",
+        "240099b7df49c416b8e7c9f4"
+      ]
+    },
+    {
+      "pdf": "MAG 133 - Dead Horse Transcript.pdf",
+      "title": "MAG 133 - Dead Horse Transcript",
+      "num_chars": 20186,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "fd58dc23bfd225c90098d308",
+        "822d31a2a5f02f42d220ade4",
+        "0bc8ac09f51d0a09a0aadf76",
+        "fe47921252db918fb58e84b0",
+        "cb4670d3e87e57338abeec42",
+        "dd5e475c958361ee7ad89051",
+        "94edeb044706a0832aa644ba"
+      ]
+    },
+    {
+      "pdf": "MAG 134 - Time of Revelation Transcript.pdf",
+      "title": "MAG 134 - Time of Revelation Transcript",
+      "num_chars": 21357,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "36eb41333eac0e9ac26c694b",
+        "159a302646c259df78e26d2a",
+        "2fbe41f88af12db612dc12ed",
+        "ec4209e2582bddc9ba466bbf",
+        "f8748d73a71abf727b2df12c",
+        "166ffa85b7b2e8e44e1a26bb",
+        "bcfbbd30178018bd0daab02a",
+        "fc63e801db0ed3be4da1bafc"
+      ]
+    },
+    {
+      "pdf": "MAG 135 - Dark Matter Transcript.pdf",
+      "title": "MAG 135 - Dark Matter Transcript",
+      "num_chars": 18654,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "abbc2645f154492321fa259e",
+        "463715d6ee7d2d03134ef4f5",
+        "af49ad8a29f8065dfe065941",
+        "7695a42ec206626385d7b0d2",
+        "63380cdbda20902f2aed6ef5",
+        "63ab940d0f9b795c26c2158c",
+        "82c8d7c8b1b4254c96ecee6a"
+      ]
+    },
+    {
+      "pdf": "MAG 136 - The Puppeteer Transcript.pdf",
+      "title": "MAG 136 - The Puppeteer Transcript",
+      "num_chars": 20504,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "6e29fdf2ddfeefb91c2af585",
+        "0f4f9b6942322f2d40a5fd80",
+        "a946d492018e32434d4eaf09",
+        "716b977038c539b96eea59e3",
+        "6d0bb0c3a77d2750f29cec04",
+        "0061ab398a209fe4a9a8fd00",
+        "aa703c4c151d6daeacbd5c25"
+      ]
+    },
+    {
+      "pdf": "MAG 137 - Nemesis Transcript.pdf",
+      "title": "MAG 137 - Nemesis Transcript",
+      "num_chars": 19254,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "f8f7bdcc1d6120ef0ab543c9",
+        "566c6d96d0c6761555ddff51",
+        "6070c0cd7a17f4fc4d543ba7",
+        "36534703db36f95053c679bc",
+        "228b5241f7a9fa2e652c651e",
+        "0e7aafcb3b7a747709c4cfc0",
+        "366d83f127db9b50e810f012"
+      ]
+    },
+    {
+      "pdf": "MAG 138 - The Architecture of Fear Transcript.pdf",
+      "title": "MAG 138 - The Architecture of Fear Transcript",
+      "num_chars": 17938,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "9ec8b43df45d61dab6c52471",
+        "b4d664d72e3cb7e9cd231674",
+        "0c72a5dddba84bdab124d65d",
+        "7f336e2a11795fb211f6df94",
+        "74b162f94765b61db0599ee8",
+        "a6f759295188ddc9d6e295f1"
+      ]
+    },
+    {
+      "pdf": "MAG 139 - Chosen Transcript.pdf",
+      "title": "MAG 139 - Chosen Transcript",
+      "num_chars": 18367,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "b00de3a829e479bc733c4397",
+        "f8ee01eecd7e12d0d9ac55d2",
+        "308e3d12a4f0f7e6e3fc8303",
+        "56d4f9c9b19d0b02bb4c1e6d",
+        "7367012483cd1f9548fc2235",
+        "86d8a61c90bf53a4441bbd70"
+      ]
+    },
+    {
+      "pdf": "MAG 140 - The Movement of the Heavens Transcript.pdf",
+      "title": "MAG 140 - The Movement of the Heavens Transcript",
+      "num_chars": 18518,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "3d6250851a49b0166435fea2",
+        "e3329aa397c77e5799c6b509",
+        "1e484d396f2f2513dc5f3022",
+        "73de9b4361d252ad2b234166",
+        "b44dd67b5663e1fd06cab072",
+        "3cc535eaa3f632c2a5353969"
+      ]
+    },
+    {
+      "pdf": "MAG 141 - Doomed Voyage Transcript.pdf",
+      "title": "MAG 141 - Doomed Voyage Transcript",
+      "num_chars": 17412,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "98633bf69d69d382cac3f03f",
+        "02a2b792d1b0615b0c841329",
+        "e3fd4037a1c09760d3c479aa",
+        "4565cf58ebd09b32e8c2c8c0",
+        "d42f0dae0771789eaa842a8d",
+        "fbde286549fe9a6e87d16e46"
+      ]
+    },
+    {
+      "pdf": "MAG 142 - Scrutiny Transcript.pdf",
+      "title": "MAG 142 - Scrutiny Transcript",
+      "num_chars": 18361,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "c899a3b79a092beb1fecff33",
+        "168445ae1b199d62299689b6",
+        "50923570a10bfb7c69889279",
+        "6f9f7aa0ca6cbc75f59376c0",
+        "bffe56799a7db92e940da76b",
+        "56eb4d003dd9870ac57c4a3c"
+      ]
+    },
+    {
+      "pdf": "MAG 143 - Heart of Darkness Transcript.pdf",
+      "title": "MAG 143 - Heart of Darkness Transcript",
+      "num_chars": 15397,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "11bb355ba4a78e4e3c3d8990",
+        "17d18e29254cf22100d02947",
+        "749fd0e2eab268b8c21dfd63",
+        "a8548a1b41e2a242da495dfd",
+        "d0815802b678fdee4b1b17b6"
+      ]
+    },
+    {
+      "pdf": "MAG 144 - Decrypted Transcript.pdf",
+      "title": "MAG 144 - Decrypted Transcript",
+      "num_chars": 17948,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "a65e38fa445125487c5be9f1",
+        "9db6f3d6985a2fd5712334ae",
+        "ce59f71cb83f2b52c4f01d41",
+        "bf772fb477ac4e442a4fd075",
+        "b4a565514513f9fede58df5a",
+        "2b8c1038e06411a1ec62c7ba"
+      ]
+    },
+    {
+      "pdf": "MAG 145 - Infectious Doubts Transcripts.pdf",
+      "title": "MAG 145 - Infectious Doubts Transcripts",
+      "num_chars": 19864,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "105521441c5c8f078a9c8beb",
+        "057084411da7718820434ed8",
+        "58d204a97612366ec1633def",
+        "b5c0c0128a3a06906f5a0258",
+        "ecc6a93f3c67e69f603906e0",
+        "489fb2c39e022794484fbbc1",
+        "3b1122d689a2696909f2881b"
+      ]
+    },
+    {
+      "pdf": "MAG 146 - Threshold Transcript.pdf",
+      "title": "MAG 146 - Threshold Transcript",
+      "num_chars": 20188,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "21797ee200df22448be90f28",
+        "40dfac023897d23d1a26c308",
+        "00b52e5ac565af2a31c76314",
+        "e06c62527966660ffde4b8eb",
+        "36e390f2e3faa6a3fd441a0a",
+        "218bffe54123556f2e8f508a",
+        "9381a24402e55d7f899a8609"
+      ]
+    },
+    {
+      "pdf": "MAG 147 - Weaver Transcripts.pdf",
+      "title": "MAG 147 - Weaver Transcripts",
+      "num_chars": 18914,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "794b780ce0f1c49885d0b784",
+        "f3606079d440da6a7a308c8c",
+        "18eab39c1ea413b8e04e1a0a",
+        "27d78ea111afd800bdb9f9bc",
+        "3c4e1fd5649a87f00ca0a5a5",
+        "a5adb7a85799e2cc4036d038",
+        "1db4be7055168723867fb503"
+      ]
+    },
+    {
+      "pdf": "MAG 148 - Extended Surveillance Transcript.pdf",
+      "title": "MAG 148 - Extended Surveillance Transcript",
+      "num_chars": 21820,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "a571f978d6b97d6ead1fead8",
+        "ddf879b06be0f383562432a1",
+        "43e6d3c1f8d33d6e03fb5f90",
+        "4f0877c12a342471a91fc35c",
+        "b772b08225b2a52118764c12",
+        "84cb4deb55ec68e3a260e2ff",
+        "3115a07f40852d64c2ce07e6",
+        "c6fa072308c2e9d465605b54"
+      ]
+    },
+    {
+      "pdf": "MAG 149 - Concrete Jungle Transcript.pdf",
+      "title": "MAG 149 - Concrete Jungle Transcript",
+      "num_chars": 19852,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "4582dcede4a20470823764d7",
+        "71bb2f93f67647d439f600eb",
+        "32109b51ac6fa781ad7fa91d",
+        "fce4ce418c8114ff7a49fc9f",
+        "6c569d5119287ebc8fb5a994",
+        "626acdb4db104f6645bf328b",
+        "fbaf11fd628a35dea69dd733"
+      ]
+    },
+    {
+      "pdf": "MAG 150 - Cul-de-Sac Transcript.pdf",
+      "title": "MAG 150 - Cul-de-Sac Transcript",
+      "num_chars": 22450,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "1160c273ae819540e7190ee7",
+        "c758ea267980da070672ac33",
+        "6bc2d1e6d5d010e95fda6734",
+        "1fae51da8ec9c9f93399cc5f",
+        "df78a3f0b238a79d91868779",
+        "5c63649e9d92439b2b4256a1",
+        "5ebc47c7df767ad38bbdc582",
+        "cec7da2e3721038da3f360dd"
+      ]
+    },
+    {
+      "pdf": "MAG 151 - Big Picture Transcript.pdf",
+      "title": "MAG 151 - Big Picture Transcript",
+      "num_chars": 21766,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "eebf49657a5d8882667a3368",
+        "5316594d251e0f5943965599",
+        "efc14e120027c5c667c88f5b",
+        "e028b41508c2922075201fc4",
+        "6ba42b87e7dde21c7c5bcc1d",
+        "4492d8ed6a646686e21c6cb6",
+        "ff44cc9578d8167c678f44ed"
+      ]
+    },
+    {
+      "pdf": "MAG 152 - A Gravedigger's Envy Transcript.pdf",
+      "title": "MAG 152 - A Gravedigger's Envy Transcript",
+      "num_chars": 22032,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "f29b1179f1666febba533e8b",
+        "d20b9a6749b1ec45029ab427",
+        "2ee846f00c4d255aadae660b",
+        "7460147bbd173813df79ab8f",
+        "8d21c336001dd34cb203e344",
+        "fd06ec44d2ff13a6a5364e17",
+        "0cf1833a599529579a016e6c"
+      ]
+    },
+    {
+      "pdf": "MAG 153 - Love Bombing Transcript.pdf",
+      "title": "MAG 153 - Love Bombing Transcript",
+      "num_chars": 22459,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "812274a5c40e489237f55687",
+        "456f1b80edddb4b3c0a5c4b8",
+        "82d60191f1a4b9296d233a7e",
+        "8ab5a1190d75e693d4b0c56d",
+        "cc7d8a29dfd1e4e7be99f979",
+        "53d5bf2ba856078edbcc3f4a",
+        "dd05966cf3604b58f5df347a"
+      ]
+    },
+    {
+      "pdf": "MAG 154 - Bloody Mary Transcript.pdf",
+      "title": "MAG 154 - Bloody Mary Transcript",
+      "num_chars": 21890,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "ceec65614215c9c2ac43f0c5",
+        "98095ad4e611429de50c946a",
+        "4cfefed7b37f6d0a2d0cd21f",
+        "b158e6fdc75a6d7d98d255b3",
+        "be8f81b9abfb01d1c8cded5b",
+        "ea6e15a3002263d0a299db19",
+        "e309edd80d0761b577fab9a5"
+      ]
+    },
+    {
+      "pdf": "MAG 155 - Cost of Living Transcript.pdf",
+      "title": "MAG 155 - Cost of Living Transcript",
+      "num_chars": 18301,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "4245a9da4ebc4ebfb2b27d05",
+        "155485b81243dc32507bd421",
+        "a41ad86d6d00f68f41c67319",
+        "ae8691f28f6c3645f545ccb1",
+        "532bab4c072453803de7d2c0",
+        "a50642da85e1c723cf43c75c"
+      ]
+    },
+    {
+      "pdf": "MAG 156 - Reflection Transcript.pdf",
+      "title": "MAG 156 - Reflection Transcript",
+      "num_chars": 19626,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "90c7222a66305f166697e0e8",
+        "f5434f211f3502387a353c25",
+        "64d9494df5b4c90b92d25fbf",
+        "b28c405258248f5757b87fcd",
+        "5e1095f7618635d545b63bc1",
+        "a9e91b7cf6c93cf070f8b0b6",
+        "ba60b9c6fc72b4f42b7cc0c5"
+      ]
+    },
+    {
+      "pdf": "MAG 157 - Rotten Core Transcript.pdf",
+      "title": "MAG 157 - Rotten Core Transcript",
+      "num_chars": 20372,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "7e656f55360768e60f207034",
+        "cd6707a71b49f4e7d6d35bad",
+        "7ed690c3f51cad732f97932f",
+        "987870a3bb45c7b576e7c493",
+        "5771acdd916cba0adc8474ab",
+        "12fba03685ed41f1f6f3f9ea",
+        "62810b3dd7ae212d8c5ac620"
+      ]
+    },
+    {
+      "pdf": "MAG 158 - Panopticon Transcript.pdf",
+      "title": "MAG 158 - Panopticon Transcript",
+      "num_chars": 23710,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "17cdf3c914210da67002b128",
+        "ea81afaa2da77e8137e06caf",
+        "3175f334a25b981accb86471",
+        "a248b75b41882e9c39d020eb",
+        "64fcd752e7e30708a8dcf875",
+        "524e778d73893ff68ff32cf1",
+        "fcbdabc4553dfc4a27802065"
+      ]
+    },
+    {
+      "pdf": "MAG 159 - The Last Transcript.pdf",
+      "title": "MAG 159 - The Last Transcript",
+      "num_chars": 20738,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "773e7991fcf34fa2a6aa39fe",
+        "b6e3be3c0a068045c103a56c",
+        "34898520550fa25b3bc977b0",
+        "f2ce0b24523daed2b03676e2",
+        "fe106c3305896d890fce67d9",
+        "fc21a4807affd8b29e19b553",
+        "dd904309582296e064ed1fdb"
+      ]
+    },
+    {
+      "pdf": "MAG 160 - The Eye Opens Transcript.pdf",
+      "title": "MAG 160 - The Eye Opens Transcript",
+      "num_chars": 24087,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "5d8a68c4c8750c6f45777704",
+        "c95e3d1c892a6d3dc735fd96",
+        "5509f1c0632f5b32d753b4d7",
+        "3661c9e44011bca533b4ccaa",
+        "4480a3b14c93172156bb979a",
+        "8c8c0a7af47c97737a714d15",
+        "cb31f70e3fac0e4986fc8077",
+        "c86cb10508d2d4510b57e60f"
+      ]
+    },
+    {
+      "pdf": "MAG 161 - Dwelling Transcript-converted.pdf",
+      "title": "MAG 161 - Dwelling Transcript-converted",
+      "num_chars": 22308,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "1cf0761a6909af21ef5acecf",
+        "a099f64fa4e9e749ec7d01e0",
+        "a74eb9e715064680e33bf322",
+        "28d6788127b08139e0b555af",
+        "3e5f8ad0cdb2c84d9534a213",
+        "aecb1763cd515e2f8a9ae4ca",
+        "725b5449b0375e346d3aba14"
+      ]
+    },
+    {
+      "pdf": "MAG 162 - A Cosy Cabin Transcript-converted.pdf",
+      "title": "MAG 162 - A Cosy Cabin Transcript-converted",
+      "num_chars": 24364,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "59dc79c8d2093bd6aeb316d4",
+        "6087882a2fbfb8c5a54cfb92",
+        "649ed596d2de91404e14ad14",
+        "f726b4916ba31315d266a622",
+        "c2d04fdd4eb28b80c659ef44",
+        "2408c71a207f3b2d9c917ba9",
+        "b8f9b1525197edec90fdd6d8",
+        "00752cb476c53d335c8eb2ce"
+      ]
+    },
+    {
+      "pdf": "MAG 163 - In the Trenches Transcript-converted.pdf",
+      "title": "MAG 163 - In the Trenches Transcript-converted",
+      "num_chars": 19982,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "4e5cce2084c2fa9ac92597c6",
+        "1c7b0a213c7b49be82547156",
+        "e76315b8e7b4ff497f9ba23f",
+        "d2a4d43304e2bbacc4e4bf88",
+        "0e8304450522426f53c5ba7d",
+        "b76f04934a8a1c3938e86878",
+        "f61fbcc058f1058668eefc5b"
+      ]
+    },
+    {
+      "pdf": "MAG 164 - The Sick Village Transcript-converted.pdf",
+      "title": "MAG 164 - The Sick Village Transcript-converted",
+      "num_chars": 22980,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "0c04cbf5bf5b1a5a5b77b0d7",
+        "448c9e5da93e7a746c7dc659",
+        "f3e1a56e4eafee77edbf1b94",
+        "bd3cade4573a2d0cb6ef6ee4",
+        "bf578c0f2c4f9c568d368ca1",
+        "16b07bcf16046523277cf471",
+        "d57626d392fb129e80888ec3"
+      ]
+    },
+    {
+      "pdf": "MAG 165 - Revolutions Transcript-converted.pdf",
+      "title": "MAG 165 - Revolutions Transcript-converted",
+      "num_chars": 19695,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "d44ab99d96a162724b880826",
+        "b1962d0b727db9783df17ad7",
+        "2e00b62a8ac2da6a65c3e5c6",
+        "d3f5c04b6678aa9e19785cbf",
+        "0a9c1c7c774d34a2cd723830",
+        "4e30b81c44742fa94faf9fcc"
+      ]
+    },
+    {
+      "pdf": "MAG 166 - The Worms Transcript-converted.pdf",
+      "title": "MAG 166 - The Worms Transcript-converted",
+      "num_chars": 20127,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "bf7010b64f7a80f659771997",
+        "b7270f57f8fbdbedbb96a051",
+        "abf68e5ef23f1764b7b26100",
+        "34460e8af5d6c162fc608fca",
+        "42e0a6b39b4dfe233746b4d0",
+        "f59844c8c29f5403cb7594a5"
+      ]
+    },
+    {
+      "pdf": "MAG 167 - Curiosity Transcript-converted.pdf",
+      "title": "MAG 167 - Curiosity Transcript-converted",
+      "num_chars": 19697,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "fc1772e71ba9ef5f2e3c4576",
+        "a28c9ca01fde3351cfa6c9b0",
+        "f41ba0291b66341a930c4601",
+        "2cade620d9efa61f0bcefaf1",
+        "a7050c3310ab4e6ea69a27f6",
+        "321de0f0e2ca2ad2cc051e2c"
+      ]
+    },
+    {
+      "pdf": "MAG 168 - Roots Transcript-converted.pdf",
+      "title": "MAG 168 - Roots Transcript-converted",
+      "num_chars": 20074,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "d7419472c3c1900e829996de",
+        "179828753289ae447e69946c",
+        "8d3335e018f6f0e080131aa2",
+        "9b681c3eb5a567ade357d614",
+        "2f93e0765c42218caeaa42f4",
+        "669d280696ef943041d60491",
+        "28782d2723b953a4ddc27f4f"
+      ]
+    },
+    {
+      "pdf": "MAG 169 - Fire Escape Transcript-converted.pdf",
+      "title": "MAG 169 - Fire Escape Transcript-converted",
+      "num_chars": 22145,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "77e57e379ae5d01445ee9c92",
+        "cda2bb4b27555a7e89a7d579",
+        "9790d5619498205d1c191a08",
+        "6bedd4602a6e4f0d4b39746c",
+        "3bb34f853f50b6676dcd4b6b",
+        "64fe781bb5a113b09e47289b",
+        "6051133b66b5059ce0da1bfa"
+      ]
+    },
+    {
+      "pdf": "MAG 170 - Recollection Transcript-converted.pdf",
+      "title": "MAG 170 - Recollection Transcript-converted",
+      "num_chars": 22223,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "a88ecea6805f1a55fb003ea0",
+        "c43f1477a5c1e1913de4ea7b",
+        "9fdeb0cdef8a9f7b0a37536a",
+        "983ff37122b214be7f977375",
+        "f4aa03281d0ed1032a20609f",
+        "e3f6d95dfed983bf203e69a4",
+        "3f61bcde0445dea7a2116d9f",
+        "717207143997d51510b3a623"
+      ]
+    },
+    {
+      "pdf": "MAG 171 - The Gardener Transcript-converted.pdf",
+      "title": "MAG 171 - The Gardener Transcript-converted",
+      "num_chars": 20716,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "1b2b0ca8d8b319d5770b148a",
+        "d10e7143828150e79462e25b",
+        "b62edfe2deea4dc0ddb7775c",
+        "e9155a6f2e8debbe9cc74656",
+        "c3c84cfa155cac73c8ccb963",
+        "1a675440aff24716d49779cc",
+        "24627562ad2a3846ac573310"
+      ]
+    },
+    {
+      "pdf": "MAG 172 - Strung Out Transcript-converted.pdf",
+      "title": "MAG 172 - Strung Out Transcript-converted",
+      "num_chars": 20173,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "a7d412b1c5ac946a02152b42",
+        "77f0c449a042d4b1d40862a4",
+        "042b1a88d7e80e64b82c5d7c",
+        "a5d9347553454ed87aea3e75",
+        "ca13be44a37246d8f0af64b2",
+        "ec9c175870e2cbc18f28394c",
+        "9d41f1cb8d7f59daf0abef9a"
+      ]
+    },
+    {
+      "pdf": "MAG 173 - Night Night Transcript-converted.pdf",
+      "title": "MAG 173 - Night Night Transcript-converted",
+      "num_chars": 15368,
+      "num_chunks": 5,
+      "chunk_ids": [
+        "5ed0e919b14360a0e263af11",
+        "4f8c9d6405e6e72521e801d9",
+        "0b4ce822330634b1bf5956e3",
+        "a464c054f57f63d4bf7cad8c",
+        "433f32d7cfc549a4abe0187d"
+      ]
+    },
+    {
+      "pdf": "MAG 174 - The Great Beast Transcript-converted.pdf",
+      "title": "MAG 174 - The Great Beast Transcript-converted",
+      "num_chars": 22265,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "c30da47e13f3ac2ae172e8a0",
+        "279273c77f890db1dc1a0ffa",
+        "5e48751faf1e1a2a7dccd92d",
+        "85e4c6bbd69428bc7651aca9",
+        "d2fca42e89e35bd92fb36757",
+        "d212754cb0e99fdb7e9e0296",
+        "e0951244af72f6922afb95b9"
+      ]
+    },
+    {
+      "pdf": "MAG 175 - Epoch Transcript-converted.pdf",
+      "title": "MAG 175 - Epoch Transcript-converted",
+      "num_chars": 18149,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "7b9c57f70f4194c8c313c02d",
+        "4962743b8a9b5d2a6bfd5b92",
+        "3f07db7be47c7f5602e82928",
+        "280bc718f84ea70bbf417ee0",
+        "052135cb38655209a65a81b0",
+        "1061dd642fe4a0d78e51e396"
+      ]
+    },
+    {
+      "pdf": "MAG 176 - Blood Ties Transcript-converted.pdf",
+      "title": "MAG 176 - Blood Ties Transcript-converted",
+      "num_chars": 20886,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "f331d8bd9b48c290ef27bb8b",
+        "e79c67190b25dc6b621526a5",
+        "ed1716010a0e601fadd56399",
+        "10bdadfb53eb2a55f8bfd490",
+        "a74161a7e2891a18cd97f649",
+        "7944b37741112fbd30bc4d84",
+        "4127fb311eeb0b05eb3247c2"
+      ]
+    },
+    {
+      "pdf": "MAG 177 - Wonderland Transcript-converted.pdf",
+      "title": "MAG 177 - Wonderland Transcript-converted",
+      "num_chars": 31214,
+      "num_chunks": 10,
+      "chunk_ids": [
+        "d1c989b2f1656b6ce15c0295",
+        "487eb37a39398fa678a9682d",
+        "811807c15f51da234b64412c",
+        "d90f97ed1f50321dad221513",
+        "4c233a1a6f36ab33d4666dea",
+        "adc4e4ba621e4f9c3dd57165",
+        "66990b7d319e26f77c1eb5c9",
+        "c78a0d036c7f4490f7d7b49e",
+        "fac08d05baa50972ff2dbf52",
+        "84bc8ba490d755d5146c5cf4"
+      ]
+    },
+    {
+      "pdf": "MAG 178 - The Processing Line Transcript.pdf",
+      "title": "MAG 178 - The Processing Line Transcript",
+      "num_chars": 20763,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "c17b0bb64fff470cec15f863",
+        "d2f361c4d9baa3cbe70f42c5",
+        "3cf398543a32f690dbf7d679",
+        "b6ce6815a302d34efc67a66d",
+        "615a7c5340f7856c700213e0",
+        "005382b913a1ff2dec8835e0",
+        "0cdb36f30ffc129fcee61084"
+      ]
+    },
+    {
+      "pdf": "MAG 179 - Accomplice Transcript-converted.pdf",
+      "title": "MAG 179 - Accomplice Transcript-converted",
+      "num_chars": 20091,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "7e2bf357d9046b40dc1e1874",
+        "af02c92e30c382f623b26ee2",
+        "cc1a4217460e4c6db17d0f1b",
+        "bcf443d31342831e993bbb9e",
+        "3bd02cd9292c2f75caabcc30",
+        "0eca40bf08030f064852d948",
+        "5835f01e53946d1029913024"
+      ]
+    },
+    {
+      "pdf": "MAG 180 - Moving On Transcript-converted.pdf",
+      "title": "MAG 180 - Moving On Transcript-converted",
+      "num_chars": 21493,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "f041c804b2041c24a570cf25",
+        "a767dc71dd589fd96160747a",
+        "d04deac4e837ea8f2928b60a",
+        "c4e5416e2c05ef27a2648ed9",
+        "5c36839fa14d7a26415902ec",
+        "7062e4bf413b7f0403e06862",
+        "d4530339de83b59def732ac5"
+      ]
+    },
+    {
+      "pdf": "MAG 181 - Ignorance Transcript-converted.pdf",
+      "title": "MAG 181 - Ignorance Transcript-converted",
+      "num_chars": 24384,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "b117748a4df77f7315f68657",
+        "78ecc5536a733ec2515727bc",
+        "8aee6cf8eec66517ff8afc6f",
+        "0e99e7b3fa4285c31bae902a",
+        "9150ffa1aeb92f67013e02b5",
+        "5c8a48e22831245f2d813c93",
+        "c44345f76df366e22c602e69",
+        "eb9e883223866fc775d4b74d"
+      ]
+    },
+    {
+      "pdf": "MAG 182 - Wellbeing Transcript-converted.pdf",
+      "title": "MAG 182 - Wellbeing Transcript-converted",
+      "num_chars": 21907,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "ec4da4707e7b3615f4ecac16",
+        "43c26d013de759fa796fd3df",
+        "25a8ec362a73cee58ba661e9",
+        "bba2ee71d0d3bdc96dcccbf3",
+        "9a288c4f1ac4098cc36b7ed2",
+        "02f627381a0211b155edbd95",
+        "d3e420af19d26b0a49219b1c"
+      ]
+    },
+    {
+      "pdf": "MAG 183 - Monument Transcript-converted.pdf",
+      "title": "MAG 183 - Monument Transcript-converted",
+      "num_chars": 19955,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "6015b83adbe7e7ba5f64eb56",
+        "7cf4bf45bf64cf84e973e270",
+        "ac4aa17af6973cc3006260f4",
+        "9fce15de4d3e976708241c42",
+        "8060620bf6bdbc6c6c0fc4b2",
+        "6a98937c2ac3729f7446f092",
+        "81bf5aabd1ed529f55dc98fa"
+      ]
+    },
+    {
+      "pdf": "MAG 184 - Like Ants Transcript-converted.pdf",
+      "title": "MAG 184 - Like Ants Transcript-converted",
+      "num_chars": 19460,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "c88722363175d0deab28185b",
+        "215261754f9d7c9b9e1ee400",
+        "2cb34215563eda5f8daa2aef",
+        "2f0d6316329d9f8cc50f65bf",
+        "c27926dec87cd2cb4f139b15",
+        "cb2b3a740c4d72d6e1eb20fe"
+      ]
+    },
+    {
+      "pdf": "MAG 185 - Locked In Transcript-converted.pdf",
+      "title": "MAG 185 - Locked In Transcript-converted",
+      "num_chars": 21370,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "fd552b2505dc88b4fcdda076",
+        "f46f86d649ea1f1a5132c6d3",
+        "7b64d7844aa3bf5482370e91",
+        "208b3191c5209d0a349478b5",
+        "5ce8bd852917e079e3a62223",
+        "8b36c7508b36b76282fc26e3",
+        "2d70a4dfa6bc4e19605659d7"
+      ]
+    },
+    {
+      "pdf": "MAG 186 - Quiet Transcript-converted.pdf",
+      "title": "MAG 186 - Quiet Transcript-converted",
+      "num_chars": 21257,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "5b56dd025965256c7059e300",
+        "81177e2797af31471e45c0fe",
+        "6869b8115b2c0172ff52a7e3",
+        "ee4bdc58681abeab630c7b6b",
+        "ac6cdf6f13902560c64f5bcd",
+        "7f07ca457c15b01d5bcf3f9e",
+        "7aafe46635a0a9e57975fe8c"
+      ]
+    },
+    {
+      "pdf": "MAG 187 - Checking Out Transcript-converted.pdf",
+      "title": "MAG 187 - Checking Out Transcript-converted",
+      "num_chars": 25117,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "fc9e4ff88c882fa2a77cf3ce",
+        "c22fead2183c761b3e8dbdcc",
+        "ad079e863d5f8ab4aebb8c5e",
+        "e2521c45dbc3e51d1951dd6a",
+        "b42d3bc95094481054573daf",
+        "d917c8472cf3f77e001ee352",
+        "0306c236c5ad9049b166380e",
+        "c5690bef49684071555038a7"
+      ]
+    },
+    {
+      "pdf": "MAG 188 - Centre of Attention Transcript-converted.pdf",
+      "title": "MAG 188 - Centre of Attention Transcript-converted",
+      "num_chars": 21991,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "3895fe95b345ef40f2a6a289",
+        "0cecb82df29588e4469d7b86",
+        "a114e409f040c1ebe5496683",
+        "16ea2948d5c8c4d500876700",
+        "f2008b81715cd72a32d7d816",
+        "a5ea4d0051618778bee16723",
+        "8f2c94d24cbbbd10423affea",
+        "02f4fadd4cae9f3c7bf77811"
+      ]
+    },
+    {
+      "pdf": "MAG 189 - Peers Transcript-converted.pdf",
+      "title": "MAG 189 - Peers Transcript-converted",
+      "num_chars": 21591,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "00a21f36fadfb5925599491f",
+        "c942d03ae5d1874d27ff941a",
+        "1326e5fc61935f6b01455093",
+        "8d683cd96b293898d923dee6",
+        "fb74a8309acda66ff4bf4bff",
+        "35e073ccc25c752fc0ec2f57",
+        "794ed8e79ac994ef41a47d98"
+      ]
+    },
+    {
+      "pdf": "MAG 190 - Scavengers Transcript-converted.pdf",
+      "title": "MAG 190 - Scavengers Transcript-converted",
+      "num_chars": 23890,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "f6e712eb72867d9263c22738",
+        "097b1d10dad3bba26fd8770c",
+        "4de3e5306036faa2073a5931",
+        "33c20a429cba44831ae4483c",
+        "7f5df480391971c5e6f70a42",
+        "7c1a6cedc87f8b52b485ae59",
+        "27272c81e001d64119d64fbf"
+      ]
+    },
+    {
+      "pdf": "MAG 191 - What We Lose Transcript-converted.pdf",
+      "title": "MAG 191 - What We Lose Transcript-converted",
+      "num_chars": 21212,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "752cad5225a4be4a1428725a",
+        "5d749f034b7f058898f5ef55",
+        "5df4d3799c8b0312fc26cd4a",
+        "0441f6130413779eab94ea91",
+        "f5bee9951ebef5f51ad67b6a",
+        "b28dab821709e5283ac6af57",
+        "37a993404d5a15bd03ca8beb"
+      ]
+    },
+    {
+      "pdf": "MAG 192 - An Appointment Transcript.pdf",
+      "title": "MAG 192 - An Appointment Transcript",
+      "num_chars": 26344,
+      "num_chunks": 9,
+      "chunk_ids": [
+        "cfe505ffe930f214e86ef673",
+        "68949b4d0ae62b160d33258f",
+        "b55538aec757c1cbb919ebbc",
+        "e054b90d9287c168d21e7e68",
+        "4f8b573c876dc110ae685ae3",
+        "aa2bf8be99a2da1863a21d72",
+        "2f4bf607d7720101cbea572c",
+        "a166ca1182e5ddba8ae90f0c",
+        "d75dc560d9fe79aa337c39f3"
+      ]
+    },
+    {
+      "pdf": "MAG 193 - A Stern Look Transcript-converted.pdf",
+      "title": "MAG 193 - A Stern Look Transcript-converted",
+      "num_chars": 23406,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "8da30823f506764be50d8f8f",
+        "6fda9b6add06c528140c8c7d",
+        "2e3c39d019b89a3e79956d43",
+        "c5b7c0898467690b9273b763",
+        "8499bfc311345f1add99a983",
+        "0f921edbde7e999045eafb45",
+        "520e777fdaeebfdf6949f6cb",
+        "4ac6af0cc77261a0a1614c55"
+      ]
+    },
+    {
+      "pdf": "MAG 194 - Parting Transcript-converted.pdf",
+      "title": "MAG 194 - Parting Transcript-converted",
+      "num_chars": 25315,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "285986605d60925a3f881175",
+        "06843ccaff129111fdf78594",
+        "5019374de181cd9d4c484a07",
+        "7712c268fbe2a50d67ffd4f4",
+        "f1ede2541a0cd1eddd679213",
+        "637baaed356be75d929feae7",
+        "5e36692c865c9db5cf61698f",
+        "9f307085d3b8410b33f5aab1"
+      ]
+    },
+    {
+      "pdf": "MAG 195 - Adrift Transcript-converted.pdf",
+      "title": "MAG 195 - Adrift Transcript-converted",
+      "num_chars": 21413,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "049868c2329849ab7a01011d",
+        "5762ca8f0e027efc1ead9b84",
+        "1b4619699d7d6aab26618482",
+        "e8753714ebde6f1449359f80",
+        "6c6cdf46b5e578242d047813",
+        "71d06e32cb03cb74020ef960",
+        "a06dbc1ed73d7f5d689243cf"
+      ]
+    },
+    {
+      "pdf": "MAG 196 - This Old House Transcript-converted.pdf",
+      "title": "MAG 196 - This Old House Transcript-converted",
+      "num_chars": 20251,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "a1b637e424fb6cf9375e2c4f",
+        "b4a8a3115a69e054fcdb8de7",
+        "5bd8731e49a510ea6745977c",
+        "68397b8fe8342d20fc7964c3",
+        "fdd386af7c0431eacae6ed33",
+        "8e12ade42c9230aa1adefd96",
+        "abafd6b755925ba148582d48"
+      ]
+    },
+    {
+      "pdf": "MAG 197 - Connected Transcript-converted.pdf",
+      "title": "MAG 197 - Connected Transcript-converted",
+      "num_chars": 23266,
+      "num_chunks": 7,
+      "chunk_ids": [
+        "ba17dcf1859fc1de689a36d5",
+        "0ef7d8d2c73b3899a4fb6f91",
+        "74b217b43127aff965e2d2c6",
+        "4b6c87608054f2e522bbfdcd",
+        "1f8bd6d95a4394b7124ccf9b",
+        "9feb5aa0998cfd76c8ab2518",
+        "eb17322be40b1f58e393716f"
+      ]
+    },
+    {
+      "pdf": "MAG 198 - Precipice Transcript-converted.pdf",
+      "title": "MAG 198 - Precipice Transcript-converted",
+      "num_chars": 19258,
+      "num_chunks": 6,
+      "chunk_ids": [
+        "a88d94218849723fdbe3c029",
+        "9ae3479be7cc3c1280a10e3a",
+        "70b54677dd7ae4756f8dc23d",
+        "5630611f9ce794a404143f36",
+        "9f2eb94e201d438a2f3d47f0",
+        "f8af013e1e7c645f681f697b"
+      ]
+    },
+    {
+      "pdf": "MAG 199 - Seeing it Through Transcript-converted.pdf",
+      "title": "MAG 199 - Seeing it Through Transcript-converted",
+      "num_chars": 25404,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "f3dbab5b66bd213492a84521",
+        "67f376b63aa92379742b2ad1",
+        "338d6838e736e92611438863",
+        "766ae672a0d8b052c5c43095",
+        "629a396029a482be729e1274",
+        "015742e82bce936f28b496ee",
+        "b56c4d09e75dac7195d66146",
+        "69c82d8fbe4d0530fc52ede5"
+      ]
+    },
+    {
+      "pdf": "MAG 200 - Last Words Transcript.pdf",
+      "title": "MAG 200 - Last Words Transcript",
+      "num_chars": 23812,
+      "num_chunks": 8,
+      "chunk_ids": [
+        "d00b9f9ea37c0431415e137e",
+        "0dba68afad71ba38ee358325",
+        "7cd5e7676e9f1c06f82be159",
+        "38450e5f86c564b56f569dbe",
+        "564df6d627a2f065da3f42aa",
+        "480ffa3ce0a7b0f7ed2a6a46",
+        "9423a0a388c8f72f3fb2121f",
+        "74b67ddc6bf636e3729e52c4"
+      ]
+    }
+  ]
+}

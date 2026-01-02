@@ -90,6 +90,7 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const maxTopK = 12;
 
   const items = useMemo(() => extractItems(data), [data]);
 
@@ -104,7 +105,10 @@ function App() {
     setAnswer("");
 
     try {
-      const resolvedTopK = Math.max(1, Number(topK) || 1);
+      const resolvedTopK = Math.min(
+        maxTopK,
+        Math.max(1, Number(topK) || 1)
+      );
       let json = null;
 
       for (const apiBase of API_BASES) {
@@ -179,7 +183,7 @@ function App() {
               name="topK"
               type="number"
               min={1}
-              max={50}
+              max={maxTopK}
               value={topK}
               onChange={(event) => setTopK(Number(event.target.value) || 1)}
             />

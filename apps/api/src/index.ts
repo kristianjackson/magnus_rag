@@ -37,6 +37,7 @@ function json(data: any, status = 200) {
 
 const EMBED_MODEL = "@cf/baai/bge-base-en-v1.5";
 const ANSWER_MODEL = "@cf/meta/llama-3-8b-instruct";
+const MAX_TOP_K = 12;
 
 async function checkR2(env: Env) {
   try {
@@ -134,7 +135,10 @@ export default {
         if (!q) return json({ error: "Missing q" }, 400);
         if (q.length > 500) return json({ error: "q too long" }, 400);
 
-        const topK = Math.min(Number(url.searchParams.get("topK") ?? "8"), 20);
+        const topK = Math.min(
+          Number(url.searchParams.get("topK") ?? "8"),
+          MAX_TOP_K
+        );
 
         const qVec = await embedText(env, q);
         const res: any = await env.VECTORIZE_INDEX.query(qVec, {
@@ -170,7 +174,10 @@ export default {
         if (!q) return json({ error: "Missing q" }, 400);
         if (q.length > 500) return json({ error: "q too long" }, 400);
 
-        const topK = Math.min(Number(url.searchParams.get("topK") ?? "5"), 12);
+        const topK = Math.min(
+          Number(url.searchParams.get("topK") ?? "5"),
+          MAX_TOP_K
+        );
 
         const qVec = await embedText(env, q);
         const res: any = await env.VECTORIZE_INDEX.query(qVec, {

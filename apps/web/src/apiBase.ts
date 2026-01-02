@@ -16,10 +16,16 @@ const normalizeEnvApiBase = (value: string) => {
   const trimmed = value.replace(/\/$/, "");
   try {
     const url = new URL(trimmed);
+    const isHttpsPage =
+      typeof window !== "undefined" && window.location.protocol === "https:";
+    if (isHttpsPage && url.protocol === "http:") {
+      return "";
+    }
     if (!["localhost", "127.0.0.1"].includes(url.hostname)) {
       const deployedUrl = new URL(DEPLOYED_WORKER_ORIGIN);
-      url.protocol = deployedUrl.protocol;
-      url.host = deployedUrl.host;
+      if (url.origin !== deployedUrl.origin) {
+        return "";
+      }
     }
     return url.toString().replace(/\/$/, "");
   } catch {

@@ -16,6 +16,18 @@ const CORS_HEADERS: Record<string, string> = {
   "Access-Control-Allow-Headers": "Content-Type,Authorization",
 };
 
+function withCors(response: Response) {
+  const headers = new Headers(response.headers);
+  for (const [key, value] of Object.entries(CORS_HEADERS)) {
+    headers.set(key, value);
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 function json(data: any, status = 200) {
   return new Response(JSON.stringify(data, null, 2), {
     status,
@@ -111,11 +123,14 @@ export default {
       const url = new URL(req.url);
 
       if (req.method === "OPTIONS") {
+        return withCors(new Response(null, { status: 204, headers: CORS_HEADERS }));
         return new Response(null, { status: 204, headers: CORS_HEADERS });
       }
 
       if (req.method === "GET" && url.pathname === "/search") {
         const q = (url.searchParams.get("q") ?? "").trim();
+        if (!q) return withCors(json({ error: "Missing q" }, 400));
+        if (q.length > 500) return withCors(json({ error: "q too long" }, 400));
         if (!q) return json({ error: "Missing q" }, 400);
         if (q.length > 500) return json({ error: "q too long" }, 400);
 
@@ -144,11 +159,14 @@ export default {
           });
         }
 
+        return withCors(json({ query: q, matches: out }));
         return json({ query: q, matches: out });
       }
 
       if (req.method === "GET" && url.pathname === "/answer") {
         const q = (url.searchParams.get("q") ?? "").trim();
+        if (!q) return withCors(json({ error: "Missing q" }, 400));
+        if (q.length > 500) return withCors(json({ error: "q too long" }, 400));
         if (!q) return json({ error: "Missing q" }, 400);
         if (q.length > 500) return json({ error: "q too long" }, 400);
 
@@ -159,6 +177,67 @@ export default {
           topK,
           returnMetadata: true,
         });
+
+        const matches = res?.matches ?? [];
+        const citations = [];
+        const contexts = [];
+
+        for (const m of matches) {
+          const obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
+          const chunk = obj ? await obj.json<any>() : null;
+          const text = chunk?.text ?? "";
+
+          contexts.push({
+            source: chunk?.source ?? m.metadata?.source ?? null,
+            title: chunk?.title ?? m.metadata?.title ?? null,
+            text,
+          });
+
+          citations.push({
+            id: m.id,
+            score: m.score,
+            source: chunk?.source ?? m.metadata?.source ?? null,
+            title: chunk?.title ?? m.metadata?.title ?? null,
+            snippet: snippet(text),
+            metadata: m.metadata ?? null,
+          });
+        }
+
+        const answer = contexts.length
+          ? await generateAnswer(env, q, contexts)
+          : "I do not know.";
+
+        return withCors(json({ query: q, answer, citations }));
+      }
+
+      // ---------- Health ----------
+      if (req.method === "GET" && url.pathname === "/health") {
+        return withCors(json({ ok: true }));
+      }
+
+      // ---------- Debug bindings ----------
+      if (req.method === "GET" && url.pathname === "/debug/bindings") {
+        return withCors(
+          json({
+            hasR2: !!env.R2_BUCKET,
+            hasVectorize: !!env.VECTORIZE_INDEX,
+            hasAI: !!env.AI,
+            hasAdminToken: !!env.ADMIN_TOKEN,
+          })
+        );
+      }
+
+      if (req.method === "GET" && url.pathname === "/debug/health") {
+        const [r2, ai] = await Promise.all([checkR2(env), checkAI(env)]);
+        const vectorize = await checkVectorize(env, ai.ok ? ai.vector : undefined);
+
+        return withCors(
+          json({
+            r2,
+            ai: ai.ok ? { ok: true, dimensions: ai.dimensions } : ai,
+            vectorize,
+          })
+        );
 
         const matches = res?.matches ?? [];
         const citations = [];
@@ -220,6 +299,9 @@ export default {
 
       // ---------- Index chunks ----------
       if (req.method === "POST" && url.pathname === "/admin/index") {
+        const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+        if (!token || token !== env.ADMIN_TOKEN) {
+          return withCors(json({ error: "unauthorized" }, 401));
         const token = req.headers.get("authorization")?.replace(
           /^Bearer\s+/i,
           ""
@@ -267,6 +349,18 @@ export default {
           }
         }
 
+        return withCors(
+          json({
+            indexed: results.filter(r => r.ok).length,
+            failed: results.filter(r => !r.ok).length,
+            nextCursor: list.truncated ? list.cursor : null,
+          })
+        );
+      }
+
+      return withCors(new Response("Not found", { status: 404, headers: CORS_HEADERS }));
+    } catch (error: any) {
+      return withCors(json({ error: error?.message ?? String(error) }, 500));
         return json({
           indexed: results.filter(r => r.ok).length,
           failed: results.filter(r => !r.ok).length,

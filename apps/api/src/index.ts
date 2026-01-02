@@ -124,6 +124,7 @@ export default {
 
       if (req.method === "OPTIONS") {
         return withCors(new Response(null, { status: 204 }));
+        return withCors(new Response(null, { status: 204, headers: CORS_HEADERS }));
       }
 
       if (req.method === "GET" && url.pathname === "/search") {

@@ -166,6 +166,9 @@ export default {
 
       if (req.method === "GET" && url.pathname === "/answer") {
         const q = (url.searchParams.get("q") ?? "").trim();
+        const includeContexts =
+          url.searchParams.get("includeContexts") === "1" ||
+          url.searchParams.get("includeContexts") === "true";
         if (!q) return withCors(json({ error: "Missing q" }, 400));
         if (q.length > 500) return withCors(json({ error: "q too long" }, 400));
 
@@ -209,7 +212,12 @@ export default {
           ? await generateAnswer(env, q, contexts)
           : "I do not know.";
 
-        return withCors(json({ query: q, answer, citations }));
+        const payload: Record<string, any> = { query: q, answer, citations };
+        if (includeContexts) {
+          payload.contexts = contexts;
+        }
+
+        return withCors(json(payload));
       }
 
       // ---------- Health ----------

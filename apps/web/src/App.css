@@ -110,15 +110,86 @@
 }
 
 .answer-card h2 {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 18px;
   color: #111827;
+}
+
+.answer-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.answer-card__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.answer-card__toggle input {
+  accent-color: #2563eb;
 }
 
 .answer-card p {
   margin: 0;
   color: #4b5563;
   font-size: 15px;
+  line-height: 1.6;
+}
+
+.answer-card__excerpts {
+  margin-top: 16px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answer-card__excerpts h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #111827;
+}
+
+.answer-card__excerpts ol {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.answer-card__excerpts li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.answer-card__excerpts .excerpt-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.answer-card__excerpts .excerpt-meta strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+.answer-card__excerpts p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
   line-height: 1.6;
 }
 

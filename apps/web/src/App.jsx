@@ -41,6 +41,12 @@ const formatLink = (item) => {
   return item.url || item.link || item.href || null;
 };
 
+const limitText = (text, maxLength = 220) => {
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trim()}…`;
+};
+
 const ResultCard = ({ item, index }) => {
   const title = formatTitle(item, index);
   const snippet = formatSnippet(item);
@@ -90,8 +96,34 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showExcerpts, setShowExcerpts] = useState(false);
 
   const items = useMemo(() => extractItems(data), [data]);
+  const contexts = useMemo(
+    () => (Array.isArray(data?.contexts) ? data.contexts : []),
+    [data]
+  );
+  const excerpts = useMemo(() => {
+    if (contexts.length) {
+      return contexts.map((context, index) => ({
+        id: `context-${index}`,
+        title: context.title,
+        source: context.source,
+        snippet: limitText(context.text),
+        text: context.text,
+      }));
+    }
+    if (Array.isArray(data?.citations)) {
+      return data.citations.map((citation, index) => ({
+        id: citation.id ?? `citation-${index}`,
+        title: citation.title,
+        source: citation.source,
+        snippet: limitText(citation.snippet || citation.text || ""),
+        text: citation.text,
+      }));
+    }
+    return [];
+  }, [contexts, data]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -110,7 +142,9 @@ function App() {
       for (const apiBase of API_BASES) {
         try {
           const response = await fetch(
-            `${apiBase}/answer?q=${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
+            `${apiBase}/answer?q=${encodeURIComponent(
+              trimmed
+            )}&topK=${resolvedTopK}&includeContexts=1`
           );
           if (!response.ok) {
             throw new Error(`Request failed with status ${response.status}`);
@@ -134,6 +168,7 @@ function App() {
 
       setData(json);
       setAnswer(json.answer || "");
+      setShowExcerpts(false);
     } catch (fetchError) {
       const fallbackBases = API_BASES.slice(1);
       const fallbackMessage = fallbackBases.length
@@ -195,8 +230,40 @@ function App() {
         {loading ? <p className="status">Searching the index...</p> : null}
         {!loading && answer ? (
           <div className="answer-card">
-            <h2>Answer</h2>
+            <div className="answer-card__header">
+              <h2>Answer</h2>
+              {excerpts.length ? (
+                <label className="answer-card__toggle">
+                  <input
+                    type="checkbox"
+                    checked={showExcerpts}
+                    onChange={(event) => setShowExcerpts(event.target.checked)}
+                  />
+                  Show full excerpts
+                </label>
+              ) : null}
+            </div>
             <p>{answer}</p>
+            {excerpts.length ? (
+              <div className="answer-card__excerpts">
+                <h3>Supporting excerpts</h3>
+                <ol>
+                  {excerpts.map((excerpt) => (
+                    <li key={excerpt.id}>
+                      <div className="excerpt-meta">
+                        {excerpt.title ? <strong>{excerpt.title}</strong> : null}
+                        {excerpt.source ? <span>{excerpt.source}</span> : null}
+                      </div>
+                      <p>
+                        {showExcerpts && excerpt.text
+                          ? excerpt.text
+                          : excerpt.snippet}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
           </div>
         ) : null}
         {!loading && data && items.length === 0 ? (

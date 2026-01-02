@@ -10,16 +10,16 @@ function snippet(text: string, n = 260) {
   return t.length <= n ? t : t.slice(0, n) + "…";
 }
 
-const corsHeaders = {
-  "access-control-allow-origin": "*",
-  "access-control-allow-methods": "GET,POST,OPTIONS",
-  "access-control-allow-headers": "authorization,content-type",
+const CORS_HEADERS: Record<string, string> = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization",
 };
 
 function json(data: any, status = 200) {
   return new Response(JSON.stringify(data, null, 2), {
     status,
-    headers: { "content-type": "application/json", ...corsHeaders },
+    headers: { "content-type": "application/json", ...CORS_HEADERS },
   });
 }
 
@@ -75,7 +75,7 @@ export default {
     const url = new URL(req.url);
 
     if (req.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: corsHeaders });
+      return new Response(null, { status: 204, headers: CORS_HEADERS });
     }
     
     if (req.method === "GET" && url.pathname === "/search") {
@@ -218,6 +218,6 @@ export default {
       });
     }
 
-    return new Response("Not found", { status: 404, headers: corsHeaders });
+    return new Response("Not found", { status: 404, headers: CORS_HEADERS });
   },
 };

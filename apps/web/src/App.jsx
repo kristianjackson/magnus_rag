@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import "./App.css";
-import { API_BASES, PRIMARY_API_BASE } from "./apiBase";
+import { answer as fetchAnswer } from "./api";
 
 const extractItems = (data) => {
   if (!data) return [];
@@ -104,45 +104,15 @@ function App() {
     setAnswer("");
 
     try {
-      const resolvedTopK = Math.max(1, Number(topK) || 1);
-      let json = null;
-
-      for (const apiBase of API_BASES) {
-        try {
-          const response = await fetch(
-            `${apiBase}/answer?q=${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
-          );
-          if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}`);
-          }
-          json = await response.json();
-          break;
-        } catch (requestError) {
-          if (
-            requestError instanceof TypeError &&
-            apiBase !== API_BASES[API_BASES.length - 1]
-          ) {
-            continue;
-          }
-          throw requestError;
-        }
-      }
-
-      if (!json) {
-        throw new Error("Request failed without a response.");
-      }
+      const json = await fetchAnswer(trimmed, topK);
 
       setData(json);
       setAnswer(json.answer || "");
     } catch (fetchError) {
-      const fallbackBases = API_BASES.slice(1);
-      const fallbackMessage = fallbackBases.length
-        ? ` Also tried ${fallbackBases.join(", ")}.`
-        : "";
       const message =
-        fetchError instanceof TypeError
-          ? `Unable to reach the Magnus API at ${PRIMARY_API_BASE}. Check VITE_API_BASE_URL or your network connection.${fallbackMessage}`
-          : fetchError.message || "Something went wrong.";
+        fetchError instanceof Error
+          ? fetchError.message || "Something went wrong."
+          : "Something went wrong.";
       setError(message);
     } finally {
       setLoading(false);

@@ -96,6 +96,98 @@
   cursor: not-allowed;
 }
 
+.diagnostics {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.diagnostics__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.diagnostics__header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #111827;
+}
+
+.diagnostics__header p {
+  margin: 4px 0 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.diagnostics__header button {
+  border: none;
+  background: #111827;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.diagnostics__header button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.diagnostics__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.diagnostics__card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.diagnostics__card h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #111827;
+}
+
+.diagnostics__card dl {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.diagnostics__card div {
+  display: grid;
+  gap: 2px;
+}
+
+.diagnostics__card dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+}
+
+.diagnostics__card dd {
+  margin: 0;
+  font-size: 14px;
+  color: #111827;
+  word-break: break-word;
+}
+
 .results {
   display: flex;
   flex-direction: column;

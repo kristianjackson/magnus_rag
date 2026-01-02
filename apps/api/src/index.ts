@@ -124,15 +124,12 @@ export default {
 
       if (req.method === "OPTIONS") {
         return withCors(new Response(null, { status: 204, headers: CORS_HEADERS }));
-        return new Response(null, { status: 204, headers: CORS_HEADERS });
       }
 
       if (req.method === "GET" && url.pathname === "/search") {
         const q = (url.searchParams.get("q") ?? "").trim();
         if (!q) return withCors(json({ error: "Missing q" }, 400));
         if (q.length > 500) return withCors(json({ error: "q too long" }, 400));
-        if (!q) return json({ error: "Missing q" }, 400);
-        if (q.length > 500) return json({ error: "q too long" }, 400);
 
         const topK = Math.min(Number(url.searchParams.get("topK") ?? "8"), 20);
 
@@ -160,15 +157,12 @@ export default {
         }
 
         return withCors(json({ query: q, matches: out }));
-        return json({ query: q, matches: out });
       }
 
       if (req.method === "GET" && url.pathname === "/answer") {
         const q = (url.searchParams.get("q") ?? "").trim();
         if (!q) return withCors(json({ error: "Missing q" }, 400));
         if (q.length > 500) return withCors(json({ error: "q too long" }, 400));
-        if (!q) return json({ error: "Missing q" }, 400);
-        if (q.length > 500) return json({ error: "q too long" }, 400);
 
         const topK = Math.min(Number(url.searchParams.get("topK") ?? "5"), 12);
 
@@ -238,63 +232,6 @@ export default {
             vectorize,
           })
         );
-
-        const matches = res?.matches ?? [];
-        const citations = [];
-        const contexts = [];
-
-        for (const m of matches) {
-          const obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
-          const chunk = obj ? await obj.json<any>() : null;
-          const text = chunk?.text ?? "";
-
-          contexts.push({
-            source: chunk?.source ?? m.metadata?.source ?? null,
-            title: chunk?.title ?? m.metadata?.title ?? null,
-            text,
-          });
-
-          citations.push({
-            id: m.id,
-            score: m.score,
-            source: chunk?.source ?? m.metadata?.source ?? null,
-            title: chunk?.title ?? m.metadata?.title ?? null,
-            snippet: snippet(text),
-            metadata: m.metadata ?? null,
-          });
-        }
-
-        const answer = contexts.length
-          ? await generateAnswer(env, q, contexts)
-          : "I do not know.";
-
-        return json({ query: q, answer, citations });
-      }
-
-      // ---------- Health ----------
-      if (req.method === "GET" && url.pathname === "/health") {
-        return json({ ok: true });
-      }
-
-      // ---------- Debug bindings ----------
-      if (req.method === "GET" && url.pathname === "/debug/bindings") {
-        return json({
-          hasR2: !!env.R2_BUCKET,
-          hasVectorize: !!env.VECTORIZE_INDEX,
-          hasAI: !!env.AI,
-          hasAdminToken: !!env.ADMIN_TOKEN,
-        });
-      }
-
-      if (req.method === "GET" && url.pathname === "/debug/health") {
-        const [r2, ai] = await Promise.all([checkR2(env), checkAI(env)]);
-        const vectorize = await checkVectorize(env, ai.ok ? ai.vector : undefined);
-
-        return json({
-          r2,
-          ai: ai.ok ? { ok: true, dimensions: ai.dimensions } : ai,
-          vectorize,
-        });
       }
 
       // ---------- Index chunks ----------
@@ -302,12 +239,6 @@ export default {
         const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
         if (!token || token !== env.ADMIN_TOKEN) {
           return withCors(json({ error: "unauthorized" }, 401));
-        const token = req.headers.get("authorization")?.replace(
-          /^Bearer\s+/i,
-          ""
-        );
-        if (!token || token !== env.ADMIN_TOKEN) {
-          return json({ error: "unauthorized" }, 401);
         }
 
         const limit = Math.min(Number(url.searchParams.get("limit") || 25), 50);
@@ -361,16 +292,6 @@ export default {
       return withCors(new Response("Not found", { status: 404, headers: CORS_HEADERS }));
     } catch (error: any) {
       return withCors(json({ error: error?.message ?? String(error) }, 500));
-        return json({
-          indexed: results.filter(r => r.ok).length,
-          failed: results.filter(r => !r.ok).length,
-          nextCursor: list.truncated ? list.cursor : null,
-        });
-      }
-
-      return new Response("Not found", { status: 404, headers: CORS_HEADERS });
-    } catch (error: any) {
-      return json({ error: error?.message ?? String(error) }, 500);
     }
   },
 };

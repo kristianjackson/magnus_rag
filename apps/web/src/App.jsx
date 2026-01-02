@@ -130,6 +130,7 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const maxTopK = 12;
 
   const items = useMemo(() => extractItems(data), [data]);
   const citations = useMemo(
@@ -148,6 +149,36 @@ function App() {
     setAnswer("");
 
     try {
+      const resolvedTopK = Math.min(
+        maxTopK,
+        Math.max(1, Number(topK) || 1)
+      );
+      let json = null;
+
+      for (const apiBase of API_BASES) {
+        try {
+          const response = await fetch(
+            `${apiBase}/answer?q=${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
+          );
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+          }
+          json = await response.json();
+          break;
+        } catch (requestError) {
+          if (
+            requestError instanceof TypeError &&
+            apiBase !== API_BASES[API_BASES.length - 1]
+          ) {
+            continue;
+          }
+          throw requestError;
+        }
+      }
+
+      if (!json) {
+        throw new Error("Request failed without a response.");
+      }
       const json = await fetchAnswer(trimmed, topK);
 
       setData(json);
@@ -193,7 +224,7 @@ function App() {
               name="topK"
               type="number"
               min={1}
-              max={50}
+              max={maxTopK}
               value={topK}
               onChange={(event) => setTopK(Number(event.target.value) || 1)}
             />

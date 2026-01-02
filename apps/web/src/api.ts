@@ -1,4 +1,4 @@
-const DEFAULT_API_BASE = "https://magnus-api.kristian-jackson.workers.dev";
+const DEFAULT_API_BASE = "/api";
 const LOCAL_API_BASE = "http://localhost:8787";
 const ENV_API_BASE = (import.meta.env.VITE_API_BASE_URL || "")
   .trim()

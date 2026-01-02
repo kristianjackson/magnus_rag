@@ -1,15 +1,6 @@
 import { useMemo, useState } from "react";
 import "./App.css";
-
-const DEFAULT_API_BASE = "/api";
-const LOCAL_API_BASE = "http://localhost:8787";
-const ENV_API_BASE = (import.meta.env.VITE_API_BASE_URL || "")
-  .trim()
-  .replace(/\/$/, "");
-const IS_LOCALHOST =
-  typeof window !== "undefined" &&
-  ["localhost", "127.0.0.1"].includes(window.location.hostname);
-const API_BASE = ENV_API_BASE || (IS_LOCALHOST ? LOCAL_API_BASE : DEFAULT_API_BASE);
+import { API_BASES, PRIMARY_API_BASE } from "./apiBase";
 
 const extractItems = (data) => {
   if (!data) return [];
@@ -114,19 +105,43 @@ function App() {
 
     try {
       const resolvedTopK = Math.max(1, Number(topK) || 1);
-      const response = await fetch(
-        `${API_BASE}/answer?q=${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
-      );
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
+      let json = null;
+
+      for (const apiBase of API_BASES) {
+        try {
+          const response = await fetch(
+            `${apiBase}/answer?q=${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
+          );
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+          }
+          json = await response.json();
+          break;
+        } catch (requestError) {
+          if (
+            requestError instanceof TypeError &&
+            apiBase !== API_BASES[API_BASES.length - 1]
+          ) {
+            continue;
+          }
+          throw requestError;
+        }
       }
-      const json = await response.json();
+
+      if (!json) {
+        throw new Error("Request failed without a response.");
+      }
+
       setData(json);
       setAnswer(json.answer || "");
     } catch (fetchError) {
+      const fallbackBases = API_BASES.slice(1);
+      const fallbackMessage = fallbackBases.length
+        ? ` Also tried ${fallbackBases.join(", ")}.`
+        : "";
       const message =
         fetchError instanceof TypeError
-          ? `Unable to reach the Magnus API at ${API_BASE}. Check VITE_API_BASE_URL or your network connection.`
+          ? `Unable to reach the Magnus API at ${PRIMARY_API_BASE}. Check VITE_API_BASE_URL or your network connection.${fallbackMessage}`
           : fetchError.message || "Something went wrong.";
       setError(message);
     } finally {

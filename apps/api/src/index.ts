@@ -31,7 +31,7 @@ function withCors(response: Response) {
 function json(data: any, status = 200) {
   return new Response(JSON.stringify(data, null, 2), {
     status,
-    headers: { "content-type": "application/json", ...CORS_HEADERS },
+    headers: { "content-type": "application/json" },
   });
 }
 
@@ -123,6 +123,7 @@ export default {
       const url = new URL(req.url);
 
       if (req.method === "OPTIONS") {
+        return withCors(new Response(null, { status: 204 }));
         return withCors(new Response(null, { status: 204, headers: CORS_HEADERS }));
       }
 
@@ -289,7 +290,7 @@ export default {
         );
       }
 
-      return withCors(new Response("Not found", { status: 404, headers: CORS_HEADERS }));
+      return withCors(new Response("Not found", { status: 404 }));
     } catch (error: any) {
       return withCors(json({ error: error?.message ?? String(error) }, 500));
     }

@@ -26,6 +26,41 @@ function json(data: any, status = 200) {
 const EMBED_MODEL = "@cf/baai/bge-base-en-v1.5";
 const ANSWER_MODEL = "@cf/meta/llama-3-8b-instruct";
 
+async function checkR2(env: Env) {
+  try {
+    const list = await env.R2_BUCKET.list({ limit: 1 });
+    return { ok: true, objects: list.objects.length };
+  } catch (error: any) {
+    return { ok: false, error: error?.message ?? String(error) };
+  }
+}
+
+async function checkAI(env: Env) {
+  try {
+    const res: any = await env.AI.run(EMBED_MODEL, { text: "health check" });
+    const vec = res?.data?.[0];
+    if (!Array.isArray(vec)) {
+      return { ok: false, error: "Invalid embedding response" };
+    }
+    return { ok: true, vector: vec, dimensions: vec.length };
+  } catch (error: any) {
+    return { ok: false, error: error?.message ?? String(error) };
+  }
+}
+
+async function checkVectorize(env: Env, vector?: number[]) {
+  if (!vector) {
+    return { ok: false, error: "No vector available for query" };
+  }
+  try {
+    const res: any = await env.VECTORIZE_INDEX.query(vector, { topK: 1 });
+    const matches = Array.isArray(res?.matches) ? res.matches.length : 0;
+    return { ok: true, matches };
+  } catch (error: any) {
+    return { ok: false, error: error?.message ?? String(error) };
+  }
+}
+
 async function embedText(env: Env, text: string): Promise<number[]> {
   const res: any = await env.AI.run(EMBED_MODEL, { text });
   const vec = res?.data?.[0];
@@ -162,6 +197,17 @@ export default {
         hasVectorize: !!env.VECTORIZE_INDEX,
         hasAI: !!env.AI,
         hasAdminToken: !!env.ADMIN_TOKEN,
+      });
+    }
+
+    if (req.method === "GET" && url.pathname === "/debug/health") {
+      const [r2, ai] = await Promise.all([checkR2(env), checkAI(env)]);
+      const vectorize = await checkVectorize(env, ai.ok ? ai.vector : undefined);
+
+      return json({
+        r2,
+        ai: ai.ok ? { ok: true, dimensions: ai.dimensions } : ai,
+        vectorize,
       });
     }
 

@@ -206,7 +206,7 @@ function App() {
         {items.length > 0 ? (
           <div className="results__grid">
             {items.map((item, index) => (
-              <ResultCard key={index} item={item} index={index} />
+              <ResultCard key={item?.id ?? index} item={item} index={index} />
             ))}
           </div>
         ) : null}

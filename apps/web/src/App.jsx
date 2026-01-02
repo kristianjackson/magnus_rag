@@ -41,6 +41,21 @@ const formatLink = (item) => {
   return item.url || item.link || item.href || null;
 };
 
+const isLikelyUrl = (value) =>
+  typeof value === "string" && /^https?:\/\//i.test(value);
+
+const formatCitationTitle = (item, index) => {
+  if (!item || typeof item !== "object") {
+    return `Citation ${index + 1}`;
+  }
+  return item.title || item.name || `Citation ${index + 1}`;
+};
+
+const formatCitationSnippet = (item) => {
+  if (!item || typeof item !== "object") return null;
+  return item.snippet || item.summary || item.text || item.content || null;
+};
+
 const ResultCard = ({ item, index }) => {
   const title = formatTitle(item, index);
   const snippet = formatSnippet(item);
@@ -76,6 +91,31 @@ const ResultCard = ({ item, index }) => {
   );
 };
 
+const CitationCard = ({ item, index }) => {
+  const title = formatCitationTitle(item, index);
+  const snippet = formatCitationSnippet(item);
+  const source = item?.source || item?.url || item?.link || item?.href || null;
+  const isSourceUrl = isLikelyUrl(source);
+
+  return (
+    <article className="result-card citation-card">
+      <div className="result-card__header">
+        <h3>{title}</h3>
+        {source ? (
+          isSourceUrl ? (
+            <a href={source} target="_blank" rel="noreferrer">
+              {source}
+            </a>
+          ) : (
+            <span>{source}</span>
+          )
+        ) : null}
+      </div>
+      {snippet ? <p>{snippet}</p> : null}
+    </article>
+  );
+};
+
 const RawResponse = ({ data }) => (
   <details className="raw-response">
     <summary>Raw response</summary>
@@ -92,6 +132,10 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const items = useMemo(() => extractItems(data), [data]);
+  const citations = useMemo(
+    () => (Array.isArray(data?.citations) ? data.citations : []),
+    [data]
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -197,6 +241,16 @@ function App() {
           <div className="answer-card">
             <h2>Answer</h2>
             <p>{answer}</p>
+            {citations.length > 0 ? (
+              <div className="answer-card__citations">
+                <h3>Citations</h3>
+                <div className="results__grid">
+                  {citations.map((item, index) => (
+                    <CitationCard key={index} item={item} index={index} />
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         ) : null}
         {!loading && data && items.length === 0 ? (

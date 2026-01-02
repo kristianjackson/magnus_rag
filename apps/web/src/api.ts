@@ -1,15 +1,26 @@
-const DEFAULT_API_BASE = "/api";
-const LOCAL_API_BASE = "http://localhost:8787";
-const ENV_API_BASE = (import.meta.env.VITE_API_BASE_URL || "")
-  .trim()
-  .replace(/\/$/, "");
-const IS_LOCALHOST =
-  typeof window !== "undefined" &&
-  ["localhost", "127.0.0.1"].includes(window.location.hostname);
-const API_BASE = ENV_API_BASE || (IS_LOCALHOST ? LOCAL_API_BASE : DEFAULT_API_BASE);
+import { API_BASES } from "./apiBase";
+
+const fetchWithFallback = async (path: string) => {
+  let lastError: unknown = null;
+
+  for (const apiBase of API_BASES) {
+    try {
+      const res = await fetch(`${apiBase}${path}`);
+      if (!res.ok) throw new Error("Search failed");
+      return res;
+    } catch (error) {
+      lastError = error;
+      if (error instanceof TypeError && apiBase !== API_BASES[API_BASES.length - 1]) {
+        continue;
+      }
+      throw error;
+    }
+  }
+
+  throw lastError ?? new Error("Search failed");
+};
 
 export async function search(query: string) {
-  const res = await fetch(`${API_BASE}/search?q=${encodeURIComponent(query)}`);
-  if (!res.ok) throw new Error("Search failed");
+  const res = await fetchWithFallback(`/search?q=${encodeURIComponent(query)}`);
   return res.json();
 }

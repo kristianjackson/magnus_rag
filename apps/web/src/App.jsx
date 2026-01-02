@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import "./App.css";
-import { API_BASES, PRIMARY_API_BASE } from "./apiBase";
+import { answer as fetchAnswer } from "./api";
 
 const DIAGNOSTIC_SERVICES = [
   { label: "R2", bindingKey: "hasR2", healthKey: "r2" },
@@ -47,6 +47,25 @@ const formatLink = (item) => {
   return item.url || item.link || item.href || null;
 };
 
+const limitText = (text, maxLength = 220) => {
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trim()}…`;
+const isLikelyUrl = (value) =>
+  typeof value === "string" && /^https?:\/\//i.test(value);
+
+const formatCitationTitle = (item, index) => {
+  if (!item || typeof item !== "object") {
+    return `Citation ${index + 1}`;
+  }
+  return item.title || item.name || `Citation ${index + 1}`;
+};
+
+const formatCitationSnippet = (item) => {
+  if (!item || typeof item !== "object") return null;
+  return item.snippet || item.summary || item.text || item.content || null;
+};
+
 const ResultCard = ({ item, index }) => {
   const title = formatTitle(item, index);
   const snippet = formatSnippet(item);
@@ -82,6 +101,31 @@ const ResultCard = ({ item, index }) => {
   );
 };
 
+const CitationCard = ({ item, index }) => {
+  const title = formatCitationTitle(item, index);
+  const snippet = formatCitationSnippet(item);
+  const source = item?.source || item?.url || item?.link || item?.href || null;
+  const isSourceUrl = isLikelyUrl(source);
+
+  return (
+    <article className="result-card citation-card">
+      <div className="result-card__header">
+        <h3>{title}</h3>
+        {source ? (
+          isSourceUrl ? (
+            <a href={source} target="_blank" rel="noreferrer">
+              {source}
+            </a>
+          ) : (
+            <span>{source}</span>
+          )
+        ) : null}
+      </div>
+      {snippet ? <p>{snippet}</p> : null}
+    </article>
+  );
+};
+
 const RawResponse = ({ data }) => (
   <details className="raw-response">
     <summary>Raw response</summary>
@@ -99,8 +143,41 @@ function App() {
   const [diagnostics, setDiagnostics] = useState(null);
   const [diagnosticsLoading, setDiagnosticsLoading] = useState(false);
   const [diagnosticsError, setDiagnosticsError] = useState("");
+  const [showExcerpts, setShowExcerpts] = useState(false);
 
   const items = useMemo(() => extractItems(data), [data]);
+  const contexts = useMemo(
+    () => (Array.isArray(data?.contexts) ? data.contexts : []),
+    [data]
+  );
+  const excerpts = useMemo(() => {
+    if (contexts.length) {
+      return contexts.map((context, index) => ({
+        id: `context-${index}`,
+        title: context.title,
+        source: context.source,
+        snippet: limitText(context.text),
+        text: context.text,
+      }));
+    }
+    if (Array.isArray(data?.citations)) {
+      return data.citations.map((citation, index) => ({
+        id: citation.id ?? `citation-${index}`,
+        title: citation.title,
+        source: citation.source,
+        snippet: limitText(citation.snippet || citation.text || ""),
+        text: citation.text,
+      }));
+    }
+    return [];
+  }, [contexts, data]);
+  const maxTopK = 12;
+
+  const items = useMemo(() => extractItems(data), [data]);
+  const citations = useMemo(
+    () => (Array.isArray(data?.citations) ? data.citations : []),
+    [data]
+  );
 
   const fetchFromApi = async (path) => {
     let json = null;
@@ -142,13 +219,18 @@ function App() {
     setAnswer("");
 
     try {
-      const resolvedTopK = Math.max(1, Number(topK) || 1);
+      const resolvedTopK = Math.min(
+        maxTopK,
+        Math.max(1, Number(topK) || 1)
+      );
       let json = null;
 
       for (const apiBase of API_BASES) {
         try {
           const response = await fetch(
-            `${apiBase}/answer?q=${encodeURIComponent(trimmed)}&topK=${resolvedTopK}`
+            `${apiBase}/answer?q=${encodeURIComponent(
+              trimmed
+            )}&topK=${resolvedTopK}&includeContexts=1`
           );
           if (!response.ok) {
             throw new Error(`Request failed with status ${response.status}`);
@@ -169,18 +251,16 @@ function App() {
       if (!json) {
         throw new Error("Request failed without a response.");
       }
+      const json = await fetchAnswer(trimmed, topK);
 
       setData(json);
       setAnswer(json.answer || "");
+      setShowExcerpts(false);
     } catch (fetchError) {
-      const fallbackBases = API_BASES.slice(1);
-      const fallbackMessage = fallbackBases.length
-        ? ` Also tried ${fallbackBases.join(", ")}.`
-        : "";
       const message =
-        fetchError instanceof TypeError
-          ? `Unable to reach the Magnus API at ${PRIMARY_API_BASE}. Check VITE_API_BASE_URL or your network connection.${fallbackMessage}`
-          : fetchError.message || "Something went wrong.";
+        fetchError instanceof Error
+          ? fetchError.message || "Something went wrong."
+          : "Something went wrong.";
       setError(message);
     } finally {
       setLoading(false);
@@ -266,7 +346,7 @@ function App() {
               name="topK"
               type="number"
               min={1}
-              max={50}
+              max={maxTopK}
               value={topK}
               onChange={(event) => setTopK(Number(event.target.value) || 1)}
             />
@@ -323,8 +403,48 @@ function App() {
         {loading ? <p className="status">Searching the index...</p> : null}
         {!loading && answer ? (
           <div className="answer-card">
-            <h2>Answer</h2>
+            <div className="answer-card__header">
+              <h2>Answer</h2>
+              {excerpts.length ? (
+                <label className="answer-card__toggle">
+                  <input
+                    type="checkbox"
+                    checked={showExcerpts}
+                    onChange={(event) => setShowExcerpts(event.target.checked)}
+                  />
+                  Show full excerpts
+                </label>
+              ) : null}
+            </div>
             <p>{answer}</p>
+            {excerpts.length ? (
+              <div className="answer-card__excerpts">
+                <h3>Supporting excerpts</h3>
+                <ol>
+                  {excerpts.map((excerpt) => (
+                    <li key={excerpt.id}>
+                      <div className="excerpt-meta">
+                        {excerpt.title ? <strong>{excerpt.title}</strong> : null}
+                        {excerpt.source ? <span>{excerpt.source}</span> : null}
+                      </div>
+                      <p>
+                        {showExcerpts && excerpt.text
+                          ? excerpt.text
+                          : excerpt.snippet}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+            {citations.length > 0 ? (
+              <div className="answer-card__citations">
+                <h3>Citations</h3>
+                <div className="results__grid">
+                  {citations.map((item, index) => (
+                    <CitationCard key={index} item={item} index={index} />
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         ) : null}
         {!loading && data && items.length === 0 ? (
@@ -334,7 +454,7 @@ function App() {
         {items.length > 0 ? (
           <div className="results__grid">
             {items.map((item, index) => (
-              <ResultCard key={index} item={item} index={index} />
+              <ResultCard key={item?.id ?? index} item={item} index={index} />
             ))}
           </div>
         ) : null}

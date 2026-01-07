@@ -42,6 +42,7 @@ const postWithFallback = async (path: string, payload: Record<string, unknown>) 
         }
         throw new Error(errorMessage);
       }
+      if (!res.ok) throw new Error("Request failed");
       return res;
     } catch (error) {
       lastError = error;

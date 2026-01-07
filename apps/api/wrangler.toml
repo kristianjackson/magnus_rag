@@ -5,10 +5,10 @@ compatibility_date = "2025-12-31"
 [ai]
 binding = "AI"
 
-r2_buckets = [
-  { binding = "R2_BUCKET", bucket_name = "magnus-bucket" }
-]
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "magnus-bucket"
 
-vectorize = [
-  { binding = "VECTORIZE_INDEX", index_name = "magnus-index-768" }
-]
+[[vectorize]]
+binding = "VECTORIZE_INDEX"
+index_name = "magnus-index-768"

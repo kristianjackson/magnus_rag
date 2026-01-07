@@ -133,6 +133,7 @@ export default {
       const url = new URL(req.url);
 
       if (req.method === "GET") {
+        console.log("GET request to:", url.pathname);
         switch (url.pathname) {
           case "/search": {
             const q = (url.searchParams.get("q") ?? "").trim();
@@ -144,18 +145,41 @@ export default {
               MAX_TOP_K
             );
 
-            const qVec = await embedText(env, q);
-            const res: any = await env.VECTORIZE_INDEX.query(qVec, {
-              topK,
-              returnMetadata: true,
-            });
+            let qVec;
+            try {
+              qVec = await embedText(env, q);
+            } catch (embedError: any) {
+              console.error("Embed error:", embedError);
+              return corsJson({ 
+                error: `Failed to embed query: ${embedError?.message ?? String(embedError)}` 
+              }, 500);
+            }
+
+            let res: any;
+            try {
+              res = await env.VECTORIZE_INDEX.query(qVec, {
+                topK,
+                returnMetadata: true,
+              });
+            } catch (queryError: any) {
+              console.error("Vectorize query error:", queryError);
+              return corsJson({ 
+                error: `Failed to query vectorize: ${queryError?.message ?? String(queryError)}` 
+              }, 500);
+            }
 
             const matches = res?.matches ?? [];
             const out = [];
 
             for (const m of matches) {
-              const obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
-              const chunk = obj ? await obj.json<any>() : null;
+              let obj, chunk;
+              try {
+                obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
+                chunk = obj ? await obj.json<any>() : null;
+              } catch (r2Error: any) {
+                console.error(`R2 error for chunk ${m.id}:`, r2Error);
+                chunk = null;
+              }
 
               out.push({
                 id: m.id,
@@ -182,19 +206,42 @@ export default {
               MAX_TOP_K
             );
 
-            const qVec = await embedText(env, q);
-            const res: any = await env.VECTORIZE_INDEX.query(qVec, {
-              topK,
-              returnMetadata: true,
-            });
+            let qVec;
+            try {
+              qVec = await embedText(env, q);
+            } catch (embedError: any) {
+              console.error("Embed error:", embedError);
+              return corsJson({ 
+                error: `Failed to embed query: ${embedError?.message ?? String(embedError)}` 
+              }, 500);
+            }
+
+            let res: any;
+            try {
+              res = await env.VECTORIZE_INDEX.query(qVec, {
+                topK,
+                returnMetadata: true,
+              });
+            } catch (queryError: any) {
+              console.error("Vectorize query error:", queryError);
+              return corsJson({ 
+                error: `Failed to query vectorize: ${queryError?.message ?? String(queryError)}` 
+              }, 500);
+            }
 
             const matches = res?.matches ?? [];
             const citations = [];
             const contexts = [];
 
             for (const m of matches) {
-              const obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
-              const chunk = obj ? await obj.json<any>() : null;
+              let obj, chunk;
+              try {
+                obj = await env.R2_BUCKET.get(`chunks/${m.id}.json`);
+                chunk = obj ? await obj.json<any>() : null;
+              } catch (r2Error: any) {
+                console.error(`R2 error for chunk ${m.id}:`, r2Error);
+                chunk = null;
+              }
               const text = chunk?.text ?? "";
 
               contexts.push({
@@ -306,7 +353,13 @@ export default {
 
       return withCors(new Response("Not found", { status: 404 }));
     } catch (error: any) {
-      return corsJson({ error: error?.message ?? String(error) }, 500);
+      const errorMessage = error?.message ?? String(error);
+      const errorStack = error?.stack;
+      console.error("API Error:", errorMessage, errorStack);
+      return corsJson({ 
+        error: errorMessage,
+        stack: errorStack 
+      }, 500);
     }
   },
 };

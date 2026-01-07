@@ -4,6 +4,8 @@ import App from "./App";
 
 describe("App", () => {
   it("renders the landing page hero and CTA", () => {
+    window.history.pushState({}, "", "/");
+
     render(<App />);
 
     expect(
@@ -12,7 +14,7 @@ describe("App", () => {
       })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: "Join the archive" })
+      screen.getByRole("link", { name: "Generate a story" })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "Be first to file a new statement." })

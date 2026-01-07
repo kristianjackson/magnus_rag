@@ -42,6 +42,7 @@ function corsJson(data: any, status = 200) {
 
 const EMBED_MODEL = "@cf/baai/bge-base-en-v1.5";
 const ANSWER_MODEL = "@cf/meta/llama-3-8b-instruct";
+const STORY_MODEL = "@cf/meta/llama-3-8b-instruct";
 const MAX_TOP_K = 12;
 
 async function checkR2(env: Env) {
@@ -115,6 +116,32 @@ async function generateAnswer(
   ];
 
   const result: any = await env.AI.run(ANSWER_MODEL, { messages });
+  return (
+    result?.response ||
+    result?.result ||
+    result?.choices?.[0]?.message?.content ||
+    ""
+  ).trim();
+}
+
+async function generateStory(env: Env, idea: string): Promise<string> {
+  const messages = [
+    {
+      role: "system",
+      content:
+        "You are a creative fiction writer crafting eerie, atmospheric short stories. Return only the story prose with no title or markdown.",
+    },
+    {
+      role: "user",
+      content: `Story idea: ${idea}\n\nWrite a 4-6 paragraph story with grounded details, an investigative tone, and a slow-building sense of dread.`,
+    },
+  ];
+
+  const result: any = await env.AI.run(STORY_MODEL, {
+    messages,
+    max_tokens: 900,
+  });
+
   return (
     result?.response ||
     result?.result ||
@@ -302,6 +329,31 @@ export default {
           failed: results.filter(r => !r.ok).length,
           nextCursor: list.truncated ? list.cursor : null,
         });
+      }
+
+      if (req.method === "POST" && url.pathname === "/generate-story") {
+        let payload: any = null;
+
+        try {
+          payload = await req.json();
+        } catch {
+          return corsJson({ error: "Invalid JSON body" }, 400);
+        }
+
+        const idea = (payload?.prompt ?? "").trim();
+        if (!idea) {
+          return corsJson({ error: "Missing prompt" }, 400);
+        }
+        if (idea.length > 800) {
+          return corsJson({ error: "Prompt too long" }, 400);
+        }
+
+        const story = await generateStory(env, idea);
+        if (!story) {
+          return corsJson({ error: "Story generation failed" }, 500);
+        }
+
+        return corsJson({ prompt: idea, story });
       }
 
       return withCors(new Response("Not found", { status: 404 }));

@@ -30,6 +30,18 @@ const postWithFallback = async (path: string, payload: Record<string, unknown>) 
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload),
       });
+      if (!res.ok) {
+        let errorMessage = "Request failed";
+        try {
+          const errorBody = await res.json();
+          if (errorBody?.error) {
+            errorMessage = String(errorBody.error);
+          }
+        } catch {
+          // Ignore JSON parsing errors, fall back to generic message.
+        }
+        throw new Error(errorMessage);
+      }
       if (!res.ok) throw new Error("Request failed");
       return res;
     } catch (error) {

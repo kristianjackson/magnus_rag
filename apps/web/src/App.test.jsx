@@ -41,7 +41,7 @@ describe("App", () => {
 
     expect(global.fetch).toHaveBeenCalledWith(
       expect.stringContaining(
-        "/answer?q=onboarding%20checklist&topK=8"
+        "/answer?q=onboarding%20checklist&topK=8&includeContexts=1"
       )
     );
 

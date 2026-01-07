@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import "./App.css";
 import { answer as fetchAnswer } from "./api";
+import { API_BASES, PRIMARY_API_BASE } from "./apiBase";
 
 const DIAGNOSTIC_SERVICES = [
   { label: "R2", bindingKey: "hasR2", healthKey: "r2" },
@@ -51,6 +52,8 @@ const limitText = (text, maxLength = 220) => {
   if (!text) return "";
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength).trim()}…`;
+};
+
 const isLikelyUrl = (value) =>
   typeof value === "string" && /^https?:\/\//i.test(value);
 
@@ -150,6 +153,10 @@ function App() {
     () => (Array.isArray(data?.contexts) ? data.contexts : []),
     [data]
   );
+  const citations = useMemo(
+    () => (Array.isArray(data?.citations) ? data.citations : []),
+    [data]
+  );
   const excerpts = useMemo(() => {
     if (contexts.length) {
       return contexts.map((context, index) => ({
@@ -172,12 +179,6 @@ function App() {
     return [];
   }, [contexts, data]);
   const maxTopK = 12;
-
-  const items = useMemo(() => extractItems(data), [data]);
-  const citations = useMemo(
-    () => (Array.isArray(data?.citations) ? data.citations : []),
-    [data]
-  );
 
   const fetchFromApi = async (path) => {
     let json = null;
@@ -251,7 +252,6 @@ function App() {
       if (!json) {
         throw new Error("Request failed without a response.");
       }
-      const json = await fetchAnswer(trimmed, topK);
 
       setData(json);
       setAnswer(json.answer || "");
@@ -435,6 +435,8 @@ function App() {
                     </li>
                   ))}
                 </ol>
+              </div>
+            ) : null}
             {citations.length > 0 ? (
               <div className="answer-card__citations">
                 <h3>Citations</h3>

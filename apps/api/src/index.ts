@@ -273,14 +273,17 @@ export default {
           }
           case "/health":
             return corsJson({ ok: true });
-          case "/debug/bindings":
+          case "/debug/bindings": {
+            console.log("Debug bindings endpoint called");
             return corsJson({
               hasR2: !!env.R2_BUCKET,
               hasVectorize: !!env.VECTORIZE_INDEX,
               hasAI: !!env.AI,
               hasAdminToken: !!env.ADMIN_TOKEN,
             });
+          }
           case "/debug/health": {
+            console.log("Debug health endpoint called");
             const [r2, ai] = await Promise.all([checkR2(env), checkAI(env)]);
             const vectorize = await checkVectorize(
               env,

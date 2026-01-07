@@ -131,10 +131,13 @@ export default {
 
     try {
       const url = new URL(req.url);
+      
+      // Normalize pathname: remove trailing slash, handle empty path
+      let pathname = url.pathname.replace(/\/$/, "") || "/";
+      console.log("Request:", req.method, pathname, "original:", url.pathname);
 
       if (req.method === "GET") {
-        console.log("GET request to:", url.pathname);
-        switch (url.pathname) {
+        switch (pathname) {
           case "/search": {
             const q = (url.searchParams.get("q") ?? "").trim();
             if (!q) return corsJson({ error: "Missing q" }, 400);
@@ -302,7 +305,7 @@ export default {
       }
 
       // ---------- Index chunks ----------
-      if (req.method === "POST" && url.pathname === "/admin/index") {
+      if (req.method === "POST" && pathname === "/admin/index") {
         const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
         if (!token || token !== env.ADMIN_TOKEN) {
           return corsJson({ error: "unauthorized" }, 401);

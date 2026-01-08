@@ -6,7 +6,7 @@ import { usePathname } from "./router";
 function App() {
   const pathname = usePathname();
 
-  if (pathname === "/generate") {
+  if (pathname === "/check-in") {
     return <ContentGeneration />;
   }
 

@@ -231,16 +231,18 @@ function formatJournalRow(row: {
   };
 }
 
-async function generateJournalInsights(
-  env: Env,
-  entry: string,
-  emotions: unknown
-): Promise<{
+type JournalAnalysis = {
   summary: string;
   emotional_tone: string;
   themes: string[];
   proposed_solution: { title: string; steps: string[] };
-}> {
+};
+
+async function generateJournalInsights(
+  env: Env,
+  entry: string,
+  emotions: unknown
+): Promise<JournalAnalysis | null> {
   const messages = [
     {
       role: "system",
@@ -253,19 +255,19 @@ async function generateJournalInsights(
     },
   ];
 
-  const result: any = await env.AI.run(JOURNAL_MODEL, {
-    messages,
-    max_tokens: 500,
-  });
-
-  const raw =
-    result?.response ||
-    result?.result ||
-    result?.choices?.[0]?.message?.content ||
-    "";
-  const cleaned = stripJsonFence(raw);
-
   try {
+    const result: any = await env.AI.run(JOURNAL_MODEL, {
+      messages,
+      max_tokens: 500,
+    });
+
+    const raw =
+      result?.response ||
+      result?.result ||
+      result?.choices?.[0]?.message?.content ||
+      "";
+    const cleaned = stripJsonFence(raw);
+
     const parsed = JSON.parse(cleaned);
     const summary = typeof parsed?.summary === "string" ? parsed.summary.trim() : "";
     const emotionalTone =
@@ -286,12 +288,7 @@ async function generateJournalInsights(
       proposed_solution: { title: solutionTitle, steps: solutionSteps },
     };
   } catch {
-    return {
-      summary: "",
-      emotional_tone: "",
-      themes: [],
-      proposed_solution: { title: "", steps: [] },
-    };
+    return null;
   }
 }
 

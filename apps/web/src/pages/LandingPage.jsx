@@ -5,10 +5,10 @@ function LandingPage() {
     <div className="page">
       <header className="hero">
         <nav className="hero__nav">
-          <span className="brand">TraceMap</span>
+          <span className="brand">Lumenary</span>
           <div className="hero__nav-actions">
             <AppLink className="ghost-button" to="/check-in">
-              Start a check-in
+              Start a reflection
             </AppLink>
             <a className="ghost-button ghost-button--muted" href="#signup">
               Join the waitlist
@@ -17,19 +17,19 @@ function LandingPage() {
         </nav>
         <div className="hero__content">
           <div>
-            <p className="eyebrow">Personal tracking workspace</p>
-            <h1>Track ASPD-related traits with structure and clarity.</h1>
+            <p className="eyebrow">Journal intelligence</p>
+            <h1>Turn daily journaling into supportive, structured feedback.</h1>
             <p className="hero__lead">
-              TraceMap is a private place to log check-ins, capture context, and
-              spot patterns over time. The experience is judgment-free, data
-              focused, and designed to keep your reflections organized.
+              Lumenary is a calm space to write your thoughts, receive LLM-powered
+              insights, and track growth over time. Everything starts with a
+              private entry and ends with clear, actionable reflections.
             </p>
             <div className="hero__actions">
               <AppLink className="primary-button" to="/check-in">
-                Start today
+                Explore the flow
               </AppLink>
               <a className="secondary-button" href="#features">
-                See the MVP
+                See the framework
               </a>
               <a className="text-link" href="#preview">
                 View a sample
@@ -37,15 +37,14 @@ function LandingPage() {
             </div>
           </div>
           <div className="hero__panel">
-            <p className="hero__panel-title">What you can capture</p>
+            <p className="hero__panel-title">Designed for thoughtful journaling</p>
             <ul className="hero__panel-list">
-              <li>Daily intensity ratings and triggers</li>
-              <li>Context tags that make patterns visible</li>
-              <li>Notes for follow-up, reflection, or therapy</li>
+              <li>Guided prompts to clarify what you are feeling</li>
+              <li>AI summaries that highlight themes and patterns</li>
+              <li>Weekly snapshots that make progress visible</li>
             </ul>
             <p className="hero__panel-note">
-              This tool is for personal insight and does not replace clinical
-              care or diagnosis.
+              Your journal stays private. You control what is shared and saved.
             </p>
           </div>
         </div>
@@ -54,34 +53,34 @@ function LandingPage() {
       <main>
         <section className="section" aria-labelledby="features">
           <div className="section__header">
-            <p className="eyebrow">What it does</p>
-            <h2 id="features">A practical toolkit for trait tracking.</h2>
+            <p className="eyebrow">How it works</p>
+            <h2 id="features">A guided path from reflection to insight.</h2>
             <p className="section__lead">
-              Build a consistent record without overthinking it. The MVP focuses
-              on structured check-ins, contextual tags, and calm visual summaries
-              that help you see change over time.
+              The first release focuses on three essentials: mindful capture,
+              gentle analysis, and habit-friendly follow ups. Each step is
+              designed to make your journaling feel lighter, not heavier.
             </p>
           </div>
           <div className="feature-grid">
             <article className="feature-card">
-              <h3>Structured check-ins</h3>
+              <h3>Thoughtful prompts</h3>
               <p>
-                Log intensity, impulse, and social friction levels in a repeatable
-                format so comparisons are easy later.
+                Start with questions that bring clarity without forcing a rigid
+                template.
               </p>
             </article>
             <article className="feature-card">
-              <h3>Context tags</h3>
+              <h3>LLM feedback layers</h3>
               <p>
-                Label situations like stress, conflict, or overstimulation to
-                reveal the patterns behind your data.
+                Receive summaries, emotional tone highlights, and suggested next
+                steps from trusted analysis.
               </p>
             </article>
             <article className="feature-card">
-              <h3>Reflection prompts</h3>
+              <h3>Weekly progress view</h3>
               <p>
-                Short, optional prompts keep the focus on actionable insights
-                instead of rumination.
+                See the themes that keep showing up so you can spot momentum or
+                friction early.
               </p>
             </article>
           </div>
@@ -93,17 +92,17 @@ function LandingPage() {
           aria-labelledby="preview-title"
         >
           <div className="section__header">
-            <p className="eyebrow">Sample check-in</p>
-            <h2 id="preview-title">Evening reflection snapshot</h2>
+            <p className="eyebrow">Sample feedback</p>
+            <h2 id="preview-title">A gentle reflection snapshot</h2>
           </div>
           <figure className="example-card">
             <blockquote>
-              “Impulse: 6/10. Trigger: unexpected change at work. Response:
-              withdrew from conversation, noted elevated irritation. Next time,
-              try a quick pause before responding.”
+              “You expressed steady optimism with a moment of tension around
+              deadlines. A recurring theme is balancing ambition with rest. Consider
+              a short check-in tomorrow on how you want your schedule to feel.”
             </blockquote>
             <figcaption>
-              Sample data only. No entries are shared or published.
+              Sample output only. Feedback is personalized and private.
             </figcaption>
           </figure>
         </section>
@@ -111,10 +110,10 @@ function LandingPage() {
         <section className="section cta" id="signup" aria-labelledby="cta-title">
           <div>
             <p className="eyebrow">Early access</p>
-            <h2 id="cta-title">Be first to try the tracking workspace.</h2>
+            <h2 id="cta-title">Get notified when the private beta opens.</h2>
             <p className="section__lead">
-              We are launching a privacy-first MVP on Cloudflare. Leave your
-              email to get notified when the first version goes live.
+              We are shipping the first Lumenary release on Cloudflare. Join the
+              waitlist for secure, privacy-first journaling updates.
             </p>
           </div>
           <form className="cta__form">
@@ -131,19 +130,17 @@ function LandingPage() {
             <button type="button">Join the waitlist</button>
           </form>
           <p className="cta__fineprint">
-            This tool is for personal tracking and does not replace professional
-            care.
+            We will only email product updates. No spam, ever.
           </p>
         </section>
       </main>
 
       <footer className="footer">
         <p>
-          © 2024 TraceMap. Private tracking for personal insight.
+          © 2024 Lumenary. Thoughtful journal feedback built for calm routines.
         </p>
         <p className="footer__disclaimer">
-          Your data stays in your control. Export and delete options will be
-          available in the MVP.
+          Always in your control, with export and deletion built in from day one.
         </p>
       </footer>
     </div>

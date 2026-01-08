@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { EmotionPicker, DEFAULT_EMOTION_CATEGORIES } from "../components/EmotionPicker";
 import { AppLink } from "../router";
-import { analyzeJournal } from "../api";
+import { createEntry, listEntries } from "../api";
 
 const DEFAULT_ENTRY =
   "Today felt lighter after an honest conversation. I still want to protect my energy, but I am proud of how I responded.";
@@ -9,7 +9,7 @@ const DEFAULT_ENTRY =
 const STATUS_COPY = {
   idle: "Draft a reflection to see a feedback preview.",
   analyzing: "Creating a metadata layer and next-step suggestion.",
-  saved: "Saved locally in this session.",
+  saved: "Saved to your journal.",
   error: "Saved, but the analysis could not be generated.",
 };
 
@@ -21,47 +21,9 @@ function ContentGeneration() {
   const [status, setStatus] = useState("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [entries, setEntries] = useState([
-    {
-      id: 1,
-      date: "2024-05-18T09:32:00.000Z",
-      emotions: {
-        selected: [
-          {
-            categoryId: "grateful",
-            intensity: 2,
-            selectedSynonyms: ["Thankful"],
-          },
-          {
-            categoryId: "capable",
-            intensity: 1,
-            selectedSynonyms: ["Prepared"],
-          },
-        ],
-      },
-      entry:
-        "Noticed I felt more grounded after a slow morning routine. Staying present helped me avoid spiraling.",
-      metadata: {
-        word_count: 19,
-        character_count: 96,
-        sentence_count: 2,
-        reading_time_minutes: 1,
-      },
-      analysis: {
-        summary: "A steady morning routine helped you stay present and avoid spiraling.",
-        emotional_tone: "Grounded and reflective",
-        themes: ["Routine", "Presence", "Emotional regulation"],
-        proposed_solution: {
-          title: "Repeat the grounding routine",
-          steps: [
-            "Choose one morning ritual that felt helpful.",
-            "Schedule it for the next three days.",
-            "Note how your body feels afterward.",
-          ],
-        },
-      },
-    },
-  ]);
+  const [entries, setEntries] = useState([]);
+  const [entriesError, setEntriesError] = useState("");
+  const [isLoadingEntries, setIsLoadingEntries] = useState(true);
 
   const formattedEntryTimestamp = dateValue =>
     new Intl.DateTimeFormat("en-US", {
@@ -69,46 +31,56 @@ function ContentGeneration() {
       timeStyle: "short",
     }).format(new Date(dateValue));
 
+  useEffect(() => {
+    let isActive = true;
+
+    const loadEntries = async () => {
+      setIsLoadingEntries(true);
+      setEntriesError("");
+      try {
+        const response = await listEntries({ limit: 10 });
+        if (!isActive) return;
+        setEntries(response?.entries ?? []);
+      } catch (error) {
+        if (!isActive) return;
+        setEntriesError(
+          error instanceof Error ? error.message : "Unable to load reflections."
+        );
+      } finally {
+        if (isActive) {
+          setIsLoadingEntries(false);
+        }
+      }
+    };
+
+    loadEntries();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
   const handleSubmit = async event => {
     event.preventDefault();
-    const nextTimestamp = new Date().toISOString();
     const entryText = entry.trim() || DEFAULT_ENTRY;
     setIsAnalyzing(true);
     setStatus("analyzing");
     setErrorMessage("");
-    let analysis = null;
-    let metadata = null;
 
     try {
-      const response = await analyzeJournal(entryText, emotions);
-      analysis = response?.analysis ?? null;
-      metadata = response?.metadata ?? null;
+      const response = await createEntry(entryText, emotions);
+      setEntries(current => [response, ...current]);
       setStatus("saved");
+      setEntry("");
+      setEmotions(DEFAULT_EMOTIONS_PAYLOAD);
     } catch (error) {
-      const wordCount = entryText.trim().match(/\b\w+\b/g)?.length ?? 0;
-      metadata = {
-        word_count: wordCount,
-        character_count: entryText.length,
-        sentence_count: entryText.match(/[.!?]+/g)?.length ?? 1,
-        reading_time_minutes: Math.max(1, Math.round(wordCount / 200)),
-      };
       setStatus("error");
       setErrorMessage(
-        error instanceof Error ? error.message : "Unable to generate feedback."
+        error instanceof Error ? error.message : "Unable to save reflection."
       );
     } finally {
       setIsAnalyzing(false);
     }
-    const nextEntry = {
-      id: Date.now(),
-      date: nextTimestamp,
-      emotions,
-      entry: entryText,
-      metadata,
-      analysis,
-    };
-    setEntries(current => [nextEntry, ...current]);
-    setEntry("");
   };
 
   const outputStatus = useMemo(
@@ -220,19 +192,23 @@ function ContentGeneration() {
             </p>
           </div>
           <div className="content-result content-result--list">
-            {entries.length ? (
+            {isLoadingEntries ? (
+              <p className="content-result__placeholder">
+                Loading reflections...
+              </p>
+            ) : entries.length ? (
               <ul className="checkin-list">
                 {entries.map(currentEntry => (
                   <li key={currentEntry.id} className="checkin-list__item">
                     <div>
                       <p className="checkin-list__meta">
-                        {formattedEntryTimestamp(currentEntry.date)} · Feelings{" "}
+                        {formattedEntryTimestamp(currentEntry.created_at)} · Feelings{" "}
                         {formatEmotions(currentEntry.emotions)}
                         {currentEntry.metadata
                           ? ` · ${currentEntry.metadata.word_count} words · ${currentEntry.metadata.reading_time_minutes} min read`
                           : ""}
                       </p>
-                      <p className="checkin-list__note">{currentEntry.entry}</p>
+                      <p className="checkin-list__note">{currentEntry.entry_text}</p>
                       {currentEntry.analysis ? (
                         <div className="checkin-list__analysis">
                           <p className="checkin-list__label">Summary</p>
@@ -276,12 +252,15 @@ function ContentGeneration() {
               </p>
             )}
           </div>
+          {entriesError ? (
+            <p className="content-form__error">{entriesError}</p>
+          ) : null}
         </section>
       </main>
 
       <footer className="footer">
         <p>
-          Entries are stored locally in this preview.
+          Entries are stored in your journal workspace.
         </p>
         <p className="footer__disclaimer">
           LLM analysis, sharing controls, and exports are coming in future

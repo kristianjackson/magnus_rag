@@ -2,6 +2,7 @@ export interface Env {
   R2_BUCKET: R2Bucket;
   VECTORIZE_INDEX: VectorizeIndex;
   AI: Fetcher;
+  DB: D1Database;
   ADMIN_TOKEN: string;
 }
 
@@ -161,6 +162,20 @@ function estimateReadingTime(wordCount: number) {
   return Math.max(1, Math.round(wordCount / 200));
 }
 
+function buildJournalMetadata(entry: string, emotions: unknown) {
+  const wordCount = countWords(entry);
+  const sentenceCount =
+    entry.match(/[.!?]+/g)?.length ?? (entry.trim() ? 1 : 0);
+
+  return {
+    word_count: wordCount,
+    character_count: entry.length,
+    sentence_count: sentenceCount,
+    reading_time_minutes: estimateReadingTime(wordCount),
+    emotions,
+  };
+}
+
 function stripJsonFence(text: string) {
   const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
   return (fenced ? fenced[1] : text).trim();
@@ -187,6 +202,33 @@ function normalizeSteps(value: unknown): string[] {
     return [value.trim()];
   }
   return [];
+}
+
+function parseJson<T>(value: string | null, fallback: T): T {
+  if (!value) return fallback;
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return fallback;
+  }
+}
+
+function formatJournalRow(row: {
+  id: string;
+  created_at: string;
+  entry_text: string;
+  emotions_json: string;
+  metadata_json: string;
+  analysis_json: string;
+}) {
+  return {
+    id: row.id,
+    created_at: row.created_at,
+    entry_text: row.entry_text,
+    emotions: parseJson(row.emotions_json, null),
+    metadata: parseJson(row.metadata_json, null),
+    analysis: parseJson(row.analysis_json, null),
+  };
 }
 
 async function generateJournalInsights(
@@ -361,6 +403,7 @@ export default {
               hasR2: !!env.R2_BUCKET,
               hasVectorize: !!env.VECTORIZE_INDEX,
               hasAI: !!env.AI,
+              hasD1: !!env.DB,
               hasAdminToken: !!env.ADMIN_TOKEN,
             });
           case "/debug/health": {
@@ -476,16 +519,7 @@ export default {
           return corsJson({ error: "Entry too long" }, 400);
         }
 
-        const wordCount = countWords(entry);
-        const sentenceCount =
-          entry.match(/[.!?]+/g)?.length ?? (entry.trim() ? 1 : 0);
-        const metadata = {
-          word_count: wordCount,
-          character_count: entry.length,
-          sentence_count: sentenceCount,
-          reading_time_minutes: estimateReadingTime(wordCount),
-          emotions: payload?.emotions ?? null,
-        };
+        const metadata = buildJournalMetadata(entry, payload?.emotions ?? null);
 
         const analysis = await generateJournalInsights(
           env,
@@ -498,6 +532,107 @@ export default {
           metadata,
           analysis,
         });
+      }
+
+      if (req.method === "POST" && url.pathname === "/journal/entries") {
+        let payload: any = null;
+
+        try {
+          payload = await req.json();
+        } catch {
+          return corsJson({ error: "Invalid JSON body" }, 400);
+        }
+
+        const entry = (payload?.entry ?? "").trim();
+        if (!entry) {
+          return corsJson({ error: "Missing entry" }, 400);
+        }
+        if (entry.length > 4000) {
+          return corsJson({ error: "Entry too long" }, 400);
+        }
+
+        const emotions = payload?.emotions;
+        if (!emotions || typeof emotions !== "object") {
+          return corsJson({ error: "Missing emotions" }, 400);
+        }
+        if (!Array.isArray(emotions.selected)) {
+          return corsJson({ error: "Invalid emotions payload" }, 400);
+        }
+
+        const metadata = buildJournalMetadata(entry, emotions);
+        const analysis = await generateJournalInsights(env, entry, emotions);
+        const id = crypto.randomUUID();
+
+        const insert = await env.DB.prepare(
+          `INSERT INTO journal_entries (id, entry_text, emotions_json, metadata_json, analysis_json)
+           VALUES (?, ?, ?, ?, ?)
+           RETURNING id, created_at, entry_text, emotions_json, metadata_json, analysis_json`
+        )
+          .bind(
+            id,
+            entry,
+            JSON.stringify(emotions),
+            JSON.stringify(metadata),
+            JSON.stringify(analysis)
+          )
+          .first<{
+            id: string;
+            created_at: string;
+            entry_text: string;
+            emotions_json: string;
+            metadata_json: string;
+            analysis_json: string;
+          }>();
+
+        if (!insert) {
+          return corsJson({ error: "Failed to save entry" }, 500);
+        }
+
+        return corsJson(formatJournalRow(insert), 201);
+      }
+
+      if (req.method === "GET" && url.pathname === "/journal/entries") {
+        const limit = Math.min(
+          Number(url.searchParams.get("limit") ?? "20"),
+          50
+        );
+        const cursor = url.searchParams.get("cursor");
+
+        let sql =
+          "SELECT id, created_at, entry_text, emotions_json, metadata_json, analysis_json FROM journal_entries";
+        const values: unknown[] = [];
+
+        if (cursor) {
+          const [createdAt, id] = cursor.split("|");
+          if (createdAt && id) {
+            sql +=
+              " WHERE (created_at < ?) OR (created_at = ? AND id < ?)";
+            values.push(createdAt, createdAt, id);
+          }
+        }
+
+        sql += " ORDER BY created_at DESC, id DESC LIMIT ?";
+        values.push(limit);
+
+        const result = await env.DB.prepare(sql)
+          .bind(...values)
+          .all<{
+            id: string;
+            created_at: string;
+            entry_text: string;
+            emotions_json: string;
+            metadata_json: string;
+            analysis_json: string;
+          }>();
+
+        const entries = (result.results ?? []).map(formatJournalRow);
+        const lastEntry = entries[entries.length - 1];
+        const nextCursor =
+          entries.length === limit && lastEntry
+            ? `${lastEntry.created_at}|${lastEntry.id}`
+            : null;
+
+        return corsJson({ entries, next_cursor: nextCursor });
       }
 
       return withCors(new Response("Not found", { status: 404 }));

@@ -116,3 +116,21 @@ export async function analyzeJournal(entry: string, emotions: unknown) {
   const res = await postWithFallback("/journal/analyze", { entry, emotions });
   return res.json();
 }
+
+export async function createEntry(entry: string, emotions: unknown) {
+  const res = await postWithFallback("/journal/entries", { entry, emotions });
+  return res.json();
+}
+
+export async function listEntries(options?: { limit?: number; cursor?: string }) {
+  const params = new URLSearchParams();
+  if (options?.limit) {
+    params.set("limit", String(options.limit));
+  }
+  if (options?.cursor) {
+    params.set("cursor", options.cursor);
+  }
+  const suffix = params.toString() ? `?${params.toString()}` : "";
+  const res = await fetchWithFallback(`/journal/entries${suffix}`);
+  return res.json();
+}

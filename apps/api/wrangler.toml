@@ -12,3 +12,9 @@ bucket_name = "magnus-bucket"
 [[vectorize]]
 binding = "VECTORIZE_INDEX"
 index_name = "magnus-index-768"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "magnus-journal"
+# TODO: replace with the real D1 database ID.
+database_id = "00000000-0000-0000-0000-000000000000"

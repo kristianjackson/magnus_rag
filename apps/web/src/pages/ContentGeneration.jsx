@@ -4,8 +4,6 @@ import { AppLink } from "../router";
 const DEFAULT_ENTRY =
   "Today felt lighter after an honest conversation. I still want to protect my energy, but I am proud of how I responded.";
 
-const DEFAULT_THEMES = ["boundaries", "energy", "communication"];
-
 const STATUS_COPY = {
   idle: "Draft a reflection to see a feedback preview.",
   saved: "Saved locally in this session.",
@@ -31,37 +29,48 @@ const FEELING_OPTIONS = [
 ];
 
 function ContentGeneration() {
-  const [date, setDate] = useState("");
+  const [timestamp, setTimestamp] = useState(() => new Date().toISOString());
   const [feelings, setFeelings] = useState(["calm"]);
-  const [themes, setThemes] = useState(DEFAULT_THEMES.join(", "));
   const [entry, setEntry] = useState("");
   const [status, setStatus] = useState("idle");
   const [entries, setEntries] = useState([
     {
       id: 1,
-      date: "2024-05-18",
+      date: "2024-05-18T09:32:00.000Z",
       feelings: ["grateful", "focused"],
-      themes: ["gratitude", "focus"],
       entry:
         "Noticed I felt more grounded after a slow morning routine. Staying present helped me avoid spiraling.",
     },
   ]);
 
+  const formattedTimestamp = useMemo(
+    () =>
+      new Intl.DateTimeFormat("en-US", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(timestamp)),
+    [timestamp]
+  );
+
+  const formattedEntryTimestamp = dateValue =>
+    new Intl.DateTimeFormat("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    }).format(new Date(dateValue));
+
   const handleSubmit = event => {
     event.preventDefault();
+    const nextTimestamp = new Date().toISOString();
     const nextEntry = {
       id: Date.now(),
-      date: date || new Date().toISOString().slice(0, 10),
+      date: nextTimestamp,
       feelings,
-      themes: themes
-        .split(",")
-        .map(theme => theme.trim())
-        .filter(Boolean),
       entry: entry.trim() || DEFAULT_ENTRY,
     };
     setEntries(current => [nextEntry, ...current]);
     setStatus("saved");
     setEntry("");
+    setTimestamp(nextTimestamp);
   };
 
   const outputStatus = useMemo(
@@ -86,8 +95,8 @@ function ContentGeneration() {
           <h1>Capture a reflection and preview the feedback.</h1>
           <p className="hero__lead">
             This is the shell of the guided journaling flow. Write freely, add
-            your themes, and see the type of insights you will receive when the
-            LLM analysis is connected.
+            your reflections, and see the type of insights you will receive
+            when the LLM analysis is connected.
           </p>
         </div>
       </header>
@@ -102,13 +111,13 @@ function ContentGeneration() {
           </div>
           <form className="content-form" onSubmit={handleSubmit}>
             <label className="content-form__label" htmlFor="reflection-date">
-              Date
+              Timestamp
             </label>
             <input
               id="reflection-date"
-              type="date"
-              value={date}
-              onChange={event => setDate(event.target.value)}
+              type="text"
+              value={formattedTimestamp}
+              readOnly
             />
             <label className="content-form__label">
               Feelings to track
@@ -138,16 +147,6 @@ function ContentGeneration() {
                 );
               })}
             </div>
-            <label className="content-form__label" htmlFor="reflection-themes">
-              Themes
-            </label>
-            <input
-              id="reflection-themes"
-              type="text"
-              placeholder={DEFAULT_THEMES.join(", ")}
-              value={themes}
-              onChange={event => setThemes(event.target.value)}
-            />
             <label className="content-form__label" htmlFor="reflection-entry">
               Journal entry
             </label>
@@ -167,9 +166,8 @@ function ContentGeneration() {
                 className="secondary-button"
                 type="button"
                 onClick={() => {
-                  setDate("");
+                  setTimestamp(new Date().toISOString());
                   setFeelings(["calm"]);
-                  setThemes(DEFAULT_THEMES.join(", "));
                   setEntry("");
                 }}
               >
@@ -195,7 +193,7 @@ function ContentGeneration() {
                   <li key={currentEntry.id} className="checkin-list__item">
                     <div>
                       <p className="checkin-list__meta">
-                        {currentEntry.date} · Feelings{" "}
+                        {formattedEntryTimestamp(currentEntry.date)} · Feelings{" "}
                         {(currentEntry.feelings ?? [])
                           .map(feelingId => {
                             const match = FEELING_OPTIONS.find(
@@ -206,13 +204,6 @@ function ContentGeneration() {
                           .join(", ")}
                       </p>
                       <p className="checkin-list__note">{currentEntry.entry}</p>
-                    </div>
-                    <div className="checkin-list__tags">
-                      {currentEntry.themes.map(theme => (
-                        <span key={`${currentEntry.id}-${theme}`} className="tag-pill">
-                          {theme}
-                        </span>
-                      ))}
                     </div>
                   </li>
                 ))}

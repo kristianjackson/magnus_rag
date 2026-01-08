@@ -111,3 +111,8 @@ export async function generateStory(prompt: string) {
   const res = await postWithFallback("/generate-story", { prompt });
   return res.json();
 }
+
+export async function analyzeJournal(entry: string, emotions: unknown) {
+  const res = await postWithFallback("/journal/analyze", { entry, emotions });
+  return res.json();
+}

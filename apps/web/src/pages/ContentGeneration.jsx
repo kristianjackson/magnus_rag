@@ -13,7 +13,6 @@ const STATUS_COPY = {
 const DEFAULT_EMOTIONS_PAYLOAD = { selected: [] };
 
 function ContentGeneration() {
-  const [timestamp, setTimestamp] = useState(() => new Date().toISOString());
   const [emotions, setEmotions] = useState(DEFAULT_EMOTIONS_PAYLOAD);
   const [entry, setEntry] = useState("");
   const [status, setStatus] = useState("idle");
@@ -40,15 +39,6 @@ function ContentGeneration() {
     },
   ]);
 
-  const formattedTimestamp = useMemo(
-    () =>
-      new Intl.DateTimeFormat("en-US", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      }).format(new Date(timestamp)),
-    [timestamp]
-  );
-
   const formattedEntryTimestamp = dateValue =>
     new Intl.DateTimeFormat("en-US", {
       dateStyle: "medium",
@@ -67,7 +57,6 @@ function ContentGeneration() {
     setEntries(current => [nextEntry, ...current]);
     setStatus("saved");
     setEntry("");
-    setTimestamp(nextTimestamp);
   };
 
   const outputStatus = useMemo(
@@ -132,15 +121,6 @@ function ContentGeneration() {
             </p>
           </div>
           <form className="content-form" onSubmit={handleSubmit}>
-            <label className="content-form__label" htmlFor="reflection-date">
-              Timestamp
-            </label>
-            <input
-              id="reflection-date"
-              type="text"
-              value={formattedTimestamp}
-              readOnly
-            />
             <label className="content-form__label">
               Feelings to track
             </label>
@@ -164,7 +144,6 @@ function ContentGeneration() {
                 className="secondary-button"
                 type="button"
                 onClick={() => {
-                  setTimestamp(new Date().toISOString());
                   setEmotions(DEFAULT_EMOTIONS_PAYLOAD);
                   setEntry("");
                 }}

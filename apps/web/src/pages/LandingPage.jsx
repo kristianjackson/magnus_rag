@@ -5,46 +5,47 @@ function LandingPage() {
     <div className="page">
       <header className="hero">
         <nav className="hero__nav">
-          <span className="brand">The Magnus Archives</span>
+          <span className="brand">TraceMap</span>
           <div className="hero__nav-actions">
-            <AppLink className="ghost-button" to="/generate">
-              Content generation
+            <AppLink className="ghost-button" to="/check-in">
+              Start a check-in
             </AppLink>
             <a className="ghost-button ghost-button--muted" href="#signup">
-              Coming Soon
+              Join the waitlist
             </a>
           </div>
         </nav>
         <div className="hero__content">
           <div>
-            <p className="eyebrow">Fan-made fiction generator</p>
-            <h1>Unearth new statements from the Magnus Institute.</h1>
+            <p className="eyebrow">Personal tracking workspace</p>
+            <h1>Track ASPD-related traits with structure and clarity.</h1>
             <p className="hero__lead">
-              The Magnus Archives Generator spins original, atmospheric tales
-              inspired by the archive. Browse the concept, preview a sample
-              entry, and join the list for early access.
+              TraceMap is a private place to log check-ins, capture context, and
+              spot patterns over time. The experience is judgment-free, data
+              focused, and designed to keep your reflections organized.
             </p>
             <div className="hero__actions">
-              <AppLink className="primary-button" to="/generate">
-                Generate a story
+              <AppLink className="primary-button" to="/check-in">
+                Start today
               </AppLink>
-              <a className="secondary-button" href="#signup">
-                Join the archive
+              <a className="secondary-button" href="#features">
+                See the MVP
               </a>
-              <a className="text-link" href="#example">
-                Read a sample
+              <a className="text-link" href="#preview">
+                View a sample
               </a>
             </div>
           </div>
           <div className="hero__panel">
-            <p className="hero__panel-title">Example prompt</p>
-            <p className="hero__panel-body">
-              “Generate a sealed statement about a coastal lighthouse that never
-              appears on maps, written in a calm, investigative tone.”
-            </p>
+            <p className="hero__panel-title">What you can capture</p>
+            <ul className="hero__panel-list">
+              <li>Daily intensity ratings and triggers</li>
+              <li>Context tags that make patterns visible</li>
+              <li>Notes for follow-up, reflection, or therapy</li>
+            </ul>
             <p className="hero__panel-note">
-              We craft every output from scratch — no scraped or copyrighted
-              text.
+              This tool is for personal insight and does not replace clinical
+              care or diagnosis.
             </p>
           </div>
         </div>
@@ -54,32 +55,33 @@ function LandingPage() {
         <section className="section" aria-labelledby="features">
           <div className="section__header">
             <p className="eyebrow">What it does</p>
-            <h2 id="features">A careful blend of dread and detail.</h2>
+            <h2 id="features">A practical toolkit for trait tracking.</h2>
             <p className="section__lead">
-              Each generation is stitched together with rich sensory cues,
-              archival structure, and a slow-burn reveal.
+              Build a consistent record without overthinking it. The MVP focuses
+              on structured check-ins, contextual tags, and calm visual summaries
+              that help you see change over time.
             </p>
           </div>
           <div className="feature-grid">
             <article className="feature-card">
-              <h3>Archive-ready structure</h3>
+              <h3>Structured check-ins</h3>
               <p>
-                Entries include statements, catalog notes, and subtle metadata
-                that feel ready for filing.
+                Log intensity, impulse, and social friction levels in a repeatable
+                format so comparisons are easy later.
               </p>
             </article>
             <article className="feature-card">
-              <h3>Atmospheric soundscape</h3>
+              <h3>Context tags</h3>
               <p>
-                We emphasize ambience, giving each story a tactile place, time,
-                and weather.
+                Label situations like stress, conflict, or overstimulation to
+                reveal the patterns behind your data.
               </p>
             </article>
             <article className="feature-card">
-              <h3>Prompt-guided lore</h3>
+              <h3>Reflection prompts</h3>
               <p>
-                Nudge the narrative with prompts about artifacts, entities, or
-                locations — the generator follows your lead.
+                Short, optional prompts keep the focus on actionable insights
+                instead of rumination.
               </p>
             </article>
           </div>
@@ -87,33 +89,32 @@ function LandingPage() {
 
         <section
           className="section section--example"
-          id="example"
-          aria-labelledby="example-title"
+          id="preview"
+          aria-labelledby="preview-title"
         >
           <div className="section__header">
-            <p className="eyebrow">Example output</p>
-            <h2 id="example-title">Statement excerpt</h2>
+            <p className="eyebrow">Sample check-in</p>
+            <h2 id="preview-title">Evening reflection snapshot</h2>
           </div>
           <figure className="example-card">
             <blockquote>
-              “The bulb in the lantern room was warm, but it gave off no light.
-              I sat there for twenty minutes, listening to the tide hurl itself
-              at the stone. When the fog finally lifted, the coastline had moved
-              — not by inches, but by miles.”
+              “Impulse: 6/10. Trigger: unexpected change at work. Response:
+              withdrew from conversation, noted elevated irritation. Next time,
+              try a quick pause before responding.”
             </blockquote>
             <figcaption>
-              Generated sample — original fiction, not an official statement.
+              Sample data only. No entries are shared or published.
             </figcaption>
           </figure>
         </section>
 
         <section className="section cta" id="signup" aria-labelledby="cta-title">
           <div>
-            <p className="eyebrow">Join the archive</p>
-            <h2 id="cta-title">Be first to file a new statement.</h2>
+            <p className="eyebrow">Early access</p>
+            <h2 id="cta-title">Be first to try the tracking workspace.</h2>
             <p className="section__lead">
-              We are preparing a limited early-access run. Leave your email and
-              we will notify you when the archive opens.
+              We are launching a privacy-first MVP on Cloudflare. Leave your
+              email to get notified when the first version goes live.
             </p>
           </div>
           <form className="cta__form">
@@ -127,23 +128,22 @@ function LandingPage() {
               placeholder="you@example.com"
               autoComplete="email"
             />
-            <button type="button">Notify me</button>
+            <button type="button">Join the waitlist</button>
           </form>
           <p className="cta__fineprint">
-            Fan-made project. Not affiliated with Rusty Quill or the original
-            podcast creators.
+            This tool is for personal tracking and does not replace professional
+            care.
           </p>
         </section>
       </main>
 
       <footer className="footer">
         <p>
-          © 2024 The Magnus Archives Generator. Crafted for fans who crave new
-          statements.
+          © 2024 TraceMap. Private tracking for personal insight.
         </p>
         <p className="footer__disclaimer">
-          This landing page contains original copy only. No official story
-          content is used or reproduced.
+          Your data stays in your control. Export and delete options will be
+          available in the MVP.
         </p>
       </footer>
     </div>

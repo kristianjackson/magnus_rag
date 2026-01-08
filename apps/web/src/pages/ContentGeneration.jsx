@@ -1,150 +1,72 @@
 import { useMemo, useState } from "react";
 import { AppLink } from "../router";
-import { generateStory } from "../api";
 
-const DEFAULT_IDEA =
-  "A misplaced archival key unlocks a room that should not exist beneath the Institute.";
+const DEFAULT_NOTE =
+  "Noted elevated irritation after a schedule change. Took a short walk.";
 
-const wrapText = (text, maxLength) => {
-  const words = text.split(/\s+/).filter(Boolean);
-  const lines = [];
-  let line = "";
+const DEFAULT_TAGS = ["work", "conflict", "overstimulation"];
 
-  words.forEach(word => {
-    const nextLine = line ? `${line} ${word}` : word;
-    if (nextLine.length > maxLength) {
-      if (line) {
-        lines.push(line);
-        line = word;
-      } else {
-        lines.push(word);
-      }
-    } else {
-      line = nextLine;
-    }
-  });
-
-  if (line) lines.push(line);
-  return lines.join("\n");
-};
-
-const sanitizePdfText = text =>
-  text
-    .replace(/[^\x20-\x7E\n]/g, " ")
-    .replace(/\\/g, "\\\\")
-    .replace(/\(/g, "\\(")
-    .replace(/\)/g, "\\)");
-
-const createPdfBlob = content => {
-  const wrapped = wrapText(content, 88);
-  const lines = sanitizePdfText(wrapped).split("\n");
-  const textLines = lines.map((line, index) => {
-    const prefix = index === 0 ? "" : "T*\n";
-    return `${prefix}(${line}) Tj`;
-  });
-
-  const stream = [
-    "BT",
-    "/F1 12 Tf",
-    "16 TL",
-    "72 720 Td",
-    ...textLines,
-    "ET",
-  ].join("\n");
-
-  const objects = [
-    "1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj",
-    "2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj",
-    "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>\nendobj",
-    `4 0 obj\n<< /Length ${stream.length} >>\nstream\n${stream}\nendstream\nendobj`,
-    "5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj",
-  ];
-
-  let pdf = "%PDF-1.4\n";
-  const offsets = [0];
-
-  objects.forEach(object => {
-    offsets.push(pdf.length);
-    pdf += `${object}\n`;
-  });
-
-  const xrefOffset = pdf.length;
-  pdf += `xref\n0 ${objects.length + 1}\n`;
-  pdf += "0000000000 65535 f \n";
-  offsets.slice(1).forEach(offset => {
-    pdf += `${offset.toString().padStart(10, "0")} 00000 n \n`;
-  });
-
-  pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
-
-  return new Blob([pdf], { type: "application/pdf" });
+const STATUS_COPY = {
+  idle: "Draft a short check-in to see it appear in your history.",
+  saved: "Saved locally in this session.",
 };
 
 function ContentGeneration() {
-  const [idea, setIdea] = useState("");
-  const [story, setStory] = useState("");
+  const [date, setDate] = useState("");
+  const [intensity, setIntensity] = useState(5);
+  const [tags, setTags] = useState(DEFAULT_TAGS.join(", "));
+  const [note, setNote] = useState("");
   const [status, setStatus] = useState("idle");
-  const [error, setError] = useState("");
+  const [entries, setEntries] = useState([
+    {
+      id: 1,
+      date: "2024-05-18",
+      intensity: 6,
+      tags: ["conflict", "fatigue"],
+      note: "Kept distance during a heated meeting. Calmed down after a reset.",
+    },
+  ]);
 
-  const resolvedIdea = idea.trim() || DEFAULT_IDEA;
-  const isLoading = status === "loading";
-
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    setError("");
-    setStatus("loading");
-
-    try {
-      const data = await generateStory(resolvedIdea);
-      setStory((data?.story ?? "").trim());
-      setStatus("success");
-    } catch (fetchError) {
-      const message =
-        fetchError instanceof Error
-          ? fetchError.message
-          : "Unable to generate a story right now.";
-      setError(message);
-      setStatus("error");
-    }
+    const nextEntry = {
+      id: Date.now(),
+      date: date || new Date().toISOString().slice(0, 10),
+      intensity: Number(intensity),
+      tags: tags
+        .split(",")
+        .map(tag => tag.trim())
+        .filter(Boolean),
+      note: note.trim() || DEFAULT_NOTE,
+    };
+    setEntries(current => [nextEntry, ...current]);
+    setStatus("saved");
+    setNote("");
   };
 
-  const handleDownload = () => {
-    if (!story) return;
-    const blob = createPdfBlob(`Idea: ${resolvedIdea}\n\n${story}`);
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "magnus-story.pdf";
-    link.click();
-    window.URL.revokeObjectURL(url);
-  };
-
-  const outputStatus = useMemo(() => {
-    if (isLoading) return "Summoning the archive...";
-    if (status === "success" && story) return "Statement generated.";
-    return "Awaiting your prompt.";
-  }, [isLoading, status, story]);
+  const outputStatus = useMemo(
+    () => STATUS_COPY[status] ?? STATUS_COPY.idle,
+    [status]
+  );
 
   return (
     <div className="page page--content">
       <header className="content-hero">
         <nav className="hero__nav">
-          <span className="brand">The Magnus Archives</span>
+          <span className="brand">TraceMap</span>
           <div className="hero__nav-actions">
             <AppLink className="ghost-button" to="/">
               Back to landing
             </AppLink>
-            <span className="ghost-button ghost-button--muted">
-              Content generation
-            </span>
+            <span className="ghost-button ghost-button--muted">Check-in</span>
           </div>
         </nav>
         <div className="content-hero__copy">
-          <p className="eyebrow">Content generation</p>
-          <h1>Generate a new statement.</h1>
+          <p className="eyebrow">Daily check-in</p>
+          <h1>Capture today’s signals.</h1>
           <p className="hero__lead">
-            Supply a seed idea and the model will craft a full statement. Keep
-            it grounded, specific, and quietly unsettling for the best results.
+            This MVP preview shows the flow: rate intensity, add tags, and leave
+            a quick note. Your entries stay in-browser for now.
           </p>
         </div>
       </header>
@@ -152,85 +74,119 @@ function ContentGeneration() {
       <main className="content-grid">
         <section className="content-card">
           <div className="content-card__header">
-            <h2>Story prompt</h2>
+            <h2>Check-in details</h2>
             <p className="section__lead">
-              Share a hook, location, or artifact. We will handle the rest.
+              Keep it short and honest. This is about tracking patterns, not
+              perfect prose.
             </p>
           </div>
           <form className="content-form" onSubmit={handleSubmit}>
-            <label className="content-form__label" htmlFor="story-idea">
-              Your idea
+            <label className="content-form__label" htmlFor="checkin-date">
+              Date
+            </label>
+            <input
+              id="checkin-date"
+              type="date"
+              value={date}
+              onChange={event => setDate(event.target.value)}
+            />
+            <label className="content-form__label" htmlFor="checkin-intensity">
+              Intensity (1-10)
+            </label>
+            <input
+              id="checkin-intensity"
+              type="range"
+              min="1"
+              max="10"
+              value={intensity}
+              onChange={event => setIntensity(event.target.value)}
+            />
+            <label className="content-form__label" htmlFor="checkin-tags">
+              Context tags
+            </label>
+            <input
+              id="checkin-tags"
+              type="text"
+              placeholder={DEFAULT_TAGS.join(", ")}
+              value={tags}
+              onChange={event => setTags(event.target.value)}
+            />
+            <label className="content-form__label" htmlFor="checkin-note">
+              Notes
             </label>
             <textarea
-              id="story-idea"
-              name="story-idea"
-              rows={6}
-              placeholder={DEFAULT_IDEA}
-              value={idea}
-              onChange={event => setIdea(event.target.value)}
+              id="checkin-note"
+              name="checkin-note"
+              rows={5}
+              placeholder={DEFAULT_NOTE}
+              value={note}
+              onChange={event => setNote(event.target.value)}
             />
             <div className="content-form__actions">
-              <button className="primary-button" type="submit" disabled={isLoading}>
-                {isLoading ? "Generating..." : "Generate story"}
+              <button className="primary-button" type="submit">
+                Save check-in
               </button>
               <button
                 className="secondary-button"
                 type="button"
-                onClick={() => setIdea("")}
-                disabled={isLoading || !idea}
+                onClick={() => {
+                  setDate("");
+                  setIntensity(5);
+                  setTags(DEFAULT_TAGS.join(", "));
+                  setNote("");
+                }}
               >
                 Clear
               </button>
             </div>
           </form>
-          {error ? <p className="content-form__error">{error}</p> : null}
           <p className="content-form__status">{outputStatus}</p>
         </section>
 
         <section className="content-card content-card--result">
           <div className="content-card__header">
-            <h2>Generated statement</h2>
+            <h2>Recent check-ins</h2>
             <p className="section__lead">
-              Review the output, then download it as a PDF for your archive.
+              Recent entries appear here. In the full MVP, you will be able to
+              filter, export, and view trends.
             </p>
           </div>
-          <div className="content-result">
-            {story ? (
-              <p>{story}</p>
+          <div className="content-result content-result--list">
+            {entries.length ? (
+              <ul className="checkin-list">
+                {entries.map(entry => (
+                  <li key={entry.id} className="checkin-list__item">
+                    <div>
+                      <p className="checkin-list__meta">
+                        {entry.date} · Intensity {entry.intensity}/10
+                      </p>
+                      <p className="checkin-list__note">{entry.note}</p>
+                    </div>
+                    <div className="checkin-list__tags">
+                      {entry.tags.map(tag => (
+                        <span key={`${entry.id}-${tag}`} className="tag-pill">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             ) : (
               <p className="content-result__placeholder">
-                Your generated story will appear here once you submit a prompt.
+                Your saved check-ins will appear here.
               </p>
             )}
-          </div>
-          <div className="content-form__actions">
-            <button
-              className="primary-button"
-              type="button"
-              onClick={handleDownload}
-              disabled={!story}
-            >
-              Download PDF
-            </button>
-            <button
-              className="ghost-button"
-              type="button"
-              onClick={() => setStory("")}
-              disabled={!story}
-            >
-              Clear output
-            </button>
           </div>
         </section>
       </main>
 
       <footer className="footer">
         <p>
-          Generated stories are fan-made fiction and do not represent official
-          canon.
+          Your entries are stored locally in this preview.
         </p>
         <p className="footer__disclaimer">
-          Powered by the Magnus API and Cloudflare AI.
+          Future versions will add encryption and exports.
         </p>
       </footer>
     </div>

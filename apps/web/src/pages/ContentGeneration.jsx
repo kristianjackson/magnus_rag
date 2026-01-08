@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { EmotionPicker, DEFAULT_EMOTION_CATEGORIES } from "../components/EmotionPicker";
 import { AppLink } from "../router";
 
 const DEFAULT_ENTRY =
@@ -9,35 +10,31 @@ const STATUS_COPY = {
   saved: "Saved locally in this session.",
 };
 
-const FEELING_OPTIONS = [
-  { id: "calm", label: "Calm", icon: "😌" },
-  { id: "grateful", label: "Grateful", icon: "🙏" },
-  { id: "hopeful", label: "Hopeful", icon: "🌤️" },
-  { id: "energized", label: "Energized", icon: "⚡️" },
-  { id: "focused", label: "Focused", icon: "🎯" },
-  { id: "anxious", label: "Anxious", icon: "😬" },
-  { id: "sad", label: "Sad", icon: "🌧️" },
-  { id: "overwhelmed", label: "Overwhelmed", icon: "🫠" },
-  { id: "irritable", label: "Irritable", icon: "😠" },
-  { id: "depressed", label: "Depressed", icon: "😞" },
-  { id: "guilty", label: "Guilty", icon: "😔" },
-  { id: "ashamed", label: "Ashamed", icon: "🫣" },
-  { id: "numb", label: "Numb", icon: "😶‍🌫️" },
-  { id: "restless", label: "Restless", icon: "🌀" },
-  { id: "panicked", label: "Panicked", icon: "😱" },
-  { id: "elevated", label: "Elevated", icon: "🚀" },
-];
+const DEFAULT_EMOTIONS_PAYLOAD = { selected: [] };
 
 function ContentGeneration() {
   const [timestamp, setTimestamp] = useState(() => new Date().toISOString());
-  const [feelings, setFeelings] = useState(["calm"]);
+  const [emotions, setEmotions] = useState(DEFAULT_EMOTIONS_PAYLOAD);
   const [entry, setEntry] = useState("");
   const [status, setStatus] = useState("idle");
   const [entries, setEntries] = useState([
     {
       id: 1,
       date: "2024-05-18T09:32:00.000Z",
-      feelings: ["grateful", "focused"],
+      emotions: {
+        selected: [
+          {
+            categoryId: "grateful",
+            intensity: 2,
+            selectedSynonyms: ["Thankful"],
+          },
+          {
+            categoryId: "capable",
+            intensity: 1,
+            selectedSynonyms: ["Prepared"],
+          },
+        ],
+      },
       entry:
         "Noticed I felt more grounded after a slow morning routine. Staying present helped me avoid spiraling.",
     },
@@ -64,7 +61,7 @@ function ContentGeneration() {
     const nextEntry = {
       id: Date.now(),
       date: nextTimestamp,
-      feelings,
+      emotions,
       entry: entry.trim() || DEFAULT_ENTRY,
     };
     setEntries(current => [nextEntry, ...current]);
@@ -77,6 +74,31 @@ function ContentGeneration() {
     () => STATUS_COPY[status] ?? STATUS_COPY.idle,
     [status]
   );
+
+  const emotionsById = useMemo(
+    () => new Map(DEFAULT_EMOTION_CATEGORIES.map(category => [category.id, category])),
+    []
+  );
+
+  const formatEmotions = payload => {
+    if (!payload?.selected?.length) {
+      return "None";
+    }
+
+    return payload.selected
+      .map(selection => {
+        const category = emotionsById.get(selection.categoryId);
+        if (!category) {
+          return selection.categoryId;
+        }
+        const synonyms =
+          selection.selectedSynonyms?.length
+            ? ` (${selection.selectedSynonyms.join(", ")})`
+            : "";
+        return `${category.label}${synonyms}`;
+      })
+      .join(", ");
+  };
 
   return (
     <div className="page page--content">
@@ -122,31 +144,7 @@ function ContentGeneration() {
             <label className="content-form__label">
               Feelings to track
             </label>
-            <div className="feeling-grid" role="group" aria-label="Select feelings">
-              {FEELING_OPTIONS.map(option => {
-                const isSelected = feelings.includes(option.id);
-                return (
-                  <button
-                    key={option.id}
-                    className={`feeling-option${isSelected ? " feeling-option--selected" : ""}`}
-                    type="button"
-                    aria-pressed={isSelected}
-                    onClick={() =>
-                      setFeelings(current =>
-                        current.includes(option.id)
-                          ? current.filter(item => item !== option.id)
-                          : [...current, option.id]
-                      )
-                    }
-                  >
-                    <span className="feeling-option__icon" aria-hidden="true">
-                      {option.icon}
-                    </span>
-                    <span className="feeling-option__label">{option.label}</span>
-                  </button>
-                );
-              })}
-            </div>
+            <EmotionPicker onChange={setEmotions} />
             <label className="content-form__label" htmlFor="reflection-entry">
               Journal entry
             </label>
@@ -167,7 +165,7 @@ function ContentGeneration() {
                 type="button"
                 onClick={() => {
                   setTimestamp(new Date().toISOString());
-                  setFeelings(["calm"]);
+                  setEmotions(DEFAULT_EMOTIONS_PAYLOAD);
                   setEntry("");
                 }}
               >
@@ -194,14 +192,7 @@ function ContentGeneration() {
                     <div>
                       <p className="checkin-list__meta">
                         {formattedEntryTimestamp(currentEntry.date)} · Feelings{" "}
-                        {(currentEntry.feelings ?? [])
-                          .map(feelingId => {
-                            const match = FEELING_OPTIONS.find(
-                              option => option.id === feelingId
-                            );
-                            return match?.label ?? feelingId;
-                          })
-                          .join(", ")}
+                        {formatEmotions(currentEntry.emotions)}
                       </p>
                       <p className="checkin-list__note">{currentEntry.entry}</p>
                     </div>

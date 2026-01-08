@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react";
 import { EmotionPicker, DEFAULT_EMOTION_CATEGORIES } from "../components/EmotionPicker";
 import { AppLink } from "../router";
+import { analyzeJournal } from "../api";
 
 const DEFAULT_ENTRY =
   "Today felt lighter after an honest conversation. I still want to protect my energy, but I am proud of how I responded.";
 
 const STATUS_COPY = {
   idle: "Draft a reflection to see a feedback preview.",
+  analyzing: "Creating a metadata layer and next-step suggestion.",
   saved: "Saved locally in this session.",
+  error: "Saved, but the analysis could not be generated.",
 };
 
 const DEFAULT_EMOTIONS_PAYLOAD = { selected: [] };
@@ -16,6 +19,8 @@ function ContentGeneration() {
   const [emotions, setEmotions] = useState(DEFAULT_EMOTIONS_PAYLOAD);
   const [entry, setEntry] = useState("");
   const [status, setStatus] = useState("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [entries, setEntries] = useState([
     {
       id: 1,
@@ -36,6 +41,25 @@ function ContentGeneration() {
       },
       entry:
         "Noticed I felt more grounded after a slow morning routine. Staying present helped me avoid spiraling.",
+      metadata: {
+        word_count: 19,
+        character_count: 96,
+        sentence_count: 2,
+        reading_time_minutes: 1,
+      },
+      analysis: {
+        summary: "A steady morning routine helped you stay present and avoid spiraling.",
+        emotional_tone: "Grounded and reflective",
+        themes: ["Routine", "Presence", "Emotional regulation"],
+        proposed_solution: {
+          title: "Repeat the grounding routine",
+          steps: [
+            "Choose one morning ritual that felt helpful.",
+            "Schedule it for the next three days.",
+            "Note how your body feels afterward.",
+          ],
+        },
+      },
     },
   ]);
 
@@ -45,17 +69,45 @@ function ContentGeneration() {
       timeStyle: "short",
     }).format(new Date(dateValue));
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const nextTimestamp = new Date().toISOString();
+    const entryText = entry.trim() || DEFAULT_ENTRY;
+    setIsAnalyzing(true);
+    setStatus("analyzing");
+    setErrorMessage("");
+    let analysis = null;
+    let metadata = null;
+
+    try {
+      const response = await analyzeJournal(entryText, emotions);
+      analysis = response?.analysis ?? null;
+      metadata = response?.metadata ?? null;
+      setStatus("saved");
+    } catch (error) {
+      const wordCount = entryText.trim().match(/\b\w+\b/g)?.length ?? 0;
+      metadata = {
+        word_count: wordCount,
+        character_count: entryText.length,
+        sentence_count: entryText.match(/[.!?]+/g)?.length ?? 1,
+        reading_time_minutes: Math.max(1, Math.round(wordCount / 200)),
+      };
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unable to generate feedback."
+      );
+    } finally {
+      setIsAnalyzing(false);
+    }
     const nextEntry = {
       id: Date.now(),
       date: nextTimestamp,
       emotions,
-      entry: entry.trim() || DEFAULT_ENTRY,
+      entry: entryText,
+      metadata,
+      analysis,
     };
     setEntries(current => [nextEntry, ...current]);
-    setStatus("saved");
     setEntry("");
   };
 
@@ -137,12 +189,13 @@ function ContentGeneration() {
               onChange={event => setEntry(event.target.value)}
             />
             <div className="content-form__actions">
-              <button className="primary-button" type="submit">
-                Save reflection
+              <button className="primary-button" type="submit" disabled={isAnalyzing}>
+                {isAnalyzing ? "Analyzing..." : "Save reflection"}
               </button>
               <button
                 className="secondary-button"
                 type="button"
+                disabled={isAnalyzing}
                 onClick={() => {
                   setEmotions(DEFAULT_EMOTIONS_PAYLOAD);
                   setEntry("");
@@ -153,6 +206,9 @@ function ContentGeneration() {
             </div>
           </form>
           <p className="content-form__status">{outputStatus}</p>
+          {errorMessage ? (
+            <p className="content-form__error">{errorMessage}</p>
+          ) : null}
         </section>
 
         <section className="content-card content-card--result">
@@ -172,8 +228,44 @@ function ContentGeneration() {
                       <p className="checkin-list__meta">
                         {formattedEntryTimestamp(currentEntry.date)} · Feelings{" "}
                         {formatEmotions(currentEntry.emotions)}
+                        {currentEntry.metadata
+                          ? ` · ${currentEntry.metadata.word_count} words · ${currentEntry.metadata.reading_time_minutes} min read`
+                          : ""}
                       </p>
                       <p className="checkin-list__note">{currentEntry.entry}</p>
+                      {currentEntry.analysis ? (
+                        <div className="checkin-list__analysis">
+                          <p className="checkin-list__label">Summary</p>
+                          <p className="checkin-list__note">
+                            {currentEntry.analysis.summary}
+                          </p>
+                          <div className="checkin-list__tags">
+                            <span className="tag-pill">
+                              Tone: {currentEntry.analysis.emotional_tone}
+                            </span>
+                            {currentEntry.analysis.themes.map(theme => (
+                              <span key={theme} className="tag-pill">
+                                {theme}
+                              </span>
+                            ))}
+                          </div>
+                          <p className="checkin-list__label">Next step</p>
+                          <p className="checkin-list__note">
+                            {currentEntry.analysis.proposed_solution.title}
+                          </p>
+                          <ol className="checkin-list__steps">
+                            {currentEntry.analysis.proposed_solution.steps.map(
+                              step => (
+                                <li key={step}>{step}</li>
+                              )
+                            )}
+                          </ol>
+                        </div>
+                      ) : (
+                        <p className="checkin-list__analysis-placeholder">
+                          Analysis will appear once generated.
+                        </p>
+                      )}
                     </div>
                   </li>
                 ))}

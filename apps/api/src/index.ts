@@ -43,6 +43,7 @@ function corsJson(data: any, status = 200) {
 const EMBED_MODEL = "@cf/baai/bge-base-en-v1.5";
 const ANSWER_MODEL = "@cf/meta/llama-3-8b-instruct";
 const STORY_MODEL = "@cf/meta/llama-3-8b-instruct";
+const JOURNAL_MODEL = "@cf/meta/llama-3-8b-instruct";
 const MAX_TOP_K = 12;
 
 async function checkR2(env: Env) {
@@ -148,6 +149,108 @@ async function generateStory(env: Env, idea: string): Promise<string> {
     result?.choices?.[0]?.message?.content ||
     ""
   ).trim();
+}
+
+function countWords(text: string) {
+  const matches = text.trim().match(/\b\w+\b/g);
+  return matches ? matches.length : 0;
+}
+
+function estimateReadingTime(wordCount: number) {
+  if (!wordCount) return 0;
+  return Math.max(1, Math.round(wordCount / 200));
+}
+
+function stripJsonFence(text: string) {
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  return (fenced ? fenced[1] : text).trim();
+}
+
+function normalizeThemes(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value.map(item => String(item)).filter(Boolean);
+  }
+  if (typeof value === "string" && value.trim()) {
+    return value
+      .split(",")
+      .map(item => item.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+function normalizeSteps(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value.map(item => String(item)).filter(Boolean);
+  }
+  if (typeof value === "string" && value.trim()) {
+    return [value.trim()];
+  }
+  return [];
+}
+
+async function generateJournalInsights(
+  env: Env,
+  entry: string,
+  emotions: unknown
+): Promise<{
+  summary: string;
+  emotional_tone: string;
+  themes: string[];
+  proposed_solution: { title: string; steps: string[] };
+}> {
+  const messages = [
+    {
+      role: "system",
+      content:
+        "You are a supportive journaling coach. Return JSON only with keys: summary (1-2 sentences), emotional_tone (short phrase), themes (3-5 short strings), proposed_solution (object with title and 2-4 step array). Keep the tone gentle and practical.",
+    },
+    {
+      role: "user",
+      content: JSON.stringify({ entry, emotions }),
+    },
+  ];
+
+  const result: any = await env.AI.run(JOURNAL_MODEL, {
+    messages,
+    max_tokens: 500,
+  });
+
+  const raw =
+    result?.response ||
+    result?.result ||
+    result?.choices?.[0]?.message?.content ||
+    "";
+  const cleaned = stripJsonFence(raw);
+
+  try {
+    const parsed = JSON.parse(cleaned);
+    const summary = typeof parsed?.summary === "string" ? parsed.summary.trim() : "";
+    const emotionalTone =
+      typeof parsed?.emotional_tone === "string"
+        ? parsed.emotional_tone.trim()
+        : "";
+    const themes = normalizeThemes(parsed?.themes);
+    const solutionTitle =
+      typeof parsed?.proposed_solution?.title === "string"
+        ? parsed.proposed_solution.title.trim()
+        : "";
+    const solutionSteps = normalizeSteps(parsed?.proposed_solution?.steps);
+
+    return {
+      summary,
+      emotional_tone: emotionalTone,
+      themes,
+      proposed_solution: { title: solutionTitle, steps: solutionSteps },
+    };
+  } catch {
+    return {
+      summary: "",
+      emotional_tone: "",
+      themes: [],
+      proposed_solution: { title: "", steps: [] },
+    };
+  }
 }
 
 export default {
@@ -354,6 +457,47 @@ export default {
         }
 
         return corsJson({ prompt: idea, story });
+      }
+
+      if (req.method === "POST" && url.pathname === "/journal/analyze") {
+        let payload: any = null;
+
+        try {
+          payload = await req.json();
+        } catch {
+          return corsJson({ error: "Invalid JSON body" }, 400);
+        }
+
+        const entry = (payload?.entry ?? "").trim();
+        if (!entry) {
+          return corsJson({ error: "Missing entry" }, 400);
+        }
+        if (entry.length > 4000) {
+          return corsJson({ error: "Entry too long" }, 400);
+        }
+
+        const wordCount = countWords(entry);
+        const sentenceCount =
+          entry.match(/[.!?]+/g)?.length ?? (entry.trim() ? 1 : 0);
+        const metadata = {
+          word_count: wordCount,
+          character_count: entry.length,
+          sentence_count: sentenceCount,
+          reading_time_minutes: estimateReadingTime(wordCount),
+          emotions: payload?.emotions ?? null,
+        };
+
+        const analysis = await generateJournalInsights(
+          env,
+          entry,
+          payload?.emotions ?? null
+        );
+
+        return corsJson({
+          entry,
+          metadata,
+          analysis,
+        });
       }
 
       return withCors(new Response("Not found", { status: 404 }));

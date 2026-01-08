@@ -20,6 +20,14 @@ const FEELING_OPTIONS = [
   { id: "anxious", label: "Anxious", icon: "😬" },
   { id: "sad", label: "Sad", icon: "🌧️" },
   { id: "overwhelmed", label: "Overwhelmed", icon: "🫠" },
+  { id: "irritable", label: "Irritable", icon: "😠" },
+  { id: "depressed", label: "Depressed", icon: "😞" },
+  { id: "guilty", label: "Guilty", icon: "😔" },
+  { id: "ashamed", label: "Ashamed", icon: "🫣" },
+  { id: "numb", label: "Numb", icon: "😶‍🌫️" },
+  { id: "restless", label: "Restless", icon: "🌀" },
+  { id: "panicked", label: "Panicked", icon: "😱" },
+  { id: "elevated", label: "Elevated", icon: "🚀" },
 ];
 
 function ContentGeneration() {

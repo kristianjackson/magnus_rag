@@ -17,4 +17,4 @@ index_name = "magnus-index-768"
 binding = "DB"
 database_name = "lumenary_db"
 # TODO: replace with the real D1 database ID.
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "e7a8185c-f8df-457b-a37c-911209ef992b"

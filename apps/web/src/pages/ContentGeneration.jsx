@@ -11,9 +11,20 @@ const STATUS_COPY = {
   saved: "Saved locally in this session.",
 };
 
+const FEELING_OPTIONS = [
+  { id: "calm", label: "Calm", icon: "😌" },
+  { id: "grateful", label: "Grateful", icon: "🙏" },
+  { id: "hopeful", label: "Hopeful", icon: "🌤️" },
+  { id: "energized", label: "Energized", icon: "⚡️" },
+  { id: "focused", label: "Focused", icon: "🎯" },
+  { id: "anxious", label: "Anxious", icon: "😬" },
+  { id: "sad", label: "Sad", icon: "🌧️" },
+  { id: "overwhelmed", label: "Overwhelmed", icon: "🫠" },
+];
+
 function ContentGeneration() {
   const [date, setDate] = useState("");
-  const [tone, setTone] = useState(6);
+  const [feelings, setFeelings] = useState(["calm"]);
   const [themes, setThemes] = useState(DEFAULT_THEMES.join(", "));
   const [entry, setEntry] = useState("");
   const [status, setStatus] = useState("idle");
@@ -21,7 +32,7 @@ function ContentGeneration() {
     {
       id: 1,
       date: "2024-05-18",
-      tone: 7,
+      feelings: ["grateful", "focused"],
       themes: ["gratitude", "focus"],
       entry:
         "Noticed I felt more grounded after a slow morning routine. Staying present helped me avoid spiraling.",
@@ -33,7 +44,7 @@ function ContentGeneration() {
     const nextEntry = {
       id: Date.now(),
       date: date || new Date().toISOString().slice(0, 10),
-      tone: Number(tone),
+      feelings,
       themes: themes
         .split(",")
         .map(theme => theme.trim())
@@ -91,17 +102,34 @@ function ContentGeneration() {
               value={date}
               onChange={event => setDate(event.target.value)}
             />
-            <label className="content-form__label" htmlFor="reflection-tone">
-              Emotional tone (1-10)
+            <label className="content-form__label">
+              Feelings to track
             </label>
-            <input
-              id="reflection-tone"
-              type="range"
-              min="1"
-              max="10"
-              value={tone}
-              onChange={event => setTone(event.target.value)}
-            />
+            <div className="feeling-grid" role="group" aria-label="Select feelings">
+              {FEELING_OPTIONS.map(option => {
+                const isSelected = feelings.includes(option.id);
+                return (
+                  <button
+                    key={option.id}
+                    className={`feeling-option${isSelected ? " feeling-option--selected" : ""}`}
+                    type="button"
+                    aria-pressed={isSelected}
+                    onClick={() =>
+                      setFeelings(current =>
+                        current.includes(option.id)
+                          ? current.filter(item => item !== option.id)
+                          : [...current, option.id]
+                      )
+                    }
+                  >
+                    <span className="feeling-option__icon" aria-hidden="true">
+                      {option.icon}
+                    </span>
+                    <span className="feeling-option__label">{option.label}</span>
+                  </button>
+                );
+              })}
+            </div>
             <label className="content-form__label" htmlFor="reflection-themes">
               Themes
             </label>
@@ -132,7 +160,7 @@ function ContentGeneration() {
                 type="button"
                 onClick={() => {
                   setDate("");
-                  setTone(6);
+                  setFeelings(["calm"]);
                   setThemes(DEFAULT_THEMES.join(", "));
                   setEntry("");
                 }}
@@ -159,7 +187,15 @@ function ContentGeneration() {
                   <li key={currentEntry.id} className="checkin-list__item">
                     <div>
                       <p className="checkin-list__meta">
-                        {currentEntry.date} · Tone {currentEntry.tone}/10
+                        {currentEntry.date} · Feelings{" "}
+                        {(currentEntry.feelings ?? [])
+                          .map(feelingId => {
+                            const match = FEELING_OPTIONS.find(
+                              option => option.id === feelingId
+                            );
+                            return match?.label ?? feelingId;
+                          })
+                          .join(", ")}
                       </p>
                       <p className="checkin-list__note">{currentEntry.entry}</p>
                     </div>
